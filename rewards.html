@@ -1,0 +1,1228 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Rewards & Points – Xtraaplywood</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=Barlow:ital,wght@0,300;0,400;0,500;0,600;1,300&family=DM+Mono:wght@400;500&display=swap" rel="stylesheet">
+  <style>
+*, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+    :root {
+      --charcoal:   #141410;
+      --charcoal2:  #1e1e18;
+      --charcoal3:  #272720;
+      --amber:      #c8811a;
+      --amber-lt:   #e8a030;
+      --amber-pale: #f5c46a;
+      --cream:      #f0ead8;
+      --cream2:     #e2d9c0;
+      --white:      #fafaf7;
+      --muted:      #7a7a6a;
+      --border:     rgba(200,129,26,0.18);
+      --success:    #4caf65;
+      --font-display: 'Bebas Neue', sans-serif;
+      --font-body:    'Barlow', sans-serif;
+      --font-mono:    'DM Mono', monospace;
+    }
+    html { scroll-behavior: smooth; }
+    body {
+      background: var(--charcoal);
+      color: var(--cream);
+      font-family: var(--font-body);
+      font-weight: 300;
+      line-height: 1.7;
+      overflow-x: hidden;
+    }
+    body::before {
+      content: '';
+      position: fixed; inset: 0;
+      background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 256 256' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)' opacity='1'/%3E%3C/svg%3E");
+      opacity: 0.025; pointer-events: none; z-index: 9999;
+    }
+
+    /* ── NAV ── */
+    nav {
+      position: fixed; top: 0; left: 0; right: 0; z-index: 1000;
+      display: flex; align-items: center; justify-content: space-between;
+      padding: 0 48px; height: 68px;
+      background: rgba(20,20,16,0.95);
+      backdrop-filter: blur(12px);
+      border-bottom: 1px solid var(--border);
+    }
+    .nav-logo { font-family: var(--font-display); font-size: 26px; letter-spacing: 2px; color: var(--white); text-decoration: none; }
+    .nav-logo span { color: var(--amber); }
+    .nav-links { display: flex; align-items: center; gap: 36px; list-style: none; }
+    .nav-links a { font-size: 13px; font-weight: 500; letter-spacing: 1.5px; text-transform: uppercase; color: var(--cream2); text-decoration: none; transition: color 0.2s; }
+    .nav-links a:hover, .nav-links a.active { color: var(--amber-lt); }
+    .nav-actions { display: flex; align-items: center; gap: 16px; }
+    .btn-nav { font-size: 13px; font-weight: 500; letter-spacing: 1px; text-transform: uppercase; padding: 9px 22px; border-radius: 2px; cursor: pointer; text-decoration: none; transition: all 0.2s; }
+    .btn-outline { background: transparent; border: 1px solid var(--border); color: var(--cream); }
+    .btn-outline:hover { border-color: var(--amber); color: var(--amber-lt); }
+    .btn-amber { background: var(--amber); border: 1px solid var(--amber); color: var(--charcoal); }
+    .btn-amber:hover { background: var(--amber-lt); }
+    .hamburger { display: none; flex-direction: column; gap: 5px; cursor: pointer; padding: 4px; background: none; border: none; }
+    .hamburger span { display: block; width: 24px; height: 2px; background: var(--cream); border-radius: 2px; }
+    .mobile-menu { display: none; position: fixed; inset: 0; top: 68px; background: rgba(20,20,16,0.98); z-index: 999; flex-direction: column; align-items: center; justify-content: center; gap: 36px; }
+    .mobile-menu.open { display: flex; }
+    .mobile-menu a { font-family: var(--font-display); font-size: 36px; letter-spacing: 3px; color: var(--cream); text-decoration: none; }
+    .mobile-menu a:hover { color: var(--amber); }
+
+    /* ── PAGE HEADER ── */
+    .page-header {
+      padding: 120px 72px 56px;
+      background: var(--charcoal2);
+      border-bottom: 1px solid var(--border);
+      position: relative; overflow: hidden;
+    }
+    .page-header::after {
+      content: 'REWARDS';
+      position: absolute; right: -10px; bottom: -40px;
+      font-family: var(--font-display); font-size: 160px;
+      letter-spacing: 4px; color: rgba(200,129,26,0.04);
+      pointer-events: none; white-space: nowrap;
+    }
+    .breadcrumb { display: flex; align-items: center; gap: 8px; font-family: var(--font-mono); font-size: 11px; letter-spacing: 2px; color: var(--muted); text-transform: uppercase; margin-bottom: 20px; }
+    .breadcrumb a { color: var(--amber); text-decoration: none; }
+    .page-header h1 { font-family: var(--font-display); font-size: clamp(48px, 6vw, 80px); color: var(--white); letter-spacing: 2px; line-height: 1; margin-bottom: 16px; }
+    .page-header p { font-size: 15px; color: var(--muted); max-width: 520px; line-height: 1.8; }
+
+    /* ── MAIN ── */
+    main { max-width: 1200px; margin: 0 auto; padding: 56px 40px 100px; }
+
+    /* ── WALLET CARD ── */
+    .wallet-card {
+      background: var(--charcoal2);
+      border: 1px solid var(--border);
+      border-radius: 4px;
+      padding: 40px 48px;
+      position: relative;
+      overflow: hidden;
+      margin-bottom: 48px;
+    }
+    .wallet-card::before {
+      content: '';
+      position: absolute; inset: 0;
+      background: repeating-linear-gradient(86deg, transparent, transparent 22px, rgba(200,129,26,0.025) 22px, rgba(200,129,26,0.025) 23px);
+      pointer-events: none;
+    }
+    .wallet-card::after {
+      content: '';
+      position: absolute; top: -120px; right: -120px;
+      width: 400px; height: 400px; border-radius: 50%;
+      background: radial-gradient(circle, rgba(200,129,26,0.07) 0%, transparent 65%);
+      pointer-events: none;
+    }
+    .wallet-inner {
+      display: flex; align-items: center; justify-content: space-between;
+      flex-wrap: wrap; gap: 32px;
+      position: relative; z-index: 2;
+    }
+    .wallet-left { display: flex; flex-direction: column; gap: 6px; }
+    .wallet-eyebrow { font-family: var(--font-mono); font-size: 11px; letter-spacing: 2.5px; color: var(--amber); text-transform: uppercase; }
+    .wallet-name { font-family: var(--font-display); font-size: 28px; letter-spacing: 1px; color: var(--white); }
+    .wallet-member { font-family: var(--font-mono); font-size: 11px; letter-spacing: 1.5px; color: var(--muted); }
+
+    .wallet-center { text-align: center; }
+    .points-display { font-family: var(--font-display); font-size: clamp(64px, 8vw, 96px); letter-spacing: 2px; color: var(--amber); line-height: 1; }
+    .points-label { font-family: var(--font-mono); font-size: 12px; letter-spacing: 2px; color: var(--muted); text-transform: uppercase; margin-top: 4px; }
+
+    .wallet-right { display: flex; flex-direction: column; gap: 16px; align-items: flex-end; }
+    .tier-badge {
+      display: inline-flex; align-items: center; gap: 8px;
+      padding: 8px 18px;
+      border: 1px solid var(--amber);
+      border-radius: 2px;
+      font-family: var(--font-display); font-size: 16px; letter-spacing: 2px;
+      color: var(--amber);
+    }
+    .tier-dot { width: 8px; height: 8px; background: var(--amber); border-radius: 50%; animation: pulse 2s infinite; }
+    @keyframes pulse { 0%,100%{opacity:1;transform:scale(1)} 50%{opacity:0.5;transform:scale(0.8)} }
+
+    /* Progress to next tier */
+    .tier-progress { width: 240px; }
+    .progress-labels { display: flex; justify-content: space-between; margin-bottom: 8px; }
+    .progress-label { font-family: var(--font-mono); font-size: 10px; letter-spacing: 1px; color: var(--muted); }
+    .progress-bar { height: 4px; background: var(--charcoal3); border-radius: 2px; overflow: hidden; }
+    .progress-fill { height: 100%; background: var(--amber); border-radius: 2px; transition: width 1s ease; }
+    .progress-hint { font-family: var(--font-mono); font-size: 10px; letter-spacing: 1px; color: var(--muted); margin-top: 6px; text-align: right; }
+
+    /* Wallet stats row */
+    .wallet-stats {
+      display: grid; grid-template-columns: repeat(4, 1fr);
+      border-top: 1px solid var(--border);
+      margin-top: 32px; padding-top: 32px;
+      position: relative; z-index: 2;
+    }
+    .wallet-stat { text-align: center; border-right: 1px solid var(--border); padding: 0 16px; }
+    .wallet-stat:last-child { border-right: none; }
+    .wstat-num { font-family: var(--font-display); font-size: 32px; color: var(--white); line-height: 1; }
+    .wstat-label { font-family: var(--font-mono); font-size: 10px; letter-spacing: 1.5px; color: var(--muted); text-transform: uppercase; margin-top: 4px; }
+
+    /* ── SECTION TABS ── */
+    .section-tabs {
+      display: flex; gap: 0;
+      border-bottom: 1px solid var(--border);
+      margin-bottom: 40px;
+    }
+    .stab {
+      font-family: var(--font-mono); font-size: 11px; letter-spacing: 2px;
+      text-transform: uppercase; padding: 14px 28px;
+      color: var(--muted); cursor: pointer;
+      border-bottom: 2px solid transparent;
+      background: none; border-top: none; border-left: none; border-right: none;
+      transition: all 0.2s;
+    }
+    .stab:hover { color: var(--cream); }
+    .stab.active { color: var(--amber); border-bottom-color: var(--amber); }
+
+    /* ── TAB CONTENT ── */
+    .tab-content { display: none; }
+    .tab-content.active { display: block; }
+
+    /* ── QR SCAN TAB ── */
+    .scan-layout {
+      display: grid; grid-template-columns: 1fr 1fr; gap: 40px; align-items: start;
+    }
+    .scan-box {
+      background: var(--charcoal2); border: 1px solid var(--border);
+      border-radius: 4px; padding: 40px; text-align: center;
+    }
+    .scan-box h3 { font-family: var(--font-display); font-size: 28px; letter-spacing: 1px; color: var(--white); margin-bottom: 12px; }
+    .scan-box p { font-size: 14px; color: var(--muted); margin-bottom: 32px; line-height: 1.7; }
+
+    /* Camera / QR area */
+    .qr-area {
+      width: 220px; height: 220px;
+      border: 2px dashed rgba(200,129,26,0.4);
+      border-radius: 4px;
+      margin: 0 auto 28px;
+      display: flex; flex-direction: column;
+      align-items: center; justify-content: center;
+      position: relative; overflow: hidden;
+      transition: border-color 0.3s;
+      cursor: pointer;
+      background: var(--charcoal3);
+    }
+    .qr-area:hover { border-color: var(--amber); }
+    .qr-corners::before, .qr-corners::after,
+    .qr-corners2::before, .qr-corners2::after {
+      content: ''; position: absolute; width: 24px; height: 24px;
+      border-color: var(--amber); border-style: solid;
+    }
+    .qr-corners::before  { top: 8px;  left: 8px;  border-width: 2px 0 0 2px; }
+    .qr-corners::after   { top: 8px;  right: 8px; border-width: 2px 2px 0 0; }
+    .qr-corners2::before { bottom: 8px; left: 8px;  border-width: 0 0 2px 2px; }
+    .qr-corners2::after  { bottom: 8px; right: 8px; border-width: 0 2px 2px 0; }
+    .scan-line {
+      position: absolute; left: 12px; right: 12px; height: 2px;
+      background: linear-gradient(90deg, transparent, var(--amber), transparent);
+      animation: scanLine 2s ease-in-out infinite;
+      display: none;
+    }
+    .qr-area.scanning .scan-line { display: block; }
+    @keyframes scanLine { 0%{top:12px} 100%{top:calc(100% - 12px)} }
+    .qr-icon { font-size: 48px; margin-bottom: 8px; }
+    .qr-hint { font-family: var(--font-mono); font-size: 10px; letter-spacing: 1.5px; color: var(--muted); text-transform: uppercase; }
+
+    .btn-scan {
+      display: inline-flex; align-items: center; gap: 10px;
+      font-family: var(--font-body); font-size: 13px; font-weight: 500;
+      letter-spacing: 1.5px; text-transform: uppercase;
+      padding: 14px 28px; background: var(--amber);
+      color: var(--charcoal); border: none; border-radius: 2px;
+      cursor: pointer; transition: all 0.25s; width: 100%;
+      justify-content: center;
+    }
+    .btn-scan:hover { background: var(--amber-lt); }
+
+    .divider-or { display: flex; align-items: center; gap: 16px; margin: 20px 0; }
+    .divider-or-line { flex: 1; height: 1px; background: var(--border); }
+    .divider-or-text { font-family: var(--font-mono); font-size: 10px; letter-spacing: 2px; color: var(--muted); }
+
+    .code-input-row { display: flex; gap: 8px; }
+    .code-input {
+      flex: 1; background: var(--charcoal3); border: 1px solid var(--border);
+      color: var(--cream); font-family: var(--font-mono); font-size: 14px;
+      letter-spacing: 2px; padding: 12px 16px; border-radius: 2px;
+      outline: none; transition: border-color 0.2s; text-transform: uppercase;
+    }
+    .code-input::placeholder { color: var(--muted); text-transform: none; letter-spacing: 0; }
+    .code-input:focus { border-color: var(--amber); }
+    .btn-redeem {
+      font-family: var(--font-body); font-size: 12px; font-weight: 500;
+      letter-spacing: 1px; text-transform: uppercase; padding: 12px 20px;
+      background: transparent; border: 1px solid var(--border); color: var(--cream2);
+      border-radius: 2px; cursor: pointer; transition: all 0.2s; white-space: nowrap;
+    }
+    .btn-redeem:hover { border-color: var(--amber); color: var(--amber); }
+
+    /* Scan result */
+    .scan-result {
+      display: none; margin-top: 20px;
+      background: rgba(76,175,101,0.08);
+      border: 1px solid rgba(76,175,101,0.25);
+      border-radius: 4px; padding: 20px 24px;
+      text-align: left;
+    }
+    .scan-result.show { display: block; animation: fadeIn 0.4s ease; }
+    .scan-result.error-result {
+      background: rgba(224,80,80,0.08);
+      border-color: rgba(224,80,80,0.25);
+    }
+    .result-top { display: flex; align-items: center; gap: 12px; margin-bottom: 12px; }
+    .result-icon { font-size: 24px; }
+    .result-title { font-family: var(--font-display); font-size: 20px; letter-spacing: 1px; color: var(--white); }
+    .result-sub { font-size: 13px; color: var(--muted); }
+    .result-points { font-family: var(--font-display); font-size: 36px; color: var(--amber); line-height: 1; }
+    .result-points-label { font-family: var(--font-mono); font-size: 10px; letter-spacing: 1.5px; color: var(--muted); }
+
+    @keyframes fadeIn { from{opacity:0;transform:translateY(8px)} to{opacity:1;transform:translateY(0)} }
+
+    /* How it works */
+    .how-box {
+      background: var(--charcoal2); border: 1px solid var(--border); border-radius: 4px; overflow: hidden;
+    }
+    .how-box-header {
+      padding: 24px 28px 16px;
+      border-bottom: 1px solid var(--border);
+    }
+    .how-box-header h4 { font-family: var(--font-display); font-size: 22px; letter-spacing: 1px; color: var(--white); }
+    .how-steps { list-style: none; }
+    .how-step {
+      display: flex; gap: 20px; padding: 20px 28px;
+      border-bottom: 1px solid var(--border);
+      transition: background 0.2s;
+    }
+    .how-step:last-child { border-bottom: none; }
+    .how-step:hover { background: var(--charcoal3); }
+    .how-step-num {
+      font-family: var(--font-display); font-size: 32px; color: var(--amber);
+      opacity: 0.25; line-height: 1; flex-shrink: 0; width: 36px;
+      transition: opacity 0.2s;
+    }
+    .how-step:hover .how-step-num { opacity: 0.7; }
+    .how-step-content h5 { font-size: 14px; font-weight: 500; color: var(--white); margin-bottom: 4px; }
+    .how-step-content p { font-size: 13px; color: var(--muted); line-height: 1.6; }
+
+    /* ── REWARDS TAB ── */
+    .rewards-intro {
+      display: flex; align-items: center; justify-content: space-between;
+      margin-bottom: 32px; flex-wrap: wrap; gap: 16px;
+    }
+    .rewards-intro h3 { font-family: var(--font-display); font-size: 28px; letter-spacing: 1px; color: var(--white); }
+    .rewards-intro p { font-size: 14px; color: var(--muted); margin-top: 4px; }
+    .user-points-pill {
+      display: flex; align-items: center; gap: 8px;
+      background: rgba(200,129,26,0.1); border: 1px solid var(--border);
+      padding: 10px 20px; border-radius: 2px;
+      font-family: var(--font-mono); font-size: 12px; letter-spacing: 1.5px; color: var(--amber);
+    }
+
+    .rewards-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(280px, 1fr)); gap: 2px; }
+    .reward-card {
+      background: var(--charcoal2); border: 1px solid transparent;
+      padding: 28px; position: relative; overflow: hidden;
+      transition: all 0.3s;
+    }
+    .reward-card::before {
+      content: ''; position: absolute; bottom: 0; left: 0;
+      width: 100%; height: 2px; background: var(--amber);
+      transform: scaleX(0); transform-origin: left; transition: transform 0.3s;
+    }
+    .reward-card:hover { border-color: var(--border); background: var(--charcoal3); }
+    .reward-card:hover::before { transform: scaleX(1); }
+    .reward-card.locked { opacity: 0.55; }
+    .reward-card.locked:hover { opacity: 0.65; }
+
+    .reward-card-top { display: flex; justify-content: space-between; align-items: flex-start; margin-bottom: 16px; }
+    .reward-icon { font-size: 36px; line-height: 1; }
+    .reward-status {
+      font-family: var(--font-mono); font-size: 10px; letter-spacing: 1px;
+      padding: 4px 10px; border-radius: 1px;
+    }
+    .status-unlocked { background: rgba(76,175,101,0.15); border: 1px solid rgba(76,175,101,0.3); color: #6dbe74; }
+    .status-locked   { background: rgba(122,122,106,0.15); border: 1px solid rgba(122,122,106,0.2); color: var(--muted); }
+    .status-featured { background: rgba(200,129,26,0.15); border: 1px solid var(--border); color: var(--amber); }
+
+    .reward-name { font-family: var(--font-display); font-size: 22px; letter-spacing: 1px; color: var(--white); margin-bottom: 6px; }
+    .reward-desc { font-size: 13px; color: var(--muted); line-height: 1.7; margin-bottom: 20px; }
+    .reward-footer { display: flex; align-items: center; justify-content: space-between; gap: 12px; }
+    .reward-cost {
+      display: flex; align-items: baseline; gap: 4px;
+    }
+    .reward-pts { font-family: var(--font-display); font-size: 28px; color: var(--amber); line-height: 1; }
+    .reward-pts-label { font-family: var(--font-mono); font-size: 10px; color: var(--muted); letter-spacing: 1px; }
+    .btn-claim {
+      font-family: var(--font-body); font-size: 12px; font-weight: 500;
+      letter-spacing: 1px; text-transform: uppercase;
+      padding: 9px 18px; border-radius: 2px; cursor: pointer; transition: all 0.2s;
+      border: none;
+    }
+    .btn-claim.available { background: var(--amber); color: var(--charcoal); }
+    .btn-claim.available:hover { background: var(--amber-lt); }
+    .btn-claim.unavailable { background: transparent; border: 1px solid var(--border); color: var(--muted); cursor: not-allowed; }
+
+    /* Lock overlay on locked cards */
+    .lock-bar {
+      margin-top: 16px; padding-top: 16px;
+      border-top: 1px solid var(--border);
+      font-family: var(--font-mono); font-size: 10px; letter-spacing: 1px;
+      color: var(--muted);
+    }
+    .lock-progress { height: 3px; background: var(--charcoal3); border-radius: 2px; margin-top: 8px; overflow: hidden; }
+    .lock-fill { height: 100%; background: var(--amber); border-radius: 2px; }
+
+    /* ── HISTORY TAB ── */
+    .history-header {
+      display: flex; align-items: center; justify-content: space-between;
+      margin-bottom: 24px; flex-wrap: wrap; gap: 12px;
+    }
+    .history-header h3 { font-family: var(--font-display); font-size: 28px; letter-spacing: 1px; color: var(--white); }
+    .history-filter { display: flex; gap: 6px; }
+    .hfilter {
+      font-family: var(--font-mono); font-size: 10px; letter-spacing: 1.5px;
+      text-transform: uppercase; padding: 6px 14px;
+      border: 1px solid var(--border); color: var(--muted);
+      background: transparent; border-radius: 2px; cursor: pointer; transition: all 0.2s;
+    }
+    .hfilter:hover { border-color: var(--amber); color: var(--amber); }
+    .hfilter.active { background: rgba(200,129,26,0.1); border-color: var(--amber); color: var(--amber); }
+
+    .history-table {
+      border: 1px solid var(--border); border-radius: 4px; overflow: hidden;
+    }
+    .history-row {
+      display: grid; grid-template-columns: 2fr 1fr 1fr 1fr;
+      align-items: center; padding: 18px 24px;
+      border-bottom: 1px solid var(--border);
+      transition: background 0.2s;
+    }
+    .history-row:last-child { border-bottom: none; }
+    .history-row:hover { background: var(--charcoal2); }
+    .history-row.header { background: var(--charcoal2); padding: 12px 24px; }
+    .history-row.header span { font-family: var(--font-mono); font-size: 10px; letter-spacing: 2px; text-transform: uppercase; color: var(--muted); }
+    .htx-product { display: flex; align-items: center; gap: 12px; }
+    .htx-icon { font-size: 20px; flex-shrink: 0; }
+    .htx-name { font-size: 14px; color: var(--white); font-weight: 400; }
+    .htx-code { font-family: var(--font-mono); font-size: 11px; color: var(--muted); letter-spacing: 1px; }
+    .htx-date { font-family: var(--font-mono); font-size: 12px; color: var(--muted); }
+    .htx-type { font-family: var(--font-mono); font-size: 10px; letter-spacing: 1px; padding: 3px 8px; border-radius: 1px; display: inline-block; }
+    .type-earn { background: rgba(76,175,101,0.12); border: 1px solid rgba(76,175,101,0.25); color: #6dbe74; }
+    .type-redeem { background: rgba(200,129,26,0.12); border: 1px solid var(--border); color: var(--amber); }
+    .htx-points { font-family: var(--font-display); font-size: 20px; }
+    .htx-points.earn { color: #6dbe74; }
+    .htx-points.redeem { color: var(--amber); }
+
+    /* ── TIERS TAB ── */
+    .tiers-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(220px, 1fr)); gap: 2px; }
+    .tier-card {
+      background: var(--charcoal2); padding: 32px 24px;
+      border: 1px solid transparent; position: relative; overflow: hidden;
+      transition: border-color 0.3s;
+    }
+    .tier-card.current { border-color: var(--amber); }
+    .tier-card.current::before {
+      content: 'YOUR TIER';
+      position: absolute; top: 12px; right: -20px;
+      font-family: var(--font-mono); font-size: 9px; letter-spacing: 2px;
+      background: var(--amber); color: var(--charcoal);
+      padding: 4px 28px; transform: rotate(45deg);
+    }
+    .tier-name { font-family: var(--font-display); font-size: 28px; letter-spacing: 2px; color: var(--white); margin-bottom: 4px; }
+    .tier-range { font-family: var(--font-mono); font-size: 11px; letter-spacing: 1px; color: var(--amber); margin-bottom: 20px; }
+    .tier-benefits { list-style: none; display: flex; flex-direction: column; gap: 10px; }
+    .tier-benefit { display: flex; align-items: flex-start; gap: 10px; font-size: 13px; color: var(--muted); }
+    .benefit-check { color: var(--amber); font-size: 12px; flex-shrink: 0; margin-top: 2px; }
+    .tier-card.locked-tier { opacity: 0.5; }
+    .tier-locked-label { font-family: var(--font-mono); font-size: 10px; letter-spacing: 1px; color: var(--muted); margin-top: 20px; }
+
+    /* ── CLAIM MODAL ── */
+    .modal-overlay {
+      position: fixed; inset: 0; background: rgba(10,10,8,0.85);
+      z-index: 2000; display: flex; align-items: center; justify-content: center;
+      padding: 24px; opacity: 0; pointer-events: none; transition: opacity 0.3s;
+    }
+    .modal-overlay.open { opacity: 1; pointer-events: all; }
+    .modal {
+      background: var(--charcoal2); border: 1px solid var(--border); border-radius: 4px;
+      padding: 40px; width: 100%; max-width: 460px;
+      transform: translateY(20px); transition: transform 0.3s;
+    }
+    .modal-overlay.open .modal { transform: translateY(0); }
+    .modal-header { display: flex; justify-content: space-between; align-items: flex-start; margin-bottom: 24px; }
+    .modal-title { font-family: var(--font-display); font-size: 28px; letter-spacing: 1px; color: var(--white); }
+    .modal-subtitle { font-family: var(--font-mono); font-size: 11px; letter-spacing: 2px; color: var(--amber); margin-top: 4px; }
+    .modal-close { background: none; border: none; color: var(--muted); cursor: pointer; font-size: 20px; padding: 4px; transition: color 0.2s; }
+    .modal-close:hover { color: var(--cream); }
+    .modal-body p { font-size: 14px; color: var(--muted); line-height: 1.8; margin-bottom: 24px; }
+    .modal-cost { display: flex; align-items: baseline; gap: 8px; margin-bottom: 28px; }
+    .modal-cost-num { font-family: var(--font-display); font-size: 48px; color: var(--amber); line-height: 1; }
+    .modal-cost-label { font-family: var(--font-mono); font-size: 12px; color: var(--muted); letter-spacing: 1px; }
+    .modal-confirm {
+      width: 100%; padding: 15px; background: var(--amber); color: var(--charcoal);
+      font-family: var(--font-body); font-size: 14px; font-weight: 500;
+      letter-spacing: 1.5px; text-transform: uppercase;
+      border: none; border-radius: 2px; cursor: pointer; transition: all 0.25s;
+    }
+    .modal-confirm:hover { background: var(--amber-lt); }
+    .modal-cancel {
+      width: 100%; padding: 13px; background: transparent;
+      color: var(--muted); font-family: var(--font-body); font-size: 13px;
+      letter-spacing: 1px; text-transform: uppercase;
+      border: 1px solid var(--border); border-radius: 2px; cursor: pointer;
+      transition: all 0.2s; margin-top: 10px;
+    }
+    .modal-cancel:hover { border-color: var(--amber); color: var(--cream); }
+
+    /* ── SUCCESS TOAST ── */
+    .toast {
+      position: fixed; bottom: 32px; right: 32px;
+      background: var(--charcoal2); border: 1px solid rgba(76,175,101,0.4);
+      border-radius: 4px; padding: 16px 24px;
+      display: flex; align-items: center; gap: 12px;
+      z-index: 3000; transform: translateY(80px); opacity: 0;
+      transition: all 0.4s cubic-bezier(0.34,1.56,0.64,1);
+      max-width: 360px;
+    }
+    .toast.show { transform: translateY(0); opacity: 1; }
+    .toast-icon { font-size: 20px; }
+    .toast-text { font-size: 14px; color: var(--white); }
+    .toast-sub { font-family: var(--font-mono); font-size: 11px; color: var(--muted); letter-spacing: 1px; }
+
+    /* ── RESPONSIVE ── */
+    @media (max-width: 1024px) {
+      .page-header { padding: 100px 40px 48px; }
+      main { padding: 40px 24px 80px; }
+      .wallet-card { padding: 32px 28px; }
+      .wallet-stats { grid-template-columns: repeat(2,1fr); }
+      .wallet-stats .wallet-stat:nth-child(2) { border-right: none; }
+      .wallet-stats .wallet-stat:nth-child(3) { border-top: 1px solid var(--border); }
+      .wallet-stats .wallet-stat:nth-child(4) { border-top: 1px solid var(--border); }
+      .scan-layout { grid-template-columns: 1fr; }
+      .history-row { grid-template-columns: 2fr 1fr 1fr; }
+      .history-row > :last-child { display: none; }
+    }
+    @media (max-width: 768px) {
+      nav { padding: 0 24px; }
+      .nav-links, .nav-actions { display: none; }
+      .hamburger { display: flex; }
+      .page-header { padding: 100px 24px 40px; }
+      main { padding: 28px 16px 60px; }
+      .wallet-inner { flex-direction: column; align-items: flex-start; }
+      .wallet-right { align-items: flex-start; width: 100%; }
+      .tier-progress { width: 100%; }
+      .wallet-stats { grid-template-columns: repeat(2,1fr); }
+      .history-row { grid-template-columns: 1fr 1fr; }
+      .history-row > :nth-child(3), .history-row > :last-child { display: none; }
+      .stab { padding: 12px 16px; font-size: 10px; }
+    }
+  </style>
+</head>
+<body>
+
+<!-- NAV -->
+<nav>
+  <a href="index.html" class="nav-logo">XTRAA<span>PLYWOOD</span></a>
+  <ul class="nav-links">
+    <li><a href="index.html">Home</a></li>
+    <li><a href="products.html">Products</a></li>
+    <li><a href="rewards.html" class="active">Rewards</a></li>
+    <li><a href="index.html#contact">Enquire</a></li>
+  </ul>
+  <div class="nav-actions">
+    <a href="login.html#login" class="btn-nav btn-outline">Login</a>
+    <a href="login.html#signup" class="btn-nav btn-amber">Sign Up</a>
+  </div>
+  <button class="hamburger" id="hamburger"><span></span><span></span><span></span></button>
+</nav>
+<div class="mobile-menu" id="mobileMenu">
+  <a href="index.html" onclick="closeMobile()">Home</a>
+  <a href="products.html" onclick="closeMobile()">Products</a>
+  <a href="rewards.html" onclick="closeMobile()">Rewards</a>
+  <a href="login.html" onclick="closeMobile()">Login</a>
+</div>
+
+<!-- PAGE HEADER -->
+<div class="page-header">
+  <div class="breadcrumb"><a href="index.html">Home</a><span>></span><span>Rewards</span></div>
+  <h1>YOUR REWARDS</h1>
+  <p>Scan QR codes on your products, earn points, and unlock exclusive discounts and rewards.</p>
+</div>
+
+<main>
+
+  <!-- WALLET CARD -->
+  <div class="wallet-card">
+    <div class="wallet-inner">
+      <div class="wallet-left">
+        <div class="wallet-eyebrow">Points Wallet</div>
+        <div class="wallet-name">Loading member...</div>
+        <div class="wallet-member">Checking your rewards profile...</div>
+      </div>
+      <div class="wallet-center">
+        <div class="points-display" id="livePoints">0</div>
+        <div class="points-label">Total Points Available</div>
+      </div>
+      <div class="wallet-right">
+        <div class="tier-badge"><span class="tier-dot"></span> Bronze Tier</div>
+        <div class="tier-progress">
+          <div class="progress-labels">
+            <span class="progress-label">Bronze - 0 pts</span>
+            <span class="progress-label">Silver - 500 pts</span>
+          </div>
+          <div class="progress-bar">
+            <div class="progress-fill" id="tierFill" style="width: 3%"></div>
+          </div>
+          <div class="progress-hint">Sign in to see your progress</div>
+        </div>
+      </div>
+    </div>
+    <div class="wallet-stats">
+      <div class="wallet-stat"><div class="wstat-num" id="totalEarned">0</div><div class="wstat-label">Points Earned</div></div>
+      <div class="wallet-stat"><div class="wstat-num" id="totalRedeemed">0</div><div class="wstat-label">Points Redeemed</div></div>
+      <div class="wallet-stat"><div class="wstat-num" id="totalScans">0</div><div class="wstat-label">Products Scanned</div></div>
+      <div class="wallet-stat"><div class="wstat-num" id="totalRewards">0</div><div class="wstat-label">Rewards Claimed</div></div>
+    </div>
+  </div>
+
+  <!-- SECTION TABS -->
+  <div class="section-tabs">
+    <button class="stab active" onclick="switchSTab(this,'scanTab')">Scan QR</button>
+    <button class="stab" onclick="switchSTab(this,'rewardsTab')">Redeem Rewards</button>
+    <button class="stab" onclick="switchSTab(this,'historyTab')">Points History</button>
+    <button class="stab" onclick="switchSTab(this,'tiersTab')">Tiers & Benefits</button>
+  </div>
+
+  <!-- ── SCAN TAB ── -->
+  <div class="tab-content active" id="scanTab">
+    <div class="scan-layout">
+      <div class="scan-box">
+        <h3>SCAN A PRODUCT</h3>
+        <p>Point your camera at the QR code on any Xtraaplywood product to earn points. Each code is one-time use only.</p>
+        <div class="qr-area" id="qrArea" onclick="startScan()">
+          <div class="qr-corners"></div>
+          <div class="qr-corners2"></div>
+          <div class="scan-line"></div>
+          <div class="qr-icon" id="qrIcon">📷</div>
+          <div class="qr-hint" id="qrHint">Tap to scan</div>
+        </div>
+        <button class="btn-scan" onclick="startScan()" id="scanBtn">
+          <svg width="16" height="16" viewBox="0 0 16 16" fill="none">
+            <rect x="1" y="1" width="5" height="5" rx="1" stroke="currentColor" stroke-width="1.5"/>
+            <rect x="10" y="1" width="5" height="5" rx="1" stroke="currentColor" stroke-width="1.5"/>
+            <rect x="1" y="10" width="5" height="5" rx="1" stroke="currentColor" stroke-width="1.5"/>
+            <rect x="11" y="11" width="3" height="3" rx="0.5" fill="currentColor"/>
+            <path d="M10 11h1M10 13h3M13 11v2" stroke="currentColor" stroke-width="1.2" stroke-linecap="round"/>
+          </svg>
+          Open Camera Scanner
+        </button>
+        <div class="divider-or">
+          <div class="divider-or-line"></div>
+          <span class="divider-or-text">or enter code manually</span>
+          <div class="divider-or-line"></div>
+        </div>
+        <div class="code-input-row">
+          <input class="code-input" type="text" id="manualCode" placeholder="Enter product code e.g. XP-BWR-0042" maxlength="20"/>
+          <button class="btn-redeem" onclick="redeemCode()">Submit</button>
+        </div>
+        <div class="scan-result" id="scanResult"></div>
+      </div>
+
+      <div class="how-box">
+        <div class="how-box-header">
+          <h4>HOW IT WORKS</h4>
+        </div>
+        <ul class="how-steps">
+          <li class="how-step">
+            <div class="how-step-num">01</div>
+            <div class="how-step-content">
+              <h5>Buy any Xtraaplywood product</h5>
+              <p>Every product we sell comes with a unique QR code label attached to it.</p>
+            </div>
+          </li>
+          <li class="how-step">
+            <div class="how-step-num">02</div>
+            <div class="how-step-content">
+              <h5>Scan or enter the code</h5>
+              <p>Use the camera scanner above or type in the alphanumeric code printed below the QR.</p>
+            </div>
+          </li>
+          <li class="how-step">
+            <div class="how-step-num">03</div>
+            <div class="how-step-content">
+              <h5>Points credited instantly</h5>
+              <p>Points appear in your wallet right away. Each code can only be scanned once — ever.</p>
+            </div>
+          </li>
+          <li class="how-step">
+            <div class="how-step-num">04</div>
+            <div class="how-step-content">
+              <h5>Reach your threshold</h5>
+              <p>Accumulate enough points to unlock your tier level and access bigger rewards.</p>
+            </div>
+          </li>
+          <li class="how-step">
+            <div class="how-step-num">05</div>
+            <div class="how-step-content">
+              <h5>Redeem for discounts & rewards</h5>
+              <p>Use points for cash discounts on your next purchase, free products, or exclusive deals.</p>
+            </div>
+          </li>
+        </ul>
+      </div>
+    </div>
+  </div>
+
+  <!-- ── REWARDS TAB ── -->
+  <div class="tab-content" id="rewardsTab">
+    <div class="rewards-intro">
+      <div>
+        <h3>REDEEM YOUR POINTS</h3>
+        <p>Use your accumulated points to unlock these rewards. Some require a minimum tier level.</p>
+      </div>
+      <div class="user-points-pill">0 pts available</div>
+    </div>
+    <div class="rewards-grid" id="rewardsGrid"></div>
+  </div>
+
+  <!-- ── HISTORY TAB ── -->
+  <div class="tab-content" id="historyTab">
+    <div class="history-header">
+      <div><h3>POINTS HISTORY</h3></div>
+      <div class="history-filter">
+        <button class="hfilter active" onclick="filterHistory(this,'all')">All</button>
+        <button class="hfilter" onclick="filterHistory(this,'earn')">Earned</button>
+        <button class="hfilter" onclick="filterHistory(this,'redeem')">Redeemed</button>
+      </div>
+    </div>
+    <div class="history-table">
+      <div class="history-row header">
+        <span>Product</span><span>Date</span><span>Type</span><span>Points</span>
+      </div>
+      <div id="historyList"></div>
+    </div>
+  </div>
+
+  <!-- ── TIERS TAB ── -->
+  <div class="tab-content" id="tiersTab">
+    <div style="margin-bottom:32px;">
+      <div style="font-family:var(--font-display);font-size:28px;letter-spacing:1px;color:var(--white);margin-bottom:8px;">MEMBERSHIP TIERS</div>
+      <p style="font-size:14px;color:var(--muted);">Earn more points to unlock better rewards and exclusive benefits. Your tier is calculated based on total lifetime points earned.</p>
+    </div>
+    <div class="tiers-grid">
+      <div class="tier-card">
+        <div class="tier-name">BRONZE</div>
+        <div class="tier-range">0 – 499 pts</div>
+        <ul class="tier-benefits">
+          <li class="tier-benefit"><span class="benefit-check">✦</span>Access to basic rewards</li>
+          <li class="tier-benefit"><span class="benefit-check">✦</span>5% discount on next order</li>
+          <li class="tier-benefit"><span class="benefit-check">✦</span>Earn 1x points per scan</li>
+          <li class="tier-benefit"><span class="benefit-check">✦</span>Email notifications on deals</li>
+        </ul>
+      </div>
+      <div class="tier-card current">
+        <div class="tier-name">SILVER</div>
+        <div class="tier-range">500 – 999 pts</div>
+        <ul class="tier-benefits">
+          <li class="tier-benefit"><span class="benefit-check">✦</span>All Bronze benefits</li>
+          <li class="tier-benefit"><span class="benefit-check">✦</span>10% discount on next order</li>
+          <li class="tier-benefit"><span class="benefit-check">✦</span>Earn 1.5x points per scan</li>
+          <li class="tier-benefit"><span class="benefit-check">✦</span>Priority enquiry handling</li>
+          <li class="tier-benefit"><span class="benefit-check">✦</span>Free delivery on bulk orders</li>
+        </ul>
+      </div>
+      <div class="tier-card locked-tier">
+        <div class="tier-name">GOLD</div>
+        <div class="tier-range">1000 – 2499 pts</div>
+        <ul class="tier-benefits">
+          <li class="tier-benefit"><span class="benefit-check">✦</span>All Silver benefits</li>
+          <li class="tier-benefit"><span class="benefit-check">✦</span>15% discount on every order</li>
+          <li class="tier-benefit"><span class="benefit-check">✦</span>Earn 2x points per scan</li>
+          <li class="tier-benefit"><span class="benefit-check">✦</span>Dedicated account manager</li>
+          <li class="tier-benefit"><span class="benefit-check">✦</span>Early access to new stock</li>
+        </ul>
+        <div class="tier-locked-label">🔒 Unlock at 1000 pts — you need 250 more</div>
+      </div>
+      <div class="tier-card locked-tier">
+        <div class="tier-name">PLATINUM</div>
+        <div class="tier-range">2500+ pts</div>
+        <ul class="tier-benefits">
+          <li class="tier-benefit"><span class="benefit-check">✦</span>All Gold benefits</li>
+          <li class="tier-benefit"><span class="benefit-check">✦</span>20% lifetime discount</li>
+          <li class="tier-benefit"><span class="benefit-check">✦</span>Earn 3x points per scan</li>
+          <li class="tier-benefit"><span class="benefit-check">✦</span>VIP pricing on bulk orders</li>
+          <li class="tier-benefit"><span class="benefit-check">✦</span>Exclusive product previews</li>
+          <li class="tier-benefit"><span class="benefit-check">✦</span>Annual loyalty gift</li>
+        </ul>
+        <div class="tier-locked-label">🔒 Unlock at 2500 pts</div>
+      </div>
+    </div>
+  </div>
+
+</main>
+
+<!-- CLAIM MODAL -->
+<div class="modal-overlay" id="claimModal" onclick="closeClaimOutside(event)">
+  <div class="modal">
+    <div class="modal-header">
+      <div>
+        <div class="modal-title">CONFIRM REDEMPTION</div>
+        <div class="modal-subtitle" id="claimName">Reward name</div>
+      </div>
+      <button class="modal-close" onclick="closeClaim()">✕</button>
+    </div>
+    <div class="modal-body">
+      <p id="claimDesc">Redeeming this reward will deduct points from your wallet. This action cannot be undone.</p>
+      <div class="modal-cost">
+        <div class="modal-cost-num" id="claimCost">200</div>
+        <div class="modal-cost-label">pts will be deducted</div>
+      </div>
+    </div>
+    <button class="modal-confirm" onclick="confirmClaim()">Confirm & Redeem →</button>
+    <button class="modal-cancel" onclick="closeClaim()">Cancel</button>
+  </div>
+</div>
+
+<!-- TOAST -->
+<div class="toast" id="toast">
+  <div class="toast-icon" id="toastIcon">OK</div>
+  <div>
+    <div class="toast-text" id="toastText">Points earned!</div>
+    <div class="toast-sub" id="toastSub">Your wallet has been updated.</div>
+  </div>
+</div>
+
+<script type="module" src="./supabase/nav-auth.js"></script>
+<script type="module">
+  import { getSupabaseClient, isSupabaseConfigured } from "./supabase/client.js";
+
+  const supabase = isSupabaseConfigured() ? getSupabaseClient() : null;
+  let pendingClaim = null;
+  let rewardsState = [];
+  let historyState = [];
+  let profileState = null;
+  let historyFilter = 'all';
+  let scanInterval = null;
+
+  const rewardVisuals = {
+    '5% Discount': { icon: '5%', featured: false },
+    '10% Discount': { icon: '10%', featured: true },
+    'Free Delivery': { icon: 'DELIV', featured: false },
+    'Free Laminate Sheet': { icon: 'SHEET', featured: false },
+    '15% Discount': { icon: '15%', featured: false },
+    'Rs 500 Cash Reward': { icon: '500', featured: false },
+    'Priority Service': { icon: 'PRIOR', featured: false },
+    'VIP Bulk Pricing': { icon: 'VIP', featured: false }
+  };
+
+  document.getElementById('hamburger').addEventListener('click', () => document.getElementById('mobileMenu').classList.toggle('open'));
+  function closeMobile() { document.getElementById('mobileMenu').classList.remove('open'); }
+  window.closeMobile = closeMobile;
+
+  function ensureSupabaseReady() {
+    if (supabase) return true;
+    showToast('NOTE', 'Supabase not configured', 'Add your project URL and anon key in supabase/client.js.');
+    return false;
+  }
+
+  function switchSTab(btn, tabId) {
+    document.querySelectorAll('.stab').forEach(b => b.classList.remove('active'));
+    document.querySelectorAll('.tab-content').forEach(t => t.classList.remove('active'));
+    btn.classList.add('active');
+    document.getElementById(tabId).classList.add('active');
+  }
+  window.switchSTab = switchSTab;
+
+  function formatDate(value) {
+    return new Date(value).toLocaleDateString('en-IN', {
+      day: '2-digit',
+      month: 'short',
+      year: 'numeric'
+    });
+  }
+
+  function getTierMeta(totalPoints) {
+    if (totalPoints >= 2500) {
+      return { tier: 'Platinum', min: 2500, nextMin: null, nextTier: null };
+    }
+    if (totalPoints >= 1000) {
+      return { tier: 'Gold', min: 1000, nextMin: 2500, nextTier: 'Platinum' };
+    }
+    if (totalPoints >= 500) {
+      return { tier: 'Silver', min: 500, nextMin: 1000, nextTier: 'Gold' };
+    }
+    return { tier: 'Bronze', min: 0, nextMin: 500, nextTier: 'Silver' };
+  }
+
+  function setWallet(profile, stats) {
+    profileState = profile;
+    const totalPoints = profile.current_points_balance || 0;
+    const totalEarned = profile.total_points_earned || 0;
+    const meta = getTierMeta(totalEarned);
+    const tierPct = meta.nextMin
+      ? Math.max((((totalEarned - meta.min) / (meta.nextMin - meta.min)) * 100), 3)
+      : 100;
+
+    document.querySelector('.wallet-name').textContent = profile.full_name || 'Xtraaplywood Member';
+    document.querySelector('.wallet-member').textContent = `Member since ${formatDate(profile.created_at)} | ID #${String(profile.id).slice(0, 8).toUpperCase()}`;
+    document.getElementById('livePoints').textContent = totalPoints.toLocaleString();
+    document.querySelector('.tier-badge').innerHTML = `<span class="tier-dot"></span> ${meta.tier} Tier`;
+
+    const progressLabels = document.querySelectorAll('.progress-label');
+    progressLabels[0].textContent = `${meta.tier} - ${meta.min} pts`;
+    progressLabels[1].textContent = meta.nextTier ? `${meta.nextTier} - ${meta.nextMin} pts` : 'Top Tier Reached';
+    document.getElementById('tierFill').style.width = `${Math.min(tierPct, 100)}%`;
+    document.querySelector('.progress-hint').textContent = meta.nextMin
+      ? `${Math.max(meta.nextMin - totalEarned, 0)} pts to ${meta.nextTier} Tier`
+      : 'You have reached the highest tier';
+
+    document.getElementById('totalEarned').textContent = totalEarned.toLocaleString();
+    document.getElementById('totalRedeemed').textContent = stats.redeemed.toLocaleString();
+    document.getElementById('totalScans').textContent = stats.scans.toLocaleString();
+    document.getElementById('totalRewards').textContent = stats.rewardClaims.toLocaleString();
+    document.querySelector('.user-points-pill').textContent = `${totalPoints.toLocaleString()} pts available`;
+  }
+
+  async function loadProfileAndStats(userId) {
+    const [{ data: profile, error: profileError }, { count: scanCount, error: scanError }, { count: claimCount, error: claimError }] = await Promise.all([
+      supabase
+        .from('profiles')
+        .select('id, full_name, loyalty_tier, total_points_earned, current_points_balance, created_at')
+        .eq('id', userId)
+        .single(),
+      supabase
+        .from('point_transactions')
+        .select('id', { count: 'exact', head: true })
+        .eq('user_id', userId)
+        .eq('type', 'earn'),
+      supabase
+        .from('reward_claims')
+        .select('id', { count: 'exact', head: true })
+        .eq('user_id', userId)
+    ]);
+
+    if (profileError) throw profileError;
+    if (scanError) throw scanError;
+    if (claimError) throw claimError;
+
+    const { data: transactions, error: txError } = await supabase
+      .from('point_transactions')
+      .select('points_delta')
+      .eq('user_id', userId)
+      .lt('points_delta', 0);
+
+    if (txError) throw txError;
+
+    const redeemed = (transactions || []).reduce((sum, row) => sum + Math.abs(row.points_delta), 0);
+
+    setWallet(profile, {
+      scans: scanCount || 0,
+      rewardClaims: claimCount || 0,
+      redeemed
+    });
+  }
+
+  function rewardIcon(name) {
+    return rewardVisuals[name]?.icon || 'REWARD';
+  }
+
+  function rewardFeatured(name) {
+    return rewardVisuals[name]?.featured || false;
+  }
+
+  function currentTierRank() {
+    const rank = { bronze: 0, silver: 1, gold: 2, platinum: 3 };
+    return rank[(profileState?.loyalty_tier || 'bronze').toLowerCase()] ?? 0;
+  }
+
+  function requiredTierRank(tier) {
+    const rank = { bronze: 0, silver: 1, gold: 2, platinum: 3 };
+    return rank[(tier || 'bronze').toLowerCase()] ?? 0;
+  }
+
+  async function loadRewards() {
+    const { data, error } = await supabase
+      .from('rewards')
+      .select('id, name, description, points_cost, tier_required, is_active, stock_qty')
+      .eq('is_active', true)
+      .order('points_cost', { ascending: true });
+
+    if (error) throw error;
+    rewardsState = data || [];
+    renderRewards();
+  }
+
+  function renderRewards() {
+    const grid = document.getElementById('rewardsGrid');
+    const balance = profileState?.current_points_balance || 0;
+    grid.innerHTML = '';
+
+    rewardsState.forEach(reward => {
+      const canAfford = balance >= reward.points_cost;
+      const tierOk = !reward.tier_required || currentTierRank() >= requiredTierRank(reward.tier_required);
+      const inStock = reward.stock_qty === null || reward.stock_qty === undefined || reward.stock_qty > 0;
+      const unlocked = canAfford && tierOk && inStock;
+      const featured = rewardFeatured(reward.name);
+      const statusClass = featured ? 'status-featured' : unlocked ? 'status-unlocked' : 'status-locked';
+      const statusText = featured ? 'Popular' : unlocked ? 'Unlocked' : 'Locked';
+      const need = Math.max(reward.points_cost - balance, 0);
+
+      const card = document.createElement('div');
+      card.className = `reward-card${!unlocked ? ' locked' : ''}`;
+      card.innerHTML = `
+        <div class="reward-card-top">
+          <div class="reward-icon">${rewardIcon(reward.name)}</div>
+          <span class="reward-status ${statusClass}">${statusText}</span>
+        </div>
+        <div class="reward-name">${reward.name}</div>
+        <div class="reward-desc">${reward.description || 'Reward available for redemption.'}</div>
+        <div class="reward-footer">
+          <div class="reward-cost">
+            <span class="reward-pts">${reward.points_cost}</span>
+            <span class="reward-pts-label">pts</span>
+          </div>
+          <button class="btn-claim ${unlocked ? 'available' : 'unavailable'}" ${unlocked ? `onclick="openClaim('${reward.id}')"` : 'disabled'}>
+            ${unlocked ? 'Claim Reward' : (!tierOk ? 'Tier required' : !inStock ? 'Out of stock' : `Need ${need} more pts`)}
+          </button>
+        </div>
+        ${!unlocked ? `
+        <div class="lock-bar">
+          ${!tierOk ? `Requires ${reward.tier_required} tier` : !inStock ? 'Currently unavailable' : `${balance}/${reward.points_cost} pts`}
+          <div class="lock-progress"><div class="lock-fill" style="width:${Math.min((balance / reward.points_cost) * 100, 100)}%"></div></div>
+        </div>` : ''}`;
+      grid.appendChild(card);
+    });
+  }
+
+  function historyIcon(item) {
+    if (item.reward_name) return rewardIcon(item.reward_name);
+    return 'PTS';
+  }
+
+  async function loadHistory(userId) {
+    const { data, error } = await supabase
+      .from('point_transactions')
+      .select(`
+        id,
+        type,
+        points_delta,
+        created_at,
+        reward:rewards(name),
+        qr_code:qr_codes(code, product:products(name))
+      `)
+      .eq('user_id', userId)
+      .order('created_at', { ascending: false });
+
+    if (error) throw error;
+
+    historyState = (data || []).map(item => ({
+      id: item.id,
+      type: item.type,
+      pts: item.points_delta,
+      date: formatDate(item.created_at),
+      reward_name: item.reward?.name || null,
+      product_name: item.qr_code?.product?.name || null,
+      code: item.qr_code?.code || 'REWARD-CLAIM'
+    }));
+
+    renderHistory(historyFilter);
+  }
+
+  function renderHistory(filter) {
+    historyFilter = filter;
+    const list = historyState.filter(h => filter === 'all' || h.type === filter);
+    const container = document.getElementById('historyList');
+    container.innerHTML = '';
+
+    list.forEach(h => {
+      const title = h.product_name || h.reward_name || 'Account activity';
+      const row = document.createElement('div');
+      row.className = 'history-row';
+      row.innerHTML = `
+        <div class="htx-product">
+          <div class="htx-icon">${historyIcon(h)}</div>
+          <div><div class="htx-name">${title}</div><div class="htx-code">${h.code}</div></div>
+        </div>
+        <div class="htx-date">${h.date}</div>
+        <div><span class="htx-type ${h.type === 'earn' ? 'type-earn' : 'type-redeem'}">${h.type === 'earn' ? 'Earned' : 'Redeemed'}</span></div>
+        <div class="htx-points ${h.type}">${h.pts > 0 ? '+' : ''}${h.pts}</div>`;
+      container.appendChild(row);
+    });
+  }
+
+  function filterHistory(btn, filter) {
+    document.querySelectorAll('.hfilter').forEach(b => b.classList.remove('active'));
+    btn.classList.add('active');
+    renderHistory(filter);
+  }
+  window.filterHistory = filterHistory;
+
+  function showToast(icon, text, sub) {
+    const t = document.getElementById('toast');
+    document.getElementById('toastIcon').textContent = icon;
+    document.getElementById('toastText').textContent = text;
+    document.getElementById('toastSub').textContent = sub;
+    t.classList.add('show');
+    setTimeout(() => t.classList.remove('show'), 4000);
+  }
+
+  function showScanResult(success, data, errMsg) {
+    const el = document.getElementById('scanResult');
+    if (success) {
+      el.className = 'scan-result show';
+      el.innerHTML = `
+        <div class="result-top">
+          <div class="result-icon">${data.icon || '?'}</div>
+          <div>
+            <div class="result-title">${data.product}</div>
+            <div class="result-sub">Code accepted and points credited to your wallet</div>
+          </div>
+        </div>
+        <div class="result-points">+${data.points}</div>
+        <div class="result-points-label">POINTS ADDED</div>`;
+    } else {
+      el.className = 'scan-result error-result show';
+      el.innerHTML = `<div class="result-top"><div class="result-icon">!</div><div class="result-title" style="color:var(--cream)">Code not valid</div></div><div class="result-sub" style="font-size:13px;color:var(--muted);margin-top:4px;">${errMsg}</div>`;
+    }
+  }
+
+  async function refreshDashboard(userId) {
+    await Promise.all([
+      loadProfileAndStats(userId),
+      loadRewards(),
+      loadHistory(userId)
+    ]);
+  }
+
+  async function processCode(code) {
+    if (!ensureSupabaseReady()) return;
+    try {
+      const { data, error } = await supabase.rpc('redeem_qr_code', {
+        input_code: code
+      });
+      if (error) throw error;
+      const result = Array.isArray(data) ? data[0] : data;
+      showScanResult(true, {
+        product: result.product_name,
+        points: result.points_added,
+        icon: 'OK'
+      });
+      showToast('OK', `+${result.points_added} points earned!`, `${result.product_name} scanned successfully.`);
+      const { data: sessionData } = await supabase.auth.getSession();
+      if (sessionData?.session?.user?.id) {
+        await refreshDashboard(sessionData.session.user.id);
+      }
+    } catch (err) {
+      showScanResult(false, null, err?.message || 'Could not redeem this code.');
+    }
+  }
+
+  function startScan() {
+    const area = document.getElementById('qrArea');
+    const icon = document.getElementById('qrIcon');
+    const hint = document.getElementById('qrHint');
+    if (area.classList.contains('scanning')) return;
+    area.classList.add('scanning');
+    icon.textContent = 'SCAN';
+    hint.textContent = 'Scanning...';
+    scanInterval = setTimeout(() => {
+      area.classList.remove('scanning');
+      icon.textContent = 'SCAN';
+      hint.textContent = 'Tap to scan';
+      showScanResult(false, null, 'Camera scanning is not connected yet. Enter the QR code manually to redeem points.');
+    }, 1800);
+  }
+  window.startScan = startScan;
+
+  async function redeemCode() {
+    const raw = document.getElementById('manualCode').value.trim().toUpperCase();
+    if (!raw) {
+      showScanResult(false, null, 'Please enter a product code.');
+      return;
+    }
+    document.getElementById('manualCode').value = '';
+    await processCode(raw);
+  }
+  window.redeemCode = redeemCode;
+
+  function openClaim(id) {
+    pendingClaim = rewardsState.find(r => r.id === id);
+    if (!pendingClaim) return;
+    document.getElementById('claimName').textContent = pendingClaim.name;
+    document.getElementById('claimDesc').textContent = pendingClaim.description || 'Redeeming this reward will deduct points from your wallet. This action cannot be undone.';
+    document.getElementById('claimCost').textContent = pendingClaim.points_cost;
+    document.getElementById('claimModal').classList.add('open');
+    document.body.style.overflow = 'hidden';
+  }
+  window.openClaim = openClaim;
+
+  function closeClaim() {
+    document.getElementById('claimModal').classList.remove('open');
+    document.body.style.overflow = '';
+    pendingClaim = null;
+  }
+  window.closeClaim = closeClaim;
+
+  function closeClaimOutside(e) {
+    if (e.target === document.getElementById('claimModal')) closeClaim();
+  }
+  window.closeClaimOutside = closeClaimOutside;
+
+  async function confirmClaim() {
+    if (!pendingClaim || !ensureSupabaseReady()) return;
+    try {
+      const { data, error } = await supabase.rpc('claim_reward', {
+        input_reward_id: pendingClaim.id
+      });
+      if (error) throw error;
+      const result = Array.isArray(data) ? data[0] : data;
+      closeClaim();
+      showToast('OK', 'Reward claimed!', `${result.reward_name} claimed. Code: ${result.claim_code}`);
+      const { data: sessionData } = await supabase.auth.getSession();
+      if (sessionData?.session?.user?.id) {
+        await refreshDashboard(sessionData.session.user.id);
+      }
+    } catch (err) {
+      showToast('!', 'Claim failed', err?.message || 'Could not claim this reward.');
+    }
+  }
+  window.confirmClaim = confirmClaim;
+
+  function renderGuestState(message) {
+    document.querySelector('.wallet-name').textContent = 'Rewards Preview';
+    document.querySelector('.wallet-member').textContent = message;
+    document.getElementById('rewardsGrid').innerHTML = '<div class="history-empty">Sign in to view available rewards and claim offers.</div>';
+    document.getElementById('historyList').innerHTML = '<div class="history-empty">Sign in to view your scan and redemption history.</div>';
+    document.getElementById('scanResult').className = 'scan-result show';
+    document.getElementById('scanResult').innerHTML = '<div class="result-top"><div class="result-icon">NOTE</div><div><div class="result-title">Login required for rewards</div><div class="result-sub">You can browse this page, but scanning and claiming rewards needs a signed-in account.</div></div></div>';
+  }
+
+  async function bootstrap() {
+    if (!ensureSupabaseReady()) {
+      renderGuestState('Configure Supabase to load live rewards data.');
+      return;
+    }
+    const { data: sessionData, error } = await supabase.auth.getSession();
+    if (error || !sessionData.session) {
+      renderGuestState('Sign in to access your wallet, scan codes, and claim rewards.');
+      return;
+    }
+    const userId = sessionData.session.user.id;
+    await refreshDashboard(userId);
+  }
+
+  bootstrap();
+</script>
+</body>
+</html>
+
+
+
+
+
+
+
+
+
+

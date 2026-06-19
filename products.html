@@ -1,0 +1,1282 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Products – Xtraaplywood</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=Barlow:ital,wght@0,300;0,400;0,500;0,600;1,300&family=DM+Mono:wght@400;500&display=swap" rel="stylesheet">
+  <style>
+*, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+    :root {
+      --charcoal:   #141410;
+      --charcoal2:  #1e1e18;
+      --charcoal3:  #272720;
+      --amber:      #c8811a;
+      --amber-lt:   #e8a030;
+      --amber-pale: #f5c46a;
+      --cream:      #f0ead8;
+      --cream2:     #e2d9c0;
+      --white:      #fafaf7;
+      --muted:      #7a7a6a;
+      --border:     rgba(200,129,26,0.18);
+      --font-display: 'Bebas Neue', sans-serif;
+      --font-body:    'Barlow', sans-serif;
+      --font-mono:    'DM Mono', monospace;
+    }
+
+    html { scroll-behavior: smooth; }
+    body {
+      background: var(--charcoal);
+      color: var(--cream);
+      font-family: var(--font-body);
+      font-weight: 300;
+      line-height: 1.7;
+      overflow-x: hidden;
+    }
+    body::before {
+      content: '';
+      position: fixed; inset: 0;
+      background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 256 256' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)' opacity='1'/%3E%3C/svg%3E");
+      opacity: 0.025;
+      pointer-events: none;
+      z-index: 9999;
+    }
+
+    /* ── NAV ── */
+    nav {
+      position: fixed; top: 0; left: 0; right: 0;
+      z-index: 1000;
+      display: flex; align-items: center; justify-content: space-between;
+      padding: 0 48px;
+      height: 68px;
+      background: rgba(20,20,16,0.95);
+      backdrop-filter: blur(12px);
+      border-bottom: 1px solid var(--border);
+    }
+    .nav-logo {
+      font-family: var(--font-display);
+      font-size: 26px;
+      letter-spacing: 2px;
+      color: var(--white);
+      text-decoration: none;
+    }
+    .nav-logo span { color: var(--amber); }
+    .nav-links { display: flex; align-items: center; gap: 36px; list-style: none; }
+    .nav-links a {
+      font-size: 13px; font-weight: 500;
+      letter-spacing: 1.5px; text-transform: uppercase;
+      color: var(--cream2); text-decoration: none;
+      transition: color 0.2s;
+    }
+    .nav-links a:hover, .nav-links a.active { color: var(--amber-lt); }
+    .nav-actions { display: flex; align-items: center; gap: 16px; }
+    .btn-nav {
+      font-size: 13px; font-weight: 500;
+      letter-spacing: 1px; text-transform: uppercase;
+      padding: 9px 22px; border-radius: 2px;
+      cursor: pointer; text-decoration: none;
+      transition: all 0.2s;
+    }
+    .btn-outline {
+      background: transparent;
+      border: 1px solid var(--border);
+      color: var(--cream);
+    }
+    .btn-outline:hover { border-color: var(--amber); color: var(--amber-lt); }
+    .btn-amber {
+      background: var(--amber);
+      border: 1px solid var(--amber);
+      color: var(--charcoal);
+    }
+    .btn-amber:hover { background: var(--amber-lt); }
+    .hamburger {
+      display: none; flex-direction: column; gap: 5px;
+      cursor: pointer; padding: 4px;
+      background: none; border: none;
+    }
+    .hamburger span {
+      display: block; width: 24px; height: 2px;
+      background: var(--cream); border-radius: 2px;
+    }
+    .mobile-menu {
+      display: none; position: fixed;
+      inset: 0; top: 68px;
+      background: rgba(20,20,16,0.98);
+      z-index: 999;
+      flex-direction: column;
+      align-items: center; justify-content: center;
+      gap: 36px;
+    }
+    .mobile-menu.open { display: flex; }
+    .mobile-menu a {
+      font-family: var(--font-display);
+      font-size: 36px; letter-spacing: 3px;
+      color: var(--cream); text-decoration: none;
+    }
+    .mobile-menu a:hover { color: var(--amber); }
+
+    /* ── PAGE HEADER ── */
+    .page-header {
+      padding: 120px 72px 60px;
+      background: var(--charcoal2);
+      border-bottom: 1px solid var(--border);
+      position: relative;
+      overflow: hidden;
+    }
+    .page-header::after {
+      content: 'PRODUCTS';
+      position: absolute;
+      right: -20px; bottom: -30px;
+      font-family: var(--font-display);
+      font-size: 160px;
+      letter-spacing: 4px;
+      color: rgba(200,129,26,0.04);
+      pointer-events: none;
+      white-space: nowrap;
+    }
+    .breadcrumb {
+      display: flex; align-items: center; gap: 8px;
+      font-family: var(--font-mono);
+      font-size: 11px; letter-spacing: 2px;
+      color: var(--muted);
+      text-transform: uppercase;
+      margin-bottom: 20px;
+    }
+    .breadcrumb a { color: var(--amber); text-decoration: none; }
+    .breadcrumb a:hover { color: var(--amber-lt); }
+    .page-header h1 {
+      font-family: var(--font-display);
+      font-size: clamp(48px, 6vw, 80px);
+      color: var(--white);
+      letter-spacing: 2px;
+      line-height: 1;
+      margin-bottom: 16px;
+    }
+    .page-header p {
+      font-size: 15px; color: var(--muted);
+      max-width: 500px; line-height: 1.8;
+    }
+
+    /* ── MAIN LAYOUT ── */
+    .products-layout {
+      display: grid;
+      grid-template-columns: 280px 1fr;
+      min-height: calc(100vh - 68px);
+    }
+
+    /* ── SIDEBAR ── */
+    .sidebar {
+      background: var(--charcoal2);
+      border-right: 1px solid var(--border);
+      padding: 40px 28px;
+      position: sticky;
+      top: 68px;
+      height: calc(100vh - 68px);
+      overflow-y: auto;
+    }
+    .sidebar::-webkit-scrollbar { width: 4px; }
+    .sidebar::-webkit-scrollbar-track { background: transparent; }
+    .sidebar::-webkit-scrollbar-thumb { background: var(--border); border-radius: 2px; }
+
+    .sidebar-section { margin-bottom: 36px; }
+    .sidebar-title {
+      font-family: var(--font-mono);
+      font-size: 10px; letter-spacing: 2.5px;
+      text-transform: uppercase; color: var(--amber);
+      margin-bottom: 16px;
+    }
+
+    /* Search */
+    .sidebar-search {
+      position: relative;
+    }
+    .sidebar-search input {
+      width: 100%;
+      background: var(--charcoal);
+      border: 1px solid var(--border);
+      color: var(--cream);
+      font-family: var(--font-body);
+      font-size: 13px;
+      padding: 10px 36px 10px 14px;
+      border-radius: 2px;
+      outline: none;
+      transition: border-color 0.2s;
+    }
+    .sidebar-search input::placeholder { color: var(--muted); }
+    .sidebar-search input:focus { border-color: var(--amber); }
+    .sidebar-search svg {
+      position: absolute; right: 12px; top: 50%;
+      transform: translateY(-50%);
+      color: var(--muted); pointer-events: none;
+    }
+
+    /* Category filters */
+    .filter-list { display: flex; flex-direction: column; gap: 4px; }
+    .filter-item {
+      display: flex; align-items: center; justify-content: space-between;
+      padding: 10px 12px;
+      border-radius: 2px;
+      cursor: pointer;
+      transition: all 0.2s;
+      border: 1px solid transparent;
+    }
+    .filter-item:hover { background: var(--charcoal3); }
+    .filter-item.active {
+      background: rgba(200,129,26,0.1);
+      border-color: var(--border);
+    }
+    .filter-label {
+      font-size: 13px; color: var(--cream2);
+      display: flex; align-items: center; gap: 10px;
+    }
+    .filter-label span { font-size: 16px; }
+    .filter-item.active .filter-label { color: var(--amber-lt); }
+    .filter-count {
+      font-family: var(--font-mono);
+      font-size: 10px; letter-spacing: 1px;
+      color: var(--muted);
+      background: var(--charcoal);
+      padding: 2px 7px; border-radius: 10px;
+    }
+    .filter-item.active .filter-count { color: var(--amber); }
+
+    /* Grade filter */
+    .grade-list { display: flex; flex-direction: column; gap: 8px; }
+    .grade-check {
+      display: flex; align-items: center; gap: 10px;
+      cursor: pointer;
+    }
+    .grade-check input { display: none; }
+    .grade-box {
+      width: 16px; height: 16px;
+      border: 1px solid var(--border);
+      border-radius: 2px;
+      display: flex; align-items: center; justify-content: center;
+      transition: all 0.2s;
+      flex-shrink: 0;
+    }
+    .grade-check input:checked + .grade-box {
+      background: var(--amber);
+      border-color: var(--amber);
+    }
+    .grade-check input:checked + .grade-box::after {
+      content: '✓';
+      font-size: 10px;
+      color: var(--charcoal);
+      font-weight: bold;
+    }
+    .grade-text { font-size: 13px; color: var(--cream2); }
+
+    /* Thickness */
+    .thickness-tags { display: flex; flex-wrap: wrap; gap: 6px; }
+    .thickness-tag {
+      font-family: var(--font-mono);
+      font-size: 11px; letter-spacing: 1px;
+      padding: 5px 10px;
+      border: 1px solid var(--border);
+      color: var(--muted);
+      border-radius: 2px;
+      cursor: pointer;
+      transition: all 0.2s;
+    }
+    .thickness-tag:hover { border-color: var(--amber); color: var(--amber); }
+    .thickness-tag.active {
+      background: var(--amber);
+      border-color: var(--amber);
+      color: var(--charcoal);
+    }
+
+    /* ── PRODUCTS MAIN ── */
+    .products-main {
+      padding: 32px 40px 80px;
+      background: var(--charcoal);
+    }
+
+    /* Toolbar */
+    .toolbar {
+      display: flex; align-items: center; justify-content: space-between;
+      margin-bottom: 32px;
+      padding-bottom: 24px;
+      border-bottom: 1px solid var(--border);
+      flex-wrap: wrap; gap: 16px;
+    }
+    .toolbar-left {
+      display: flex; align-items: center; gap: 12px;
+    }
+    .results-count {
+      font-family: var(--font-mono);
+      font-size: 12px; letter-spacing: 1px;
+      color: var(--muted);
+    }
+    .results-count strong { color: var(--amber); }
+    .active-filters {
+      display: flex; gap: 8px; flex-wrap: wrap;
+    }
+    .active-filter-tag {
+      display: flex; align-items: center; gap: 6px;
+      font-family: var(--font-mono);
+      font-size: 10px; letter-spacing: 1px;
+      padding: 4px 10px;
+      background: rgba(200,129,26,0.12);
+      border: 1px solid var(--border);
+      color: var(--amber);
+      border-radius: 2px;
+      cursor: pointer;
+    }
+    .active-filter-tag:hover { background: rgba(200,129,26,0.2); }
+
+    .toolbar-right {
+      display: flex; align-items: center; gap: 12px;
+    }
+    .sort-select {
+      background: var(--charcoal2);
+      border: 1px solid var(--border);
+      color: var(--cream2);
+      font-family: var(--font-body);
+      font-size: 13px;
+      padding: 8px 14px;
+      border-radius: 2px;
+      outline: none;
+      cursor: pointer;
+    }
+    .sort-select option { background: var(--charcoal2); }
+    .view-toggle { display: flex; gap: 4px; }
+    .view-btn {
+      width: 34px; height: 34px;
+      display: flex; align-items: center; justify-content: center;
+      background: var(--charcoal2);
+      border: 1px solid var(--border);
+      color: var(--muted);
+      border-radius: 2px;
+      cursor: pointer;
+      transition: all 0.2s;
+    }
+    .view-btn:hover, .view-btn.active { border-color: var(--amber); color: var(--amber); }
+
+    /* Products grid */
+    .products-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(260px, 1fr));
+      gap: 2px;
+    }
+    .products-grid.list-view {
+      grid-template-columns: 1fr;
+    }
+
+    /* Product card */
+    .product-card {
+      background: var(--charcoal2);
+      border: 1px solid transparent;
+      position: relative;
+      cursor: pointer;
+      transition: all 0.3s;
+      overflow: hidden;
+      display: flex;
+      flex-direction: column;
+    }
+    .product-card::before {
+      content: '';
+      position: absolute; bottom: 0; left: 0;
+      width: 100%; height: 2px;
+      background: var(--amber);
+      transform: scaleX(0);
+      transform-origin: left;
+      transition: transform 0.3s;
+    }
+    .product-card:hover { border-color: var(--border); background: var(--charcoal3); }
+    .product-card:hover::before { transform: scaleX(1); }
+
+    .card-top {
+      padding: 28px 24px 20px;
+      flex: 1;
+    }
+    .card-meta {
+      display: flex; align-items: center; justify-content: space-between;
+      margin-bottom: 16px;
+    }
+    .card-num {
+      font-family: var(--font-mono);
+      font-size: 10px; letter-spacing: 2px;
+      color: var(--amber); opacity: 0.6;
+    }
+    .card-badge {
+      font-family: var(--font-mono);
+      font-size: 10px; letter-spacing: 1px;
+      padding: 3px 8px;
+      border-radius: 1px;
+    }
+    .badge-stock {
+      background: rgba(58,122,64,0.2);
+      border: 1px solid rgba(58,122,64,0.4);
+      color: #6dbe74;
+    }
+    .badge-limited {
+      background: rgba(200,129,26,0.15);
+      border: 1px solid var(--border);
+      color: var(--amber);
+    }
+    .badge-enquire {
+      background: rgba(255,255,255,0.05);
+      border: 1px solid rgba(255,255,255,0.1);
+      color: var(--muted);
+    }
+    .card-icon { font-size: 36px; margin-bottom: 14px; line-height: 1; }
+    .card-name {
+      font-family: var(--font-display);
+      font-size: 22px; letter-spacing: 1px;
+      color: var(--white);
+      margin-bottom: 6px;
+    }
+    .card-grade {
+      font-family: var(--font-mono);
+      font-size: 10px; letter-spacing: 2px;
+      color: var(--amber); opacity: 0.8;
+      text-transform: uppercase;
+      margin-bottom: 10px;
+    }
+    .card-desc {
+      font-size: 13px; color: var(--muted);
+      line-height: 1.7; margin-bottom: 16px;
+    }
+    .card-specs {
+      display: flex; flex-wrap: wrap; gap: 6px;
+    }
+    .spec-tag {
+      font-family: var(--font-mono);
+      font-size: 10px; letter-spacing: 1px;
+      padding: 3px 8px;
+      border: 1px solid var(--border);
+      color: var(--muted);
+      border-radius: 1px;
+    }
+    .card-bottom {
+      padding: 16px 24px;
+      border-top: 1px solid var(--border);
+      display: flex; align-items: center; justify-content: space-between;
+      gap: 12px;
+    }
+    .card-points {
+      display: flex; align-items: center; gap: 6px;
+      font-family: var(--font-mono);
+      font-size: 11px; letter-spacing: 1px;
+      color: var(--amber);
+    }
+    .points-dot {
+      width: 6px; height: 6px;
+      background: var(--amber);
+      border-radius: 50%;
+    }
+    .card-actions { display: flex; gap: 8px; }
+    .btn-enquire {
+      font-family: var(--font-body);
+      font-size: 12px; font-weight: 500;
+      letter-spacing: 1px; text-transform: uppercase;
+      padding: 8px 16px;
+      background: var(--amber);
+      color: var(--charcoal);
+      border: none; border-radius: 2px;
+      cursor: pointer;
+      transition: all 0.2s;
+      white-space: nowrap;
+    }
+    .btn-enquire:hover { background: var(--amber-lt); }
+    .btn-detail {
+      font-family: var(--font-body);
+      font-size: 12px; font-weight: 500;
+      letter-spacing: 1px; text-transform: uppercase;
+      padding: 8px 14px;
+      background: transparent;
+      color: var(--cream2);
+      border: 1px solid var(--border);
+      border-radius: 2px;
+      cursor: pointer;
+      transition: all 0.2s;
+      white-space: nowrap;
+    }
+    .btn-detail:hover { border-color: var(--amber); color: var(--amber-lt); }
+
+    /* List view card adjustments */
+    .list-view .product-card { flex-direction: row; align-items: stretch; }
+    .list-view .card-top {
+      display: flex; gap: 24px; align-items: flex-start;
+      flex: 1;
+    }
+    .list-view .card-icon { font-size: 28px; flex-shrink: 0; margin-bottom: 0; margin-top: 4px; }
+    .list-view .card-content { flex: 1; }
+    .list-view .card-bottom {
+      border-top: none; border-left: 1px solid var(--border);
+      flex-direction: column; justify-content: center;
+      padding: 24px; min-width: 180px;
+    }
+
+    /* No results */
+    .no-results {
+      grid-column: 1 / -1;
+      text-align: center;
+      padding: 80px 40px;
+    }
+    .no-results-icon { font-size: 48px; margin-bottom: 16px; }
+    .no-results h3 {
+      font-family: var(--font-display);
+      font-size: 28px; color: var(--white);
+      margin-bottom: 8px;
+    }
+    .no-results p { font-size: 14px; color: var(--muted); }
+
+    /* ── ENQUIRY MODAL ── */
+    .modal-overlay {
+      position: fixed; inset: 0;
+      background: rgba(10,10,8,0.85);
+      z-index: 2000;
+      display: flex; align-items: center; justify-content: center;
+      padding: 24px;
+      opacity: 0; pointer-events: none;
+      transition: opacity 0.3s;
+    }
+    .modal-overlay.open { opacity: 1; pointer-events: all; }
+    .modal {
+      background: var(--charcoal2);
+      border: 1px solid var(--border);
+      border-radius: 4px;
+      padding: 40px;
+      width: 100%; max-width: 520px;
+      transform: translateY(20px);
+      transition: transform 0.3s;
+    }
+    .modal-overlay.open .modal { transform: translateY(0); }
+    .modal-header {
+      display: flex; align-items: flex-start; justify-content: space-between;
+      margin-bottom: 28px;
+    }
+    .modal-title {
+      font-family: var(--font-display);
+      font-size: 28px; letter-spacing: 1px;
+      color: var(--white);
+    }
+    .modal-product-name {
+      font-family: var(--font-mono);
+      font-size: 11px; letter-spacing: 2px;
+      color: var(--amber); margin-top: 4px;
+    }
+    .modal-close {
+      background: none; border: none;
+      color: var(--muted); cursor: pointer;
+      font-size: 20px; line-height: 1;
+      padding: 4px; transition: color 0.2s;
+    }
+    .modal-close:hover { color: var(--cream); }
+    .modal-form { display: flex; flex-direction: column; gap: 16px; }
+    .form-row { display: grid; grid-template-columns: 1fr 1fr; gap: 14px; }
+    .form-group { display: flex; flex-direction: column; gap: 7px; }
+    .form-label {
+      font-family: var(--font-mono);
+      font-size: 10px; letter-spacing: 2px;
+      color: var(--amber); text-transform: uppercase;
+    }
+    .form-input, .form-textarea, .form-select {
+      background: var(--charcoal);
+      border: 1px solid var(--border);
+      color: var(--cream);
+      font-family: var(--font-body);
+      font-size: 13px;
+      padding: 12px 14px;
+      border-radius: 2px;
+      outline: none;
+      transition: border-color 0.2s;
+      width: 100%;
+    }
+    .form-input:focus, .form-textarea:focus, .form-select:focus { border-color: var(--amber); }
+    .form-input::placeholder, .form-textarea::placeholder { color: var(--muted); }
+    .form-textarea { resize: vertical; min-height: 100px; }
+    .form-select option { background: var(--charcoal); }
+    .modal-submit {
+      font-family: var(--font-body);
+      font-size: 13px; font-weight: 500;
+      letter-spacing: 1.5px; text-transform: uppercase;
+      padding: 14px 32px;
+      background: var(--amber);
+      color: var(--charcoal);
+      border: none; border-radius: 2px;
+      cursor: pointer; transition: all 0.25s;
+      width: 100%;
+    }
+    .modal-submit:hover { background: var(--amber-lt); }
+
+    /* ── FADE ANIMATION ── */
+    .fade-in { animation: fadeIn 0.4s ease both; }
+    @keyframes fadeIn { from { opacity: 0; transform: translateY(16px); } to { opacity: 1; transform: translateY(0); } }
+
+    /* ── RESPONSIVE ── */
+    @media (max-width: 1024px) {
+      .products-layout { grid-template-columns: 1fr; }
+      .sidebar {
+        position: static; height: auto;
+        border-right: none; border-bottom: 1px solid var(--border);
+        padding: 24px;
+      }
+      .sidebar-section { margin-bottom: 20px; }
+      .filter-list { flex-direction: row; flex-wrap: wrap; }
+      .filter-item { padding: 7px 10px; }
+      .page-header { padding: 100px 40px 48px; }
+      .products-main { padding: 24px 40px 60px; }
+    }
+    @media (max-width: 768px) {
+      nav { padding: 0 24px; }
+      .nav-links, .nav-actions { display: none; }
+      .hamburger { display: flex; }
+      .page-header { padding: 100px 24px 40px; }
+      .products-main { padding: 20px 16px 60px; }
+      .products-grid { grid-template-columns: 1fr; }
+      .list-view .product-card { flex-direction: column; }
+      .list-view .card-bottom { border-left: none; border-top: 1px solid var(--border); flex-direction: row; min-width: unset; }
+      .form-row { grid-template-columns: 1fr; }
+      .modal { padding: 28px 20px; }
+    }
+  </style>
+</head>
+<body>
+
+<!-- NAV -->
+<nav>
+  <a href="index.html" class="nav-logo">XTRAA<span>PLYWOOD</span></a>
+  <ul class="nav-links">
+    <li><a href="index.html">Home</a></li>
+    <li><a href="products.html" class="active">Products</a></li>
+    <li><a href="rewards.html">Rewards</a></li>
+    <li><a href="index.html#contact">Enquire</a></li>
+  </ul>
+  <div class="nav-actions">
+    <a href="login.html#login" class="btn-nav btn-outline">Login</a>
+    <a href="login.html#signup" class="btn-nav btn-amber">Sign Up</a>
+  </div>
+  <button class="hamburger" id="hamburger">
+    <span></span><span></span><span></span>
+  </button>
+</nav>
+<div class="mobile-menu" id="mobileMenu">
+  <a href="index.html" onclick="closeMobile()">Home</a>
+  <a href="products.html" onclick="closeMobile()">Products</a>
+  <a href="rewards.html" onclick="closeMobile()">Rewards</a>
+  <a href="login.html" onclick="closeMobile()">Login</a>
+</div>
+
+<!-- PAGE HEADER -->
+<div class="page-header">
+  <div class="breadcrumb">
+    <a href="index.html">Home</a>
+    <span>›</span>
+    <span>Products</span>
+  </div>
+  <h1>OUR CATALOGUE</h1>
+  <p>Premium plywood, laminates, hardware & more — sourced from India's top manufacturers. Filter by category, grade, or thickness.</p>
+</div>
+
+<!-- LAYOUT -->
+<div class="products-layout">
+
+  <!-- SIDEBAR -->
+  <aside class="sidebar">
+    <div class="sidebar-section">
+      <div class="sidebar-title">Search</div>
+      <div class="sidebar-search">
+        <input type="text" id="searchInput" placeholder="Search products…" oninput="applyFilters()"/>
+        <svg width="14" height="14" viewBox="0 0 16 16" fill="none">
+          <circle cx="7" cy="7" r="5" stroke="currentColor" stroke-width="1.5"/>
+          <path d="M11 11l3 3" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"/>
+        </svg>
+      </div>
+    </div>
+
+    <div class="sidebar-section">
+      <div class="sidebar-title">Category</div>
+      <div class="filter-list" id="categoryFilters">
+        <div class="filter-item active" data-cat="all" onclick="setCategory(this)">
+          <div class="filter-label"><span>🗂️</span> All Products</div>
+          <span class="filter-count">18</span>
+        </div>
+        <div class="filter-item" data-cat="plywood" onclick="setCategory(this)">
+          <div class="filter-label"><span>🪵</span> Plywood</div>
+          <span class="filter-count">6</span>
+        </div>
+        <div class="filter-item" data-cat="blockboard" onclick="setCategory(this)">
+          <div class="filter-label"><span>🏗️</span> Block Board</div>
+          <span class="filter-count">3</span>
+        </div>
+        <div class="filter-item" data-cat="laminate" onclick="setCategory(this)">
+          <div class="filter-label"><span>✨</span> Laminates</div>
+          <span class="filter-count">4</span>
+        </div>
+        <div class="filter-item" data-cat="door" onclick="setCategory(this)">
+          <div class="filter-label"><span>🚪</span> Flush Doors</div>
+          <span class="filter-count">2</span>
+        </div>
+        <div class="filter-item" data-cat="hardware" onclick="setCategory(this)">
+          <div class="filter-label"><span>🔩</span> Hardware</div>
+          <span class="filter-count">2</span>
+        </div>
+        <div class="filter-item" data-cat="mdf" onclick="setCategory(this)">
+          <div class="filter-label"><span>🏠</span> MDF / HDF</div>
+          <span class="filter-count">1</span>
+        </div>
+      </div>
+    </div>
+
+    <div class="sidebar-section">
+      <div class="sidebar-title">Grade</div>
+      <div class="grade-list">
+        <label class="grade-check">
+          <input type="checkbox" value="BWR" onchange="applyFilters()">
+          <div class="grade-box"></div>
+          <span class="grade-text">BWR (Water Resistant)</span>
+        </label>
+        <label class="grade-check">
+          <input type="checkbox" value="BWP" onchange="applyFilters()">
+          <div class="grade-box"></div>
+          <span class="grade-text">BWP (Boiling Water Proof)</span>
+        </label>
+        <label class="grade-check">
+          <input type="checkbox" value="Marine" onchange="applyFilters()">
+          <div class="grade-box"></div>
+          <span class="grade-text">Marine Grade</span>
+        </label>
+        <label class="grade-check">
+          <input type="checkbox" value="Commercial" onchange="applyFilters()">
+          <div class="grade-box"></div>
+          <span class="grade-text">Commercial Grade</span>
+        </label>
+        <label class="grade-check">
+          <input type="checkbox" value="ISI" onchange="applyFilters()">
+          <div class="grade-box"></div>
+          <span class="grade-text">ISI Certified</span>
+        </label>
+      </div>
+    </div>
+
+    <div class="sidebar-section">
+      <div class="sidebar-title">Thickness</div>
+      <div class="thickness-tags" id="thicknessTags">
+        <span class="thickness-tag" onclick="toggleThickness(this)">6mm</span>
+        <span class="thickness-tag" onclick="toggleThickness(this)">9mm</span>
+        <span class="thickness-tag" onclick="toggleThickness(this)">12mm</span>
+        <span class="thickness-tag" onclick="toggleThickness(this)">15mm</span>
+        <span class="thickness-tag" onclick="toggleThickness(this)">18mm</span>
+        <span class="thickness-tag" onclick="toggleThickness(this)">19mm</span>
+        <span class="thickness-tag" onclick="toggleThickness(this)">25mm</span>
+      </div>
+    </div>
+
+    <button onclick="clearAll()" style="width:100%;padding:10px;background:transparent;border:1px solid var(--border);color:var(--muted);font-family:var(--font-mono);font-size:10px;letter-spacing:2px;text-transform:uppercase;cursor:pointer;border-radius:2px;transition:all 0.2s;" onmouseover="this.style.borderColor='var(--amber)';this.style.color='var(--amber)'" onmouseout="this.style.borderColor='var(--border)';this.style.color='var(--muted)'">
+      Clear All Filters
+    </button>
+  </aside>
+
+  <!-- MAIN -->
+  <main class="products-main">
+    <div class="toolbar">
+      <div class="toolbar-left">
+        <div class="results-count">Showing <strong id="resultCount">18</strong> products</div>
+        <div class="active-filters" id="activeFilters"></div>
+      </div>
+      <div class="toolbar-right">
+        <select class="sort-select" onchange="applyFilters()">
+          <option value="default">Sort: Default</option>
+          <option value="name-asc">Name A–Z</option>
+          <option value="name-desc">Name Z–A</option>
+          <option value="points-high">Points: High</option>
+        </select>
+        <div class="view-toggle">
+          <button class="view-btn active" id="gridBtn" onclick="setView('grid')" title="Grid view">
+            <svg width="14" height="14" viewBox="0 0 14 14" fill="none">
+              <rect x="0" y="0" width="6" height="6" rx="1" fill="currentColor"/>
+              <rect x="8" y="0" width="6" height="6" rx="1" fill="currentColor"/>
+              <rect x="0" y="8" width="6" height="6" rx="1" fill="currentColor"/>
+              <rect x="8" y="8" width="6" height="6" rx="1" fill="currentColor"/>
+            </svg>
+          </button>
+          <button class="view-btn" id="listBtn" onclick="setView('list')" title="List view">
+            <svg width="14" height="14" viewBox="0 0 14 14" fill="none">
+              <rect x="0" y="1" width="14" height="2.5" rx="1" fill="currentColor"/>
+              <rect x="0" y="5.75" width="14" height="2.5" rx="1" fill="currentColor"/>
+              <rect x="0" y="10.5" width="14" height="2.5" rx="1" fill="currentColor"/>
+            </svg>
+          </button>
+        </div>
+      </div>
+    </div>
+
+    <div class="products-grid" id="productsGrid"></div>
+  </main>
+</div>
+
+<!-- ENQUIRY MODAL -->
+<div class="modal-overlay" id="modalOverlay" onclick="closeModalOutside(event)">
+  <div class="modal">
+    <div class="modal-header">
+      <div>
+        <div class="modal-title">ENQUIRE NOW</div>
+        <div class="modal-product-name" id="modalProductName">Product name</div>
+      </div>
+      <button class="modal-close" onclick="closeModal()">✕</button>
+    </div>
+    <form class="modal-form" onsubmit="submitEnquiry(event)">
+      <div class="form-row">
+        <div class="form-group">
+          <label class="form-label">Full Name</label>
+          <input class="form-input" type="text" placeholder="Your name" required />
+        </div>
+        <div class="form-group">
+          <label class="form-label">Phone</label>
+          <input class="form-input" type="tel" placeholder="+91 XXXXX XXXXX" required />
+        </div>
+      </div>
+      <div class="form-group">
+        <label class="form-label">Quantity / Size Required</label>
+        <input class="form-input" type="text" placeholder="e.g. 50 sheets, 8×4 ft" />
+      </div>
+      <div class="form-group">
+        <label class="form-label">Message</label>
+        <textarea class="form-textarea" placeholder="Any specific requirements, thickness, grade…"></textarea>
+      </div>
+      <button type="submit" class="modal-submit" id="modalSubmitBtn">Send Enquiry →</button>
+    </form>
+  </div>
+</div>
+
+<script type="module" src="./supabase/nav-auth.js"></script>
+<script type="module">
+import { getSupabaseClient, isSupabaseConfigured } from "./supabase/client.js";
+
+const supabase = isSupabaseConfigured() ? getSupabaseClient() : null;
+const FALLBACK_PRODUCTS = [
+  { id: "local-1", name: "BWR Plywood", cat: "plywood", grade: "BWR", desc: "Boiling water resistant plywood for furniture, paneling, and interior work.", specs: ["6mm", "9mm", "12mm", "18mm"], points: 40, stock: "In Stock" },
+  { id: "local-2", name: "BWP Plywood", cat: "plywood", grade: "BWP", desc: "Boiling waterproof plywood suited for kitchens, bathrooms, and wet areas.", specs: ["12mm", "18mm", "25mm"], points: 55, stock: "In Stock" },
+  { id: "local-3", name: "Marine Plywood", cat: "plywood", grade: "Marine", desc: "Premium marine-grade plywood with void-free construction and high durability.", specs: ["12mm", "18mm", "25mm"], points: 70, stock: "In Stock" },
+  { id: "local-4", name: "Commercial Ply", cat: "plywood", grade: "Commercial", desc: "Economical general-purpose plywood for packaging, interiors, and backing work.", specs: ["6mm", "9mm", "12mm"], points: 25, stock: "In Stock" },
+  { id: "local-5", name: "Film Face Ply", cat: "plywood", grade: "BWP", desc: "Phenolic film-faced shuttering plywood for repeated formwork use.", specs: ["12mm", "18mm"], points: 50, stock: "Limited" },
+  { id: "local-6", name: "Flexi Plywood", cat: "plywood", grade: "Commercial", desc: "Bendable plywood for curved furniture, decorative work, and custom designs.", specs: ["3mm", "6mm"], points: 45, stock: "Enquire" },
+  { id: "local-7", name: "Block Board 19mm", cat: "blockboard", grade: "BWR", desc: "Timber-core block board for shelves, tables, and general furniture applications.", specs: ["19mm"], points: 50, stock: "In Stock" },
+  { id: "local-8", name: "Block Board 25mm", cat: "blockboard", grade: "BWR", desc: "Heavy-duty block board for stronger furniture and structural applications.", specs: ["25mm"], points: 60, stock: "In Stock" },
+  { id: "local-9", name: "Flush Block Board", cat: "blockboard", grade: "Commercial", desc: "Smooth, even block board often used in flush-door manufacturing.", specs: ["19mm", "25mm"], points: 35, stock: "In Stock" },
+  { id: "local-10", name: "Matte Laminate", cat: "laminate", grade: "ISI", desc: "Scratch-resistant matte laminates with a wide range of decorative finishes.", specs: ["0.8mm", "1mm"], points: 20, stock: "In Stock" },
+  { id: "local-11", name: "Gloss Laminate", cat: "laminate", grade: "ISI", desc: "High-gloss laminate suited for wardrobes, modular kitchens, and feature panels.", specs: ["0.8mm", "1mm"], points: 20, stock: "In Stock" },
+  { id: "local-12", name: "Woodgrain Laminate", cat: "laminate", grade: "ISI", desc: "Natural wood-look decorative laminate in oak, teak, walnut, and more.", specs: ["0.8mm", "1mm"], points: 22, stock: "In Stock" },
+  { id: "local-13", name: "Textured Laminate", cat: "laminate", grade: "ISI", desc: "Embossed laminates with fabric, stone, and abstract textured finishes.", specs: ["1mm"], points: 25, stock: "Limited" },
+  { id: "local-14", name: "Solid Core Door", cat: "door", grade: "ISI", desc: "Factory-finished solid core flush door with standard and custom sizing.", specs: ["30x78", "32x78", "36x78"], points: 80, stock: "In Stock" },
+  { id: "local-15", name: "Hollow Core Door", cat: "door", grade: "Commercial", desc: "Lightweight interior door option with dependable daily-use performance.", specs: ["30x78", "32x78"], points: 50, stock: "In Stock" },
+  { id: "local-16", name: "Cabinet Hardware", cat: "hardware", grade: "ISI", desc: "Hinges, handles, drawer channels, and cabinet accessories from trusted brands.", specs: ["Stainless", "Zinc Alloy"], points: 15, stock: "In Stock" },
+  { id: "local-17", name: "Structural Fixings", cat: "hardware", grade: "ISI", desc: "Anchor bolts, screws, brackets, and other structural fixing solutions.", specs: ["Various"], points: 10, stock: "In Stock" },
+  { id: "local-18", name: "MDF 18mm", cat: "mdf", grade: "ISI", desc: "Smooth MDF board for cabinetry, modular kitchens, and machine-cut furniture.", specs: ["6mm", "9mm", "12mm", "18mm"], points: 35, stock: "In Stock" }
+];
+
+const CATEGORY_META = {
+  all: { badge: "ALL", label: "All Products" },
+  plywood: { badge: "PLY", label: "Plywood" },
+  blockboard: { badge: "BLK", label: "Block Board" },
+  laminate: { badge: "LAM", label: "Laminates" },
+  door: { badge: "DR", label: "Flush Doors" },
+  hardware: { badge: "HDW", label: "Hardware" },
+  mdf: { badge: "MDF", label: "MDF / HDF" }
+};
+
+const state = {
+  products: [],
+  currentCat: "all",
+  currentView: "grid",
+  activeThickness: [],
+  selectedProduct: null
+};
+
+function escapeHtml(value) {
+  return String(value ?? "").replace(/[&<>\"']/g, (char) => ({
+    "&": "&amp;",
+    "<": "&lt;",
+    ">": "&gt;",
+    "\"": "&quot;",
+    "'": "&#39;"
+  }[char]));
+}
+
+function isUuid(value) {
+  return /^[0-9a-f]{8}-[0-9a-f]{4}-[1-5][0-9a-f]{3}-[89ab][0-9a-f]{3}-[0-9a-f]{12}$/i.test(value || "");
+}
+
+function getCategoryMeta(slug) {
+  return CATEGORY_META[slug] || {
+    badge: (slug || "ITEM").slice(0, 4).toUpperCase(),
+    label: (slug || "General").replace(/[-_]/g, " ")
+  };
+}
+
+function formatStock(status) {
+  const map = {
+    in_stock: "In Stock",
+    limited: "Limited",
+    enquire: "Enquire"
+  };
+  return map[status] || status || "Enquire";
+}
+
+function getBadgeClass(stock) {
+  if (stock === "In Stock") return "badge-stock";
+  if (stock === "Limited") return "badge-limited";
+  return "badge-enquire";
+}
+
+function sortSpecs(specs) {
+  return [...specs].sort((a, b) => {
+    const numA = parseFloat(a);
+    const numB = parseFloat(b);
+    if (!Number.isNaN(numA) && !Number.isNaN(numB) && numA !== numB) {
+      return numA - numB;
+    }
+    return a.localeCompare(b);
+  });
+}
+
+function hydrateProduct(row, index) {
+  const category = Array.isArray(row.product_categories) ? row.product_categories[0] : row.product_categories;
+  const variants = Array.isArray(row.product_variants) ? row.product_variants : [];
+  const categorySlug = category?.slug || row.cat || "uncategorized";
+  const meta = getCategoryMeta(categorySlug);
+
+  return {
+    id: row.id,
+    name: row.name,
+    slug: row.slug || "",
+    cat: categorySlug,
+    grade: row.grade || "Standard",
+    badge: meta.badge,
+    desc: row.description || "Contact us for full specifications and pricing details.",
+    specs: sortSpecs([...new Set((row.specs || variants.map((variant) => variant.label)).filter(Boolean))]),
+    points: Number(row.points_per_scan ?? row.points ?? 0),
+    stock: formatStock(row.stock_status || row.stock),
+    sortKey: String(index + 1).padStart(2, "0")
+  };
+}
+
+function renderCategoryFilters() {
+  const container = document.getElementById("categoryFilters");
+  const counts = state.products.reduce((acc, product) => {
+    acc[product.cat] = (acc[product.cat] || 0) + 1;
+    return acc;
+  }, {});
+
+  const knownOrder = Object.keys(CATEGORY_META).filter((slug) => slug !== "all");
+  const extras = Object.keys(counts).filter((slug) => !knownOrder.includes(slug)).sort();
+  const categories = ["all", ...knownOrder.filter((slug) => counts[slug]), ...extras];
+
+  if (state.currentCat !== "all" && !counts[state.currentCat]) {
+    state.currentCat = "all";
+  }
+
+  container.innerHTML = categories.map((slug) => {
+    const meta = getCategoryMeta(slug);
+    const count = slug === "all" ? state.products.length : counts[slug] || 0;
+    const activeClass = state.currentCat === slug ? " active" : "";
+    return `
+      <div class="filter-item${activeClass}" data-cat="${escapeHtml(slug)}" onclick="setCategory(this)">
+        <div class="filter-label"><span>${escapeHtml(meta.badge)}</span> ${escapeHtml(meta.label)}</div>
+        <span class="filter-count">${count}</span>
+      </div>
+    `;
+  }).join("");
+}
+
+function renderGradeFilters() {
+  const container = document.querySelector(".grade-list");
+  const activeGrades = new Set([...document.querySelectorAll(".grade-check input:checked")].map((input) => input.value));
+  const grades = [...new Set(state.products.map((product) => product.grade).filter(Boolean))].sort();
+
+  container.innerHTML = grades.map((grade) => `
+    <label class="grade-check">
+      <input type="checkbox" value="${escapeHtml(grade)}" ${activeGrades.has(grade) ? "checked" : ""} onchange="applyFilters()">
+      <div class="grade-box"></div>
+      <span class="grade-text">${escapeHtml(grade)}</span>
+    </label>
+  `).join("");
+}
+
+function renderThicknessFilters() {
+  const container = document.getElementById("thicknessTags");
+  const thicknessValues = sortSpecs([...new Set(state.products.flatMap((product) => product.specs || []).filter(Boolean))]);
+  container.innerHTML = thicknessValues.map((value) => `
+    <span class="thickness-tag${state.activeThickness.includes(value) ? " active" : ""}" onclick="toggleThickness(this)">${escapeHtml(value)}</span>
+  `).join("");
+}
+
+function renderProducts(list) {
+  const grid = document.getElementById("productsGrid");
+  document.getElementById("resultCount").textContent = list.length;
+  grid.classList.toggle("list-view", state.currentView === "list");
+
+  if (!list.length) {
+    grid.innerHTML = '<div class="no-results"><div class="no-results-icon">0</div><h3>No products found</h3><p>Try adjusting your filters or search term.</p></div>';
+    return;
+  }
+
+  grid.innerHTML = "";
+  list.forEach((product, index) => {
+    const detailTarget = `contact.html?product=${encodeURIComponent(product.name)}`;
+    const card = document.createElement("div");
+    card.className = "product-card fade-in";
+    card.style.animationDelay = `${index * 40}ms`;
+    card.innerHTML = `
+      <div class="card-top">
+        <div class="card-meta">
+          <span class="card-num">${escapeHtml(product.sortKey || String(index + 1).padStart(2, "0"))}</span>
+          <span class="card-badge ${getBadgeClass(product.stock)}">${escapeHtml(product.stock)}</span>
+        </div>
+        <div class="card-icon">${escapeHtml(product.badge)}</div>
+        <div class="card-grade">${escapeHtml(product.grade)}</div>
+        <div class="card-name">${escapeHtml(product.name)}</div>
+        <div class="card-desc">${escapeHtml(product.desc)}</div>
+        <div class="card-specs">${product.specs.map((spec) => `<span class="spec-tag">${escapeHtml(spec)}</span>`).join("")}</div>
+      </div>
+      <div class="card-bottom">
+        <div class="card-points"><span class="points-dot"></span>+${product.points} pts on scan</div>
+        <div class="card-actions">
+          <button class="btn-detail" onclick="event.stopPropagation(); window.location='${detailTarget}'">Details</button>
+          <button class="btn-enquire" onclick="event.stopPropagation(); openModal('${encodeURIComponent(product.name)}')">Enquire</button>
+        </div>
+      </div>
+    `;
+    grid.appendChild(card);
+  });
+}
+
+function updateActiveFilters() {
+  const container = document.getElementById("activeFilters");
+  const grades = [...document.querySelectorAll(".grade-check input:checked")].map((input) => input.value);
+  container.innerHTML = "";
+
+  grades.forEach((grade) => {
+    const tag = document.createElement("div");
+    tag.className = "active-filter-tag";
+    tag.textContent = `${grade} x`;
+    tag.onclick = () => {
+      const input = document.querySelector(`.grade-check input[value="${CSS.escape(grade)}"]`);
+      if (input) input.checked = false;
+      applyFilters();
+    };
+    container.appendChild(tag);
+  });
+
+  state.activeThickness.forEach((thickness) => {
+    const tag = document.createElement("div");
+    tag.className = "active-filter-tag";
+    tag.textContent = `${thickness} x`;
+    tag.onclick = () => {
+      state.activeThickness = state.activeThickness.filter((value) => value !== thickness);
+      renderThicknessFilters();
+      applyFilters();
+    };
+    container.appendChild(tag);
+  });
+}
+
+function applyFilters() {
+  const search = document.getElementById("searchInput").value.trim().toLowerCase();
+  const grades = [...document.querySelectorAll(".grade-check input:checked")].map((input) => input.value);
+  const sort = document.querySelector(".sort-select").value;
+
+  let filtered = state.products.filter((product) => {
+    const catMatch = state.currentCat === "all" || product.cat === state.currentCat;
+    const searchMatch = !search || product.name.toLowerCase().includes(search) || product.desc.toLowerCase().includes(search);
+    const gradeMatch = !grades.length || grades.includes(product.grade);
+    const thicknessMatch = !state.activeThickness.length || state.activeThickness.some((thickness) => product.specs.includes(thickness));
+    return catMatch && searchMatch && gradeMatch && thicknessMatch;
+  });
+
+  if (sort === "name-asc") filtered.sort((a, b) => a.name.localeCompare(b.name));
+  if (sort === "name-desc") filtered.sort((a, b) => b.name.localeCompare(a.name));
+  if (sort === "points-high") filtered.sort((a, b) => b.points - a.points);
+
+  renderProducts(filtered);
+  updateActiveFilters();
+}
+
+function setCategory(value) {
+  state.currentCat = typeof value === "string" ? value : value.dataset.cat;
+  renderCategoryFilters();
+  applyFilters();
+}
+
+function toggleThickness(value) {
+  const thickness = typeof value === "string" ? value : value.textContent.trim();
+  if (state.activeThickness.includes(thickness)) {
+    state.activeThickness = state.activeThickness.filter((item) => item !== thickness);
+  } else {
+    state.activeThickness.push(thickness);
+  }
+  renderThicknessFilters();
+  applyFilters();
+}
+
+function clearAll() {
+  state.currentCat = "all";
+  state.activeThickness = [];
+  document.getElementById("searchInput").value = "";
+  document.querySelector(".sort-select").value = "default";
+  document.querySelectorAll(".grade-check input").forEach((input) => {
+    input.checked = false;
+  });
+  renderCategoryFilters();
+  renderThicknessFilters();
+  applyFilters();
+}
+
+function setView(view) {
+  state.currentView = view;
+  document.getElementById("gridBtn").classList.toggle("active", view === "grid");
+  document.getElementById("listBtn").classList.toggle("active", view === "list");
+  applyFilters();
+}
+
+function getProductByName(name) {
+  return state.products.find((product) => product.name.toLowerCase() === name.toLowerCase()) || null;
+}
+
+function openModal(productValue) {
+  const decodedName = decodeURIComponent(productValue || "");
+  state.selectedProduct = typeof productValue === "object" ? productValue : getProductByName(decodedName);
+  document.getElementById("modalProductName").textContent = state.selectedProduct?.name || decodedName || "Product enquiry";
+  document.getElementById("modalOverlay").classList.add("open");
+  document.body.style.overflow = "hidden";
+}
+
+function closeModal() {
+  document.getElementById("modalOverlay").classList.remove("open");
+  document.body.style.overflow = "";
+}
+
+function closeModalOutside(event) {
+  if (event.target === document.getElementById("modalOverlay")) {
+    closeModal();
+  }
+}
+
+async function submitEnquiry(event) {
+  event.preventDefault();
+  const form = event.target;
+  const button = document.getElementById("modalSubmitBtn");
+  const [nameInput, phoneInput, quantityInput] = form.querySelectorAll("input");
+  const messageInput = form.querySelector("textarea");
+
+  button.textContent = "Sending...";
+  button.disabled = true;
+
+  try {
+    if (!supabase) {
+      window.location.href = `contact.html?product=${encodeURIComponent(state.selectedProduct?.name || "")}`;
+      return;
+    }
+
+    const { data: sessionData } = await supabase.auth.getSession();
+    const payload = {
+      user_id: sessionData.session?.user?.id || null,
+      full_name: nameInput.value.trim(),
+      phone: phoneInput.value.trim(),
+      product_id: isUuid(state.selectedProduct?.id) ? state.selectedProduct.id : null,
+      order_type: "product enquiry",
+      quantity_requirement: quantityInput.value.trim() || null,
+      message: messageInput.value.trim() || `Enquiry for ${state.selectedProduct?.name || "product"}`
+    };
+
+    const { error } = await supabase.from("enquiries").insert(payload);
+    if (error) throw error;
+
+    button.textContent = "Enquiry Sent";
+    button.style.background = "#3a7a40";
+    window.setTimeout(() => {
+      form.reset();
+      closeModal();
+      button.textContent = "Send Enquiry ->";
+      button.style.background = "";
+      button.disabled = false;
+    }, 1800);
+  } catch (error) {
+    console.error(error);
+    button.textContent = "Try Again";
+    button.disabled = false;
+    window.alert(error?.message || "We could not submit your enquiry right now.");
+  }
+}
+
+function closeMobile() {
+  document.getElementById("mobileMenu").classList.remove("open");
+}
+
+async function loadProducts() {
+  if (!supabase) {
+    state.products = FALLBACK_PRODUCTS.map(hydrateProduct);
+    return;
+  }
+
+  const { data, error } = await supabase
+    .from("products")
+    .select(`
+      id,
+      name,
+      slug,
+      description,
+      grade,
+      points_per_scan,
+      stock_status,
+      product_categories ( name, slug ),
+      product_variants ( label )
+    `)
+    .eq("is_active", true)
+    .order("name", { ascending: true });
+
+  if (error || !data?.length) {
+    console.error(error);
+    state.products = FALLBACK_PRODUCTS.map(hydrateProduct);
+    return;
+  }
+
+  state.products = data.map(hydrateProduct);
+}
+
+function hydrateUi() {
+  renderCategoryFilters();
+  renderGradeFilters();
+  renderThicknessFilters();
+  setView(state.currentView);
+}
+
+function maybeOpenPrefilledProduct() {
+  const productName = new URLSearchParams(window.location.search).get("product");
+  if (!productName) return;
+  openModal(productName);
+}
+
+async function init() {
+  document.getElementById("hamburger").addEventListener("click", () => {
+    document.getElementById("mobileMenu").classList.toggle("open");
+  });
+
+  await loadProducts();
+  hydrateUi();
+  maybeOpenPrefilledProduct();
+}
+
+window.applyFilters = applyFilters;
+window.clearAll = clearAll;
+window.closeMobile = closeMobile;
+window.closeModal = closeModal;
+window.closeModalOutside = closeModalOutside;
+window.openModal = openModal;
+window.setCategory = setCategory;
+window.setView = setView;
+window.submitEnquiry = submitEnquiry;
+window.toggleThickness = toggleThickness;
+
+init();
+</script>
+</body>
+</html>
+
+
+

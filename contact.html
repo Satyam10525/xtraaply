@@ -1,0 +1,891 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Contact & Enquiry – Xtraaplywood</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=Barlow:ital,wght@0,300;0,400;0,500;0,600;1,300&family=DM+Mono:wght@400;500&display=swap" rel="stylesheet">
+  <style>
+*, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+    :root {
+      --charcoal:   #141410;
+      --charcoal2:  #1e1e18;
+      --charcoal3:  #272720;
+      --amber:      #c8811a;
+      --amber-lt:   #e8a030;
+      --amber-pale: #f5c46a;
+      --cream:      #f0ead8;
+      --cream2:     #e2d9c0;
+      --white:      #fafaf7;
+      --muted:      #7a7a6a;
+      --border:     rgba(200,129,26,0.18);
+      --success:    #4caf65;
+      --error:      #e05050;
+      --font-display: 'Bebas Neue', sans-serif;
+      --font-body:    'Barlow', sans-serif;
+      --font-mono:    'DM Mono', monospace;
+    }
+    html { scroll-behavior: smooth; }
+    body {
+      background: var(--charcoal);
+      color: var(--cream);
+      font-family: var(--font-body);
+      font-weight: 300;
+      line-height: 1.7;
+      overflow-x: hidden;
+    }
+    body::before {
+      content: '';
+      position: fixed; inset: 0;
+      background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 256 256' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)' opacity='1'/%3E%3C/svg%3E");
+      opacity: 0.025; pointer-events: none; z-index: 9999;
+    }
+
+    /* ── NAV ── */
+    nav {
+      position: fixed; top: 0; left: 0; right: 0; z-index: 1000;
+      display: flex; align-items: center; justify-content: space-between;
+      padding: 0 48px; height: 68px;
+      background: rgba(20,20,16,0.95);
+      backdrop-filter: blur(12px);
+      border-bottom: 1px solid var(--border);
+    }
+    .nav-logo { font-family: var(--font-display); font-size: 26px; letter-spacing: 2px; color: var(--white); text-decoration: none; }
+    .nav-logo span { color: var(--amber); }
+    .nav-links { display: flex; align-items: center; gap: 36px; list-style: none; }
+    .nav-links a { font-size: 13px; font-weight: 500; letter-spacing: 1.5px; text-transform: uppercase; color: var(--cream2); text-decoration: none; transition: color 0.2s; }
+    .nav-links a:hover, .nav-links a.active { color: var(--amber-lt); }
+    .nav-actions { display: flex; align-items: center; gap: 16px; }
+    .btn-nav { font-size: 13px; font-weight: 500; letter-spacing: 1px; text-transform: uppercase; padding: 9px 22px; border-radius: 2px; cursor: pointer; text-decoration: none; transition: all 0.2s; }
+    .btn-outline { background: transparent; border: 1px solid var(--border); color: var(--cream); }
+    .btn-outline:hover { border-color: var(--amber); color: var(--amber-lt); }
+    .btn-amber { background: var(--amber); border: 1px solid var(--amber); color: var(--charcoal); }
+    .btn-amber:hover { background: var(--amber-lt); }
+    .hamburger { display: none; flex-direction: column; gap: 5px; cursor: pointer; padding: 4px; background: none; border: none; }
+    .hamburger span { display: block; width: 24px; height: 2px; background: var(--cream); border-radius: 2px; }
+    .mobile-menu { display: none; position: fixed; inset: 0; top: 68px; background: rgba(20,20,16,0.98); z-index: 999; flex-direction: column; align-items: center; justify-content: center; gap: 36px; }
+    .mobile-menu.open { display: flex; }
+    .mobile-menu a { font-family: var(--font-display); font-size: 36px; letter-spacing: 3px; color: var(--cream); text-decoration: none; }
+    .mobile-menu a:hover { color: var(--amber); }
+
+    /* ── PAGE HEADER ── */
+    .page-header {
+      padding: 120px 72px 56px;
+      background: var(--charcoal2);
+      border-bottom: 1px solid var(--border);
+      position: relative; overflow: hidden;
+    }
+    .page-header::after {
+      content: 'CONTACT';
+      position: absolute; right: -10px; bottom: -40px;
+      font-family: var(--font-display); font-size: 160px;
+      letter-spacing: 4px; color: rgba(200,129,26,0.04);
+      pointer-events: none; white-space: nowrap;
+    }
+    .breadcrumb { display: flex; align-items: center; gap: 8px; font-family: var(--font-mono); font-size: 11px; letter-spacing: 2px; color: var(--muted); text-transform: uppercase; margin-bottom: 20px; }
+    .breadcrumb a { color: var(--amber); text-decoration: none; }
+    .page-header h1 { font-family: var(--font-display); font-size: clamp(48px, 6vw, 80px); color: var(--white); letter-spacing: 2px; line-height: 1; margin-bottom: 16px; }
+    .page-header p { font-size: 15px; color: var(--muted); max-width: 520px; line-height: 1.8; }
+
+    /* ── QUICK INFO STRIP ── */
+    .info-strip {
+      display: grid; grid-template-columns: repeat(3, 1fr);
+      border-bottom: 1px solid var(--border);
+    }
+    .info-tile {
+      display: flex; align-items: center; gap: 20px;
+      padding: 32px 48px;
+      border-right: 1px solid var(--border);
+      transition: background 0.2s;
+    }
+    .info-tile:last-child { border-right: none; }
+    .info-tile:hover { background: var(--charcoal2); }
+    .info-tile-icon {
+      width: 48px; height: 48px; flex-shrink: 0;
+      background: rgba(200,129,26,0.1);
+      border: 1px solid var(--border);
+      border-radius: 2px;
+      display: flex; align-items: center; justify-content: center;
+      font-size: 20px;
+    }
+    .info-tile-label { font-family: var(--font-mono); font-size: 10px; letter-spacing: 2px; color: var(--amber); text-transform: uppercase; margin-bottom: 4px; }
+    .info-tile-value { font-size: 15px; color: var(--white); font-weight: 400; }
+    .info-tile-sub { font-size: 12px; color: var(--muted); }
+
+    /* ── MAIN CONTENT ── */
+    .main-grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      min-height: 600px;
+    }
+
+    /* ── MAP PANEL ── */
+    .map-panel {
+      position: relative;
+      background: var(--charcoal3);
+      overflow: hidden;
+      min-height: 500px;
+    }
+    .map-embed {
+      width: 100%; height: 100%;
+      border: none; display: block;
+      filter: grayscale(30%) contrast(1.05);
+      min-height: 500px;
+    }
+    .map-overlay-card {
+      position: absolute;
+      bottom: 32px; left: 32px;
+      background: rgba(20,20,16,0.92);
+      border: 1px solid var(--border);
+      border-radius: 4px;
+      padding: 20px 24px;
+      backdrop-filter: blur(8px);
+      max-width: 280px;
+    }
+    .map-card-title { font-family: var(--font-display); font-size: 18px; letter-spacing: 1px; color: var(--white); margin-bottom: 6px; }
+    .map-card-addr { font-size: 13px; color: var(--muted); line-height: 1.7; }
+    .map-card-link {
+      display: inline-flex; align-items: center; gap: 6px;
+      font-family: var(--font-mono); font-size: 11px; letter-spacing: 1.5px;
+      color: var(--amber); text-decoration: none; text-transform: uppercase;
+      margin-top: 12px; transition: color 0.2s;
+    }
+    .map-card-link:hover { color: var(--amber-lt); }
+
+    /* ── FORM PANEL ── */
+    .form-panel {
+      background: var(--charcoal);
+      border-left: 1px solid var(--border);
+      padding: 56px 60px;
+    }
+    .form-eyebrow { font-family: var(--font-mono); font-size: 11px; letter-spacing: 3px; color: var(--amber); text-transform: uppercase; margin-bottom: 12px; }
+    .form-title { font-family: var(--font-display); font-size: 40px; letter-spacing: 1px; color: var(--white); line-height: 1; margin-bottom: 8px; }
+    .form-sub { font-size: 14px; color: var(--muted); margin-bottom: 40px; line-height: 1.7; }
+
+    /* Form fields */
+    .enquiry-form { display: flex; flex-direction: column; gap: 18px; }
+    .form-row-2 { display: grid; grid-template-columns: 1fr 1fr; gap: 16px; }
+    .form-group { display: flex; flex-direction: column; gap: 8px; }
+    .form-label { font-family: var(--font-mono); font-size: 10px; letter-spacing: 2px; color: var(--amber); text-transform: uppercase; }
+    .input-wrap { position: relative; }
+    .input-icon { position: absolute; left: 14px; top: 50%; transform: translateY(-50%); color: var(--muted); pointer-events: none; display: flex; align-items: center; }
+    .form-input, .form-textarea, .form-select {
+      width: 100%; background: var(--charcoal2);
+      border: 1px solid var(--border); color: var(--cream);
+      font-family: var(--font-body); font-size: 14px;
+      padding: 13px 14px 13px 42px;
+      border-radius: 2px; outline: none; transition: border-color 0.2s, background 0.2s;
+    }
+    .form-input::placeholder, .form-textarea::placeholder { color: var(--muted); }
+    .form-input:focus, .form-textarea:focus, .form-select:focus { border-color: var(--amber); background: var(--charcoal3); }
+    .form-input.error, .form-textarea.error { border-color: var(--error); }
+    .form-textarea { resize: vertical; min-height: 130px; padding-top: 13px; padding-left: 42px; }
+    .form-select { cursor: pointer; }
+    .form-select option { background: var(--charcoal2); }
+    .no-icon { padding-left: 14px !important; }
+
+    /* Checkboxes row */
+    .contact-prefs { display: flex; gap: 20px; flex-wrap: wrap; }
+    .pref-check { display: flex; align-items: center; gap: 8px; cursor: pointer; }
+    .pref-check input { display: none; }
+    .pref-box { width: 16px; height: 16px; border: 1px solid var(--border); border-radius: 2px; display: flex; align-items: center; justify-content: center; transition: all 0.2s; flex-shrink: 0; }
+    .pref-check input:checked + .pref-box { background: var(--amber); border-color: var(--amber); }
+    .pref-check input:checked + .pref-box::after { content: '✓'; font-size: 10px; color: var(--charcoal); font-weight: bold; }
+    .pref-text { font-size: 13px; color: var(--cream2); }
+
+    /* Field error */
+    .field-error { font-size: 11px; color: var(--error); font-family: var(--font-mono); letter-spacing: 0.5px; display: none; }
+    .field-error.show { display: block; }
+
+    /* Submit */
+    .form-submit {
+      display: inline-flex; align-items: center; justify-content: center; gap: 10px;
+      font-family: var(--font-body); font-size: 14px; font-weight: 500;
+      letter-spacing: 1.5px; text-transform: uppercase;
+      padding: 16px 40px; background: var(--amber); color: var(--charcoal);
+      border: none; border-radius: 2px; cursor: pointer; transition: all 0.25s;
+      align-self: flex-start; min-width: 200px;
+    }
+    .form-submit:hover:not(:disabled) { background: var(--amber-lt); transform: translateY(-2px); }
+    .form-submit:disabled { opacity: 0.6; cursor: not-allowed; }
+    .spinner { width: 16px; height: 16px; border: 2px solid rgba(20,20,16,0.3); border-top-color: var(--charcoal); border-radius: 50%; animation: spin 0.7s linear infinite; display: none; }
+    @keyframes spin { to { transform: rotate(360deg); } }
+
+    /* Alert */
+    .form-alert { padding: 14px 18px; border-radius: 2px; font-size: 13px; font-family: var(--font-mono); letter-spacing: 0.5px; display: none; align-items: center; gap: 10px; }
+    .form-alert.show { display: flex; }
+    .form-alert.success { background: rgba(76,175,101,0.1); border: 1px solid rgba(76,175,101,0.3); color: #6dbe74; }
+    .form-alert.error   { background: rgba(224,80,80,0.1); border: 1px solid rgba(224,80,80,0.3); color: #f08080; }
+
+    /* ── SUCCESS STATE ── */
+    .success-state {
+      display: none; text-align: center; padding: 60px 0;
+    }
+    .success-ring {
+      width: 80px; height: 80px;
+      border: 2px solid rgba(76,175,101,0.3);
+      border-radius: 50%; display: flex; align-items: center; justify-content: center;
+      margin: 0 auto 24px; font-size: 36px;
+      animation: ringPop 0.5s cubic-bezier(0.34,1.56,0.64,1);
+    }
+    @keyframes ringPop { from{transform:scale(0);opacity:0} to{transform:scale(1);opacity:1} }
+    .success-state h3 { font-family: var(--font-display); font-size: 36px; letter-spacing: 1px; color: var(--white); margin-bottom: 12px; }
+    .success-state p { font-size: 14px; color: var(--muted); line-height: 1.8; max-width: 360px; margin: 0 auto 32px; }
+    .success-ref { font-family: var(--font-mono); font-size: 12px; letter-spacing: 2px; color: var(--amber); margin-bottom: 32px; }
+    .btn-reset {
+      display: inline-flex; align-items: center; gap: 8px;
+      font-family: var(--font-body); font-size: 13px; font-weight: 500;
+      letter-spacing: 1.5px; text-transform: uppercase;
+      padding: 13px 28px; background: transparent;
+      border: 1px solid var(--border); color: var(--cream2);
+      border-radius: 2px; cursor: pointer; transition: all 0.2s;
+    }
+    .btn-reset:hover { border-color: var(--amber); color: var(--amber); }
+
+    /* ── FAQ SECTION ── */
+    .faq-section { padding: 80px 72px; background: var(--charcoal2); border-top: 1px solid var(--border); }
+    .faq-grid { display: grid; grid-template-columns: 1fr 2fr; gap: 80px; align-items: start; }
+    .faq-left h2 { font-family: var(--font-display); font-size: 52px; letter-spacing: 1px; color: var(--white); line-height: 1; margin-bottom: 16px; }
+    .faq-left p { font-size: 14px; color: var(--muted); line-height: 1.8; }
+    .faq-list { display: flex; flex-direction: column; gap: 0; }
+    .faq-item { border-bottom: 1px solid var(--border); }
+    .faq-question {
+      display: flex; align-items: center; justify-content: space-between;
+      padding: 22px 0; cursor: pointer;
+      font-size: 15px; font-weight: 400; color: var(--cream);
+      transition: color 0.2s; gap: 16px;
+    }
+    .faq-question:hover { color: var(--amber-lt); }
+    .faq-icon { font-size: 20px; color: var(--amber); flex-shrink: 0; transition: transform 0.3s; font-family: var(--font-mono); font-weight: 400; }
+    .faq-item.open .faq-icon { transform: rotate(45deg); }
+    .faq-answer { font-size: 14px; color: var(--muted); line-height: 1.8; max-height: 0; overflow: hidden; transition: max-height 0.4s ease, padding 0.3s; }
+    .faq-item.open .faq-answer { max-height: 200px; padding-bottom: 22px; }
+
+    /* ── BRANCHES SECTION ── */
+    .branches-section { padding: 80px 72px; background: var(--charcoal); border-top: 1px solid var(--border); }
+    .branches-header { margin-bottom: 48px; }
+    .section-eyebrow { font-family: var(--font-mono); font-size: 11px; letter-spacing: 3px; color: var(--amber); text-transform: uppercase; margin-bottom: 12px; display: flex; align-items: center; gap: 12px; }
+    .section-eyebrow::after { content: ''; flex: 1; max-width: 60px; height: 1px; background: var(--amber); opacity: 0.4; }
+    .section-title { font-family: var(--font-display); font-size: clamp(36px, 4vw, 52px); color: var(--white); letter-spacing: 1px; line-height: 1; }
+    .branches-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(260px, 1fr)); gap: 2px; }
+    .branch-card {
+      background: var(--charcoal2); padding: 32px 28px;
+      border: 1px solid transparent; position: relative; overflow: hidden;
+      transition: all 0.3s;
+    }
+    .branch-card::before { content: ''; position: absolute; bottom: 0; left: 0; width: 100%; height: 2px; background: var(--amber); transform: scaleX(0); transform-origin: left; transition: transform 0.3s; }
+    .branch-card:hover { border-color: var(--border); background: var(--charcoal3); }
+    .branch-card:hover::before { transform: scaleX(1); }
+    .branch-card.main { border-color: var(--border); }
+    .branch-label { font-family: var(--font-mono); font-size: 10px; letter-spacing: 2px; color: var(--amber); text-transform: uppercase; margin-bottom: 12px; }
+    .branch-name { font-family: var(--font-display); font-size: 24px; letter-spacing: 1px; color: var(--white); margin-bottom: 16px; }
+    .branch-detail { display: flex; gap: 10px; margin-bottom: 10px; font-size: 13px; color: var(--muted); align-items: flex-start; }
+    .branch-detail-icon { flex-shrink: 0; margin-top: 2px; }
+    .branch-hours { margin-top: 16px; padding-top: 16px; border-top: 1px solid var(--border); }
+    .hours-row { display: flex; justify-content: space-between; font-size: 12px; font-family: var(--font-mono); }
+    .hours-day { color: var(--muted); }
+    .hours-time { color: var(--cream2); }
+    .hours-row.today .hours-day, .hours-row.today .hours-time { color: var(--amber); }
+
+    /* ── SOCIAL STRIP ── */
+    .social-strip {
+      background: var(--charcoal2);
+      border-top: 1px solid var(--border);
+      padding: 40px 72px;
+      display: flex; align-items: center; justify-content: space-between;
+      flex-wrap: wrap; gap: 20px;
+    }
+    .social-text { font-family: var(--font-display); font-size: 24px; letter-spacing: 1px; color: var(--white); }
+    .social-links { display: flex; gap: 12px; }
+    .social-btn {
+      display: flex; align-items: center; gap: 8px;
+      font-family: var(--font-mono); font-size: 11px; letter-spacing: 1.5px;
+      text-transform: uppercase; padding: 10px 18px;
+      border: 1px solid var(--border); color: var(--muted);
+      border-radius: 2px; text-decoration: none; transition: all 0.2s;
+    }
+    .social-btn:hover { border-color: var(--amber); color: var(--amber); }
+
+    /* ── FOOTER ── */
+    footer { background: var(--charcoal2); border-top: 1px solid var(--border); padding: 60px 72px 40px; }
+    .footer-top { display: grid; grid-template-columns: 2fr 1fr 1fr 1fr; gap: 60px; margin-bottom: 60px; }
+    .footer-logo { font-family: var(--font-display); font-size: 22px; letter-spacing: 2px; color: var(--white); text-decoration: none; display: inline-block; margin-bottom: 16px; }
+    .footer-logo span { color: var(--amber); }
+    .footer-tagline { font-size: 13px; color: var(--muted); line-height: 1.8; max-width: 260px; }
+    .footer-col h5 { font-family: var(--font-mono); font-size: 10px; letter-spacing: 2px; color: var(--amber); text-transform: uppercase; margin-bottom: 20px; }
+    .footer-col ul { list-style: none; display: flex; flex-direction: column; gap: 12px; }
+    .footer-col ul a { font-size: 13px; color: var(--muted); text-decoration: none; transition: color 0.2s; }
+    .footer-col ul a:hover { color: var(--cream); }
+    .footer-bottom { display: flex; justify-content: space-between; align-items: center; padding-top: 32px; border-top: 1px solid var(--border); flex-wrap: wrap; gap: 12px; }
+    .footer-copy { font-size: 12px; color: var(--muted); font-family: var(--font-mono); letter-spacing: 1px; }
+    .footer-badge { display: flex; align-items: center; gap: 8px; font-family: var(--font-mono); font-size: 11px; color: var(--amber); letter-spacing: 1px; }
+    .badge-dot { width: 6px; height: 6px; background: var(--amber); border-radius: 50%; animation: pulse 2s infinite; }
+    @keyframes pulse { 0%,100%{opacity:1;transform:scale(1)} 50%{opacity:0.5;transform:scale(0.8)} }
+
+    /* ── FADE ANIMATION ── */
+    .fade-up { opacity: 0; transform: translateY(24px); transition: opacity 0.7s ease, transform 0.7s ease; }
+    .fade-up.visible { opacity: 1; transform: translateY(0); }
+
+    /* ── RESPONSIVE ── */
+    @media (max-width: 1100px) {
+      .faq-grid { grid-template-columns: 1fr; gap: 40px; }
+      .main-grid { grid-template-columns: 1fr; }
+      .map-panel { min-height: 360px; }
+      .form-panel { border-left: none; border-top: 1px solid var(--border); padding: 48px 40px; }
+    }
+    @media (max-width: 768px) {
+      nav { padding: 0 24px; }
+      .nav-links, .nav-actions { display: none; }
+      .hamburger { display: flex; }
+      .page-header { padding: 100px 24px 40px; }
+      .info-strip { grid-template-columns: 1fr; }
+      .info-tile { border-right: none; border-bottom: 1px solid var(--border); padding: 24px; }
+      .info-tile:last-child { border-bottom: none; }
+      .form-panel { padding: 36px 24px; }
+      .form-row-2 { grid-template-columns: 1fr; }
+      .faq-section { padding: 60px 24px; }
+      .branches-section { padding: 60px 24px; }
+      .social-strip { padding: 32px 24px; }
+      footer { padding: 48px 24px 32px; }
+      .footer-top { grid-template-columns: 1fr 1fr; gap: 36px; }
+    }
+    @media (max-width: 480px) {
+      .footer-top { grid-template-columns: 1fr; }
+      .contact-prefs { flex-direction: column; gap: 12px; }
+    }
+  </style>
+</head>
+<body>
+
+<!-- NAV -->
+<nav>
+  <a href="index.html" class="nav-logo">XTRAA<span>PLYWOOD</span></a>
+  <ul class="nav-links">
+    <li><a href="index.html">Home</a></li>
+    <li><a href="products.html">Products</a></li>
+    <li><a href="rewards.html">Rewards</a></li>
+    <li><a href="contact.html" class="active">Contact</a></li>
+  </ul>
+  <div class="nav-actions">
+    <a href="login.html" class="btn-nav btn-outline">Login</a>
+    <a href="login.html" class="btn-nav btn-amber">Sign Up</a>
+  </div>
+  <button class="hamburger" id="hamburger"><span></span><span></span><span></span></button>
+</nav>
+<div class="mobile-menu" id="mobileMenu">
+  <a href="index.html" onclick="closeMobile()">Home</a>
+  <a href="products.html" onclick="closeMobile()">Products</a>
+  <a href="rewards.html" onclick="closeMobile()">Rewards</a>
+  <a href="login.html" onclick="closeMobile()">Login</a>
+</div>
+
+<!-- PAGE HEADER -->
+<div class="page-header">
+  <div class="breadcrumb"><a href="index.html">Home</a><span>›</span><span>Contact</span></div>
+  <h1>GET IN TOUCH</h1>
+  <p>Have a bulk order, a custom requirement, or just want to know more about what we stock? We're here — reach out and we'll get back to you the same day.</p>
+</div>
+
+<!-- QUICK INFO STRIP -->
+<div class="info-strip">
+  <div class="info-tile">
+    <div class="info-tile-icon">📍</div>
+    <div>
+      <div class="info-tile-label">Visit Us</div>
+      <div class="info-tile-value">Patna, Bihar - 800001</div>
+      <div class="info-tile-sub">Main showroom + warehouse</div>
+    </div>
+  </div>
+  <div class="info-tile">
+    <div class="info-tile-icon">📞</div>
+    <div>
+      <div class="info-tile-label">Call Us</div>
+      <div class="info-tile-value">Share your requirement first</div>
+      <div class="info-tile-sub">Phone support is coordinated after enquiry review</div>
+    </div>
+  </div>
+  <div class="info-tile">
+    <div class="info-tile-icon">✉️</div>
+    <div>
+      <div class="info-tile-label">Email Us</div>
+      <div class="info-tile-value">Reply sent after enquiry submission</div>
+      <div class="info-tile-sub">Use the form below for the fastest response</div>
+    </div>
+  </div>
+</div>
+
+<!-- MAP + FORM -->
+<div class="main-grid">
+
+  <!-- MAP -->
+  <div class="map-panel">
+    <iframe
+      class="map-embed"
+      src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3115.25507988955!2d85.14168117464024!3d25.61261531475099!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x39ed5859484d0d7b%3A0x64fe111983a8c976!2sMohini%20Mkt%20Rd%2C%20Ali%20Nagar%20Colony%2C%20Salimpur%20Ahra%2C%20Golambar%2C%20Patna%2C%20Bihar%20800001!5e1!3m2!1sen!2sin!4v1780828594953!5m2!1sen!2sin"width="400" height="300" style="border:0;"
+      allowfullscreen="" loading="lazy" referrerpolicy="no-referrer-when-downgrade"
+      title="Xtraaplywood location map">
+    </iframe>
+    <div class="map-overlay-card">
+      <div class="map-card-title">XTRAAPLYWOOD</div>
+      <div class="map-card-addr">Main Showroom & Warehouse<br>Patna, Bihar - 800020</div>
+      <a href="https://maps.google.com" target="_blank" class="map-card-link">
+        Open in Maps
+        <svg width="12" height="12" viewBox="0 0 12 12" fill="none">
+          <path d="M2 10L10 2M10 2H4M10 2v6" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
+        </svg>
+      </a>
+    </div>
+  </div>
+
+  <!-- ENQUIRY FORM -->
+  <div class="form-panel">
+    <div class="form-eyebrow">Send an Enquiry</div>
+    <h2 class="form-title">ENQUIRE NOW</h2>
+    <p class="form-sub">Fill in your details and we'll respond within the day — or call us directly for urgent requirements.</p>
+
+    <div class="form-alert" id="formAlert"></div>
+
+    <!-- FORM -->
+    <form class="enquiry-form" id="contactForm" onsubmit="handleSubmit(event)" novalidate>
+
+      <div class="form-row-2">
+        <div class="form-group">
+          <label class="form-label">Full Name</label>
+          <div class="input-wrap">
+            <span class="input-icon">
+              <svg width="16" height="16" viewBox="0 0 16 16" fill="none"><circle cx="8" cy="5" r="3" stroke="currentColor" stroke-width="1.4"/><path d="M1 14c0-3.314 3.134-6 7-6s7 2.686 7 6" stroke="currentColor" stroke-width="1.4" stroke-linecap="round"/></svg>
+            </span>
+            <input class="form-input" type="text" id="fname" placeholder="Your full name" autocomplete="name"/>
+          </div>
+          <span class="field-error" id="fnameErr">Name is required.</span>
+        </div>
+        <div class="form-group">
+          <label class="form-label">Phone</label>
+          <div class="input-wrap">
+            <span class="input-icon">
+              <svg width="16" height="16" viewBox="0 0 16 16" fill="none"><rect x="3" y="1" width="10" height="14" rx="2" stroke="currentColor" stroke-width="1.4"/><circle cx="8" cy="12" r="1" fill="currentColor"/></svg>
+            </span>
+            <input class="form-input" type="tel" id="phone" placeholder="+91 XXXXX XXXXX" autocomplete="tel"/>
+          </div>
+          <span class="field-error" id="phoneErr">Enter a valid phone number.</span>
+        </div>
+      </div>
+
+      <div class="form-group">
+        <label class="form-label">Email Address</label>
+        <div class="input-wrap">
+          <span class="input-icon">
+            <svg width="16" height="16" viewBox="0 0 16 16" fill="none"><rect x="1" y="3" width="14" height="10" rx="2" stroke="currentColor" stroke-width="1.4"/><path d="M1 5l7 5 7-5" stroke="currentColor" stroke-width="1.4" stroke-linecap="round"/></svg>
+          </span>
+          <input class="form-input" type="email" id="email" placeholder="you@email.com (optional)" autocomplete="email"/>
+        </div>
+        <span class="field-error" id="emailErr">Enter a valid email address.</span>
+      </div>
+
+      <div class="form-row-2">
+        <div class="form-group">
+          <label class="form-label">Product Interest</label>
+          <div class="input-wrap">
+            <span class="input-icon">
+              <svg width="16" height="16" viewBox="0 0 16 16" fill="none"><rect x="1" y="1" width="14" height="14" rx="2" stroke="currentColor" stroke-width="1.4"/><path d="M4 8h8M4 5h8M4 11h5" stroke="currentColor" stroke-width="1.4" stroke-linecap="round"/></svg>
+            </span>
+            <select class="form-select" id="product">
+              <option value="">Select category…</option>
+              <option>Plywood Sheets</option>
+              <option>Block Board</option>
+              <option>Flush Doors</option>
+              <option>Multiple Products</option>
+              <option>Other / Not Sure</option>
+            </select>
+          </div>
+        </div>
+        <div class="form-group">
+          <label class="form-label">Order Type</label>
+          <div class="input-wrap">
+            <span class="input-icon">
+              <svg width="16" height="16" viewBox="0 0 16 16" fill="none"><rect x="1" y="4" width="14" height="9" rx="2" stroke="currentColor" stroke-width="1.4"/><path d="M5 4V3a3 3 0 016 0v1" stroke="currentColor" stroke-width="1.4" stroke-linecap="round"/></svg>
+            </span>
+            <select class="form-select" id="orderType">
+              <option value="">Select type…</option>
+              <option>Retail Purchase</option>
+              <option>Bulk / Trade Order</option>
+              <option>Custom Cut / Size</option>
+              <option>Price Enquiry</option>
+              <option>Other</option>
+            </select>
+          </div>
+        </div>
+      </div>
+
+      <div class="form-group">
+        <label class="form-label">Quantity / Requirement</label>
+        <div class="input-wrap">
+          <span class="input-icon">
+            <svg width="16" height="16" viewBox="0 0 16 16" fill="none"><path d="M2 4h12M2 8h8M2 12h10" stroke="currentColor" stroke-width="1.4" stroke-linecap="round"/></svg>
+          </span>
+          <input class="form-input" type="text" id="qty" placeholder="e.g. 100 sheets of 18mm BWR, 8×4 ft"/>
+        </div>
+      </div>
+
+      <div class="form-group">
+        <label class="form-label">Preferred Contact Method</label>
+        <div class="contact-prefs">
+          <label class="pref-check">
+            <input type="checkbox" id="prefCall" checked/>
+            <div class="pref-box"></div>
+            <span class="pref-text">📞 Phone call</span>
+          </label>
+          <label class="pref-check">
+            <input type="checkbox" id="prefWhatsapp"/>
+            <div class="pref-box"></div>
+            <span class="pref-text">💬 WhatsApp</span>
+          </label>
+          <label class="pref-check">
+            <input type="checkbox" id="prefEmail"/>
+            <div class="pref-box"></div>
+            <span class="pref-text">✉️ Email</span>
+          </label>
+        </div>
+      </div>
+
+      <div class="form-group">
+        <label class="form-label">Message</label>
+        <div class="input-wrap">
+          <span class="input-icon" style="top:18px;transform:none;">
+            <svg width="16" height="16" viewBox="0 0 16 16" fill="none"><rect x="1" y="2" width="14" height="10" rx="2" stroke="currentColor" stroke-width="1.4"/><path d="M4 14l2-2h5" stroke="currentColor" stroke-width="1.4" stroke-linecap="round" stroke-linejoin="round"/></svg>
+          </span>
+          <textarea class="form-textarea" id="message" placeholder="Tell us more — grade, thickness, delivery location, timeline or any specific requirements…"></textarea>
+        </div>
+        <span class="field-error" id="messageErr">Please add a brief message.</span>
+      </div>
+
+      <button type="submit" class="form-submit" id="submitBtn">
+        <div class="spinner" id="submitSpinner"></div>
+        <span id="submitText">Send Enquiry →</span>
+      </button>
+
+    </form>
+
+    <!-- SUCCESS STATE -->
+    <div class="success-state" id="successState">
+      <div class="success-ring">✓</div>
+      <h3>ENQUIRY SENT!</h3>
+      <p>Thank you — we've received your enquiry and will get back to you within the day. Check your email for a confirmation.</p>
+      <div class="success-ref" id="refNum">REF: XP-ENQ-0000</div>
+      <button class="btn-reset" onclick="resetForm()">← Send Another Enquiry</button>
+    </div>
+  </div>
+</div>
+
+<!-- FAQ SECTION -->
+<div class="faq-section">
+  <div class="faq-grid">
+    <div class="fade-up">
+      <h2>FREQUENTLY ASKED</h2>
+      <p>Can't find the answer? Call us or drop a message using the form above.</p>
+    </div>
+    <div class="faq-list fade-up">
+      <div class="faq-item">
+        <div class="faq-question" onclick="toggleFaq(this)">
+          Do you offer delivery across Bihar?
+          <span class="faq-icon">+</span>
+        </div>
+        <div class="faq-answer">Yes — we deliver across Patna same-day for orders placed before 12 PM. For other districts in Bihar, delivery typically takes 1–3 business days depending on location. Bulk orders get free delivery.</div>
+      </div>
+      <div class="faq-item">
+        <div class="faq-question" onclick="toggleFaq(this)">
+          What is the minimum order quantity?
+          <span class="faq-icon">+</span>
+        </div>
+        <div class="faq-answer">There's no minimum order for retail purchases — you can buy a single sheet. For wholesale and trade pricing, a minimum of 20 sheets applies. Contact us for bulk pricing quotes.</div>
+      </div>
+      <div class="faq-item">
+        <div class="faq-question" onclick="toggleFaq(this)">
+          Can you do custom sizes / cutting?
+          <span class="faq-icon">+</span>
+        </div>
+        <div class="faq-answer">Absolutely. We have precision cutting equipment in-house. You can specify custom dimensions for plywood, MDF, and block board when placing your order. Additional cutting charges may apply.</div>
+      </div>
+      <div class="faq-item">
+        <div class="faq-question" onclick="toggleFaq(this)">
+          How do I earn and use loyalty points?
+          <span class="faq-icon">+</span>
+        </div>
+        <div class="faq-answer">Every product you buy has a unique QR code label. Scan it after purchase using your Xtraaplywood account to earn points. Points accumulate in your wallet and can be redeemed for discounts, free products, and other rewards once you hit the required threshold.</div>
+      </div>
+      <div class="faq-item">
+        <div class="faq-question" onclick="toggleFaq(this)">
+          Are all products ISI certified?
+          <span class="faq-icon">+</span>
+        </div>
+        <div class="faq-answer">Most of our plywood and structural products are ISI certified (BIS-licensed) and comply with IS:710 (BWP), IS:303 (BWR), and IS:2191 standards. Each product listing indicates its certification grade clearly.</div>
+      </div>
+      <div class="faq-item">
+        <div class="faq-question" onclick="toggleFaq(this)">
+          Do you supply to contractors and builders?
+          <span class="faq-icon">+</span>
+        </div>
+        <div class="faq-answer">Yes — we work with carpenters, interior designers, contractors, builders, and architects across Bihar. Trade accounts get priority pricing, dedicated support, and credit terms. Contact us to open a trade account.</div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- BRANCHES -->
+<div class="branches-section">
+  <div class="branches-header fade-up">
+    <div class="section-eyebrow">Find Us</div>
+    <h2 class="section-title">OUR LOCATIONS</h2>
+  </div>
+  <div class="branches-grid">
+    <div class="branch-card main fade-up">
+      <div class="branch-label">⭐ Main Showroom</div>
+      <div class="branch-name">PATNA SHOWROOM</div>
+      <div class="branch-detail"><span class="branch-detail-icon">📍</span><span>Main showroom & warehouse, Patna, Bihar — 800020</span></div>
+      <div class="branch-detail"><span class="branch-detail-icon">📞</span><span>Phone support arranged after enquiry</span></div>
+      <div class="branch-detail"><span class="branch-detail-icon">✉️</span><span>Enquiry responses handled directly by the showroom team</span></div>
+      <div class="branch-hours">
+        <div class="hours-row today"><span class="hours-day">Mon – Sat</span><span class="hours-time">9:00 AM – 7:00 PM</span></div>
+        <div class="hours-row"><span class="hours-day">Sunday</span><span class="hours-time">10:00 AM – 4:00 PM</span></div>
+      </div>
+    </div>
+    <div class="branch-card fade-up">
+      <div class="branch-label">Warehouse</div>
+      <div class="branch-name">STOCK POINT</div>
+      <div class="branch-detail"><span class="branch-detail-icon">📍</span><span>Industrial Area, Patna — 800020</span></div>
+      <div class="branch-detail"><span class="branch-detail-icon">📞</span><span>Warehouse contact shared for approved dispatches</span></div>
+      <div class="branch-detail"><span class="branch-detail-icon">🚚</span><span>Bulk pickup & dispatch only</span></div>
+      <div class="branch-hours">
+        <div class="hours-row today"><span class="hours-day">Mon – Sat</span><span class="hours-time">8:00 AM – 6:00 PM</span></div>
+        <div class="hours-row"><span class="hours-day">Sunday</span><span class="hours-time">Closed</span></div>
+      </div>
+    </div>
+    <div class="branch-card fade-up">
+      <div class="branch-label">Service Area</div>
+      <div class="branch-name">BIHAR DELIVERY COVERAGE</div>
+      <div class="branch-detail"><span class="branch-detail-icon">&#128205;</span><span>Patna city, nearby industrial areas, and dispatch support across Bihar</span></div>
+      <div class="branch-detail"><span class="branch-detail-icon">&#128666;</span><span>Same-day delivery in Patna for eligible orders</span></div>
+      <div class="branch-detail"><span class="branch-detail-icon">&#128230;</span><span>Bulk orders coordinated through the enquiry form and warehouse team</span></div>
+      <div class="branch-hours">
+        <div class="hours-row"><span class="hours-day">Dispatch Support</span><span class="hours-time">Mon - Sat</span></div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- SOCIAL STRIP -->
+<div class="social-strip">
+  <div class="social-text">EXPLORE XTRAAPLYWOOD</div>
+  <div class="social-links">
+    <a href="contact.html" class="social-btn">
+      <svg width="14" height="14" viewBox="0 0 24 24" fill="currentColor"><path d="M12 3a9 9 0 109 9 9.01 9.01 0 00-9-9zm1 13h-2v-2h2zm0-4h-2V8h2z"/></svg>
+      Contact Us
+    </a>
+    <a href="products.html" class="social-btn">
+      <svg width="14" height="14" viewBox="0 0 24 24" fill="currentColor"><path d="M4 5h16v2H4zm0 6h16v2H4zm0 6h10v2H4z"/></svg>
+      View Products
+    </a>
+    <a href="rewards.html" class="social-btn">
+      <svg width="14" height="14" viewBox="0 0 24 24" fill="currentColor"><path d="M12 2l2.9 5.88L21 8.76l-4.5 4.39 1.06 6.2L12 16.9l-5.56 2.45 1.06-6.2L3 8.76l6.1-.88z"/></svg>
+      Rewards Program
+    </a>
+  </div>
+</div>
+
+<!-- FOOTER -->
+<footer>
+  <div class="footer-top">
+    <div>
+      <a href="index.html" class="footer-logo">XTRAA<span>PLYWOOD</span></a>
+      <p class="footer-tagline">Patna's premium destination for plywood, laminates, and hardware. Quality certified, competitively priced.</p>
+    </div>
+    <div class="footer-col">
+      <h5>Products</h5>
+      <ul>
+        <li><a href="products.html">Plywood Sheets</a></li>
+        <li><a href="products.html">Block Board</a></li>
+        <li><a href="products.html">Laminates</a></li>
+        <li><a href="products.html">Flush Doors</a></li>
+        <li><a href="products.html">Hardware</a></li>
+      </ul>
+    </div>
+    <div class="footer-col">
+      <h5>Company</h5>
+      <ul>
+        <li><a href="index.html#about">About Us</a></li>
+        <li><a href="products.html">Our Brands</a></li>
+        <li><a href="contact.html">Visit Showroom</a></li>
+        <li><a href="contact.html">Contact</a></li>
+      </ul>
+    </div>
+    <div class="footer-col">
+      <h5>Account</h5>
+      <ul>
+        <li><a href="login.html#login">Login</a></li>
+        <li><a href="login.html#signup">Sign Up</a></li>
+        <li><a href="rewards.html">My Points</a></li>
+        <li><a href="rewards.html">Scan QR</a></li>
+        <li><a href="rewards.html">Rewards</a></li>
+      </ul>
+    </div>
+  </div>
+  <div class="footer-bottom">
+    <div class="footer-copy">(c) 2026 Xtraaplywood. All rights reserved.</div>
+    <div class="footer-badge"><span class="badge-dot"></span>Loyalty rewards active</div>
+  </div>
+</footer>
+
+<script type="module" src="./supabase/nav-auth.js"></script>
+<script type="module">
+  import { getSupabaseClient, isSupabaseConfigured } from "./supabase/client.js";
+
+  const supabase = isSupabaseConfigured() ? getSupabaseClient() : null;
+
+  document.getElementById('hamburger').addEventListener('click', () => document.getElementById('mobileMenu').classList.toggle('open'));
+  function closeMobile() { document.getElementById('mobileMenu').classList.remove('open'); }
+  window.closeMobile = closeMobile;
+
+  const observer = new IntersectionObserver(entries => entries.forEach(e => { if (e.isIntersecting) e.target.classList.add('visible'); }), { threshold: 0.1 });
+  document.querySelectorAll('.fade-up').forEach(el => observer.observe(el));
+
+  function toggleFaq(el) {
+    const item = el.parentElement;
+    const isOpen = item.classList.contains('open');
+    document.querySelectorAll('.faq-item.open').forEach(i => i.classList.remove('open'));
+    if (!isOpen) item.classList.add('open');
+  }
+  window.toggleFaq = toggleFaq;
+
+  function validateEmail(v) { return /^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(v); }
+  function validatePhone(v) { return /^[+\d\s\-()]{8,}$/.test(v); }
+  function showErr(id) { document.getElementById(id).classList.add('show'); document.getElementById(id.replace('Err','')).classList.add('error'); }
+  function clearErr(id) { document.getElementById(id).classList.remove('show'); document.getElementById(id.replace('Err','')).classList.remove('error'); }
+
+  function showAlert(type, msg) {
+    const el = document.getElementById('formAlert');
+    el.className = `form-alert ${type} show`;
+    el.innerHTML = `<span>${type === 'success' ? 'OK' : '!'}</span> ${msg}`;
+  }
+
+  function resetAlert() {
+    const el = document.getElementById('formAlert');
+    el.className = 'form-alert';
+    el.innerHTML = '';
+  }
+
+  function ensureSupabaseReady() {
+    if (supabase) return true;
+    showAlert('error', 'Supabase is not configured yet. Add your project URL and anon key in supabase/client.js.');
+    return false;
+  }
+
+  async function handleSubmit(e) {
+    e.preventDefault();
+    resetAlert();
+
+    const fname = document.getElementById('fname').value.trim();
+    const phone = document.getElementById('phone').value.trim();
+    const email = document.getElementById('email').value.trim();
+    const product = document.getElementById('product').value.trim();
+    const orderType = document.getElementById('orderType').value.trim();
+    const qty = document.getElementById('qty').value.trim();
+    const message = document.getElementById('message').value.trim();
+    const contactPrefs = [
+      document.getElementById('prefCall').checked ? 'Phone call' : null,
+      document.getElementById('prefWhatsapp').checked ? 'WhatsApp' : null,
+      document.getElementById('prefEmail').checked ? 'Email' : null
+    ].filter(Boolean);
+    let valid = true;
+
+    if (!fname) { showErr('fnameErr'); valid = false; } else clearErr('fnameErr');
+    if (!validatePhone(phone)) { showErr('phoneErr'); valid = false; } else clearErr('phoneErr');
+    if (email && !validateEmail(email)) { showErr('emailErr'); valid = false; } else clearErr('emailErr');
+    if (!message) { showErr('messageErr'); valid = false; } else clearErr('messageErr');
+    if (!valid) return;
+    if (!ensureSupabaseReady()) return;
+
+    const btn = document.getElementById('submitBtn');
+    const spinner = document.getElementById('submitSpinner');
+    const text = document.getElementById('submitText');
+    btn.disabled = true;
+    spinner.style.display = 'block';
+    text.style.opacity = '0.4';
+
+    try {
+      const { data: sessionData } = await supabase.auth.getSession();
+      const payload = {
+        user_id: sessionData?.session?.user?.id ?? null,
+        full_name: fname,
+        phone,
+        email: email || null,
+        order_type: orderType || null,
+        quantity_requirement: [
+          product ? `Product interest: ${product}` : null,
+          qty ? `Requirement: ${qty}` : null,
+          contactPrefs.length ? `Preferred contact: ${contactPrefs.join(', ')}` : null
+        ].filter(Boolean).join(' | ') || null,
+        message
+      };
+
+      const { data, error } = await supabase
+        .from('enquiries')
+        .insert(payload)
+        .select('id')
+        .single();
+
+      if (error) throw error;
+
+      document.getElementById('contactForm').style.display = 'none';
+      document.getElementById('refNum').textContent = 'REF: XP-ENQ-' + data.id.slice(0, 8).toUpperCase();
+      document.getElementById('successState').style.display = 'block';
+    } catch (err) {
+      showAlert('error', err?.message || 'Could not submit your enquiry. Please try again.');
+      btn.disabled = false;
+      spinner.style.display = 'none';
+      text.style.opacity = '1';
+    }
+  }
+  window.handleSubmit = handleSubmit;
+
+  function resetForm() {
+    document.getElementById('contactForm').reset();
+    document.getElementById('contactForm').style.display = 'flex';
+    document.getElementById('successState').style.display = 'none';
+    resetAlert();
+    document.querySelectorAll('.field-error').forEach(e => e.classList.remove('show'));
+    document.querySelectorAll('.form-input, .form-textarea').forEach(e => e.classList.remove('error'));
+    const btn = document.getElementById('submitBtn');
+    const spinner = document.getElementById('submitSpinner');
+    const text = document.getElementById('submitText');
+    btn.disabled = false;
+    spinner.style.display = 'none';
+    text.style.opacity = '1';
+  }
+  window.resetForm = resetForm;
+
+  const params = new URLSearchParams(window.location.search);
+  const selectedProduct = params.get('product');
+  const prefilledMessage = params.get('message');
+  if (selectedProduct) {
+    const messageField = document.getElementById('message');
+    if (messageField && !messageField.value) {
+      messageField.value = `I'm interested in ${selectedProduct}. Please share product details, pricing, and availability.`;
+    }
+  }
+  if (prefilledMessage) {
+    const messageField = document.getElementById('message');
+    if (messageField && !messageField.value) {
+      messageField.value = prefilledMessage;
+    }
+  }
+</script>
+</body>
+</html>
+
+
+
+
+
+
+

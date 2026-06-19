@@ -1,0 +1,1339 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Xtraaplywood – Premium Plywood & Hardware</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=Barlow:ital,wght@0,300;0,400;0,500;0,600;1,300&family=DM+Mono:wght@400;500&display=swap" rel="stylesheet">
+  <style>
+*, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+    :root {
+      --charcoal:   #141410;
+      --charcoal2:  #1e1e18;
+      --charcoal3:  #272720;
+      --amber:      #c8811a;
+      --amber-lt:   #e8a030;
+      --amber-pale: #f5c46a;
+      --cream:      #f0ead8;
+      --cream2:     #e2d9c0;
+      --white:      #fafaf7;
+      --muted:      #7a7a6a;
+      --border:     rgba(200,129,26,0.18);
+      --font-display: 'Bebas Neue', sans-serif;
+      --font-body:    'Barlow', sans-serif;
+      --font-mono:    'DM Mono', monospace;
+    }
+
+    html { scroll-behavior: smooth; }
+
+    body {
+      background: var(--charcoal);
+      color: var(--cream);
+      font-family: var(--font-body);
+      font-weight: 300;
+      line-height: 1.7;
+      overflow-x: hidden;
+    }
+
+    /* ── NOISE TEXTURE OVERLAY ── */
+    body::before {
+      content: '';
+      position: fixed; inset: 0;
+      background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 256 256' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)' opacity='1'/%3E%3C/svg%3E");
+      opacity: 0.025;
+      pointer-events: none;
+      z-index: 9999;
+    }
+
+    /* ── NAV ── */
+    nav {
+      position: fixed; top: 0; left: 0; right: 0;
+      z-index: 1000;
+      display: flex; align-items: center; justify-content: space-between;
+      padding: 0 48px;
+      height: 68px;
+      background: rgba(20,20,16,0.88);
+      backdrop-filter: blur(12px);
+      border-bottom: 1px solid var(--border);
+      transition: background 0.3s;
+    }
+
+    .nav-logo {
+      font-family: var(--font-display);
+      font-size: 26px;
+      letter-spacing: 2px;
+      color: var(--white);
+      text-decoration: none;
+      display: flex; align-items: center; gap: 10px;
+    }
+    .nav-logo span {
+      color: var(--amber);
+    }
+    .logo-dot {
+      width: 6px; height: 6px;
+      background: var(--amber);
+      border-radius: 50%;
+      display: inline-block;
+    }
+
+    .nav-links {
+      display: flex; align-items: center; gap: 36px;
+      list-style: none;
+    }
+    .nav-links a {
+      font-family: var(--font-body);
+      font-size: 13px;
+      font-weight: 500;
+      letter-spacing: 1.5px;
+      text-transform: uppercase;
+      color: var(--cream2);
+      text-decoration: none;
+      transition: color 0.2s;
+    }
+    .nav-links a:hover { color: var(--amber-lt); }
+
+    .nav-actions {
+      display: flex; align-items: center; gap: 16px;
+    }
+    .btn-nav {
+      font-family: var(--font-body);
+      font-size: 13px;
+      font-weight: 500;
+      letter-spacing: 1px;
+      text-transform: uppercase;
+      padding: 9px 22px;
+      border-radius: 2px;
+      cursor: pointer;
+      text-decoration: none;
+      transition: all 0.2s;
+    }
+    .btn-outline {
+      background: transparent;
+      border: 1px solid var(--border);
+      color: var(--cream);
+    }
+    .btn-outline:hover {
+      border-color: var(--amber);
+      color: var(--amber-lt);
+    }
+    .btn-amber {
+      background: var(--amber);
+      border: 1px solid var(--amber);
+      color: var(--charcoal);
+    }
+    .btn-amber:hover {
+      background: var(--amber-lt);
+      border-color: var(--amber-lt);
+    }
+
+    /* Hamburger */
+    .hamburger {
+      display: none;
+      flex-direction: column; gap: 5px;
+      cursor: pointer; padding: 4px;
+      background: none; border: none;
+    }
+    .hamburger span {
+      display: block; width: 24px; height: 2px;
+      background: var(--cream); border-radius: 2px;
+      transition: all 0.3s;
+    }
+
+    /* ── HERO ── */
+    .hero {
+      min-height: 100vh;
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      padding-top: 68px;
+      position: relative;
+      overflow: hidden;
+    }
+
+    .hero-left {
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      padding: 80px 60px 80px 72px;
+      position: relative;
+      z-index: 2;
+    }
+
+    .hero-badge {
+      display: inline-flex; align-items: center; gap: 8px;
+      font-family: var(--font-mono);
+      font-size: 11px;
+      letter-spacing: 2px;
+      color: var(--amber);
+      text-transform: uppercase;
+      margin-bottom: 28px;
+    }
+    .hero-badge::before {
+      content: '';
+      display: block; width: 28px; height: 1px;
+      background: var(--amber);
+    }
+
+    .hero-title {
+      font-family: var(--font-display);
+      font-size: clamp(72px, 8vw, 110px);
+      line-height: 0.92;
+      letter-spacing: 2px;
+      color: var(--white);
+      margin-bottom: 32px;
+    }
+    .hero-title em {
+      font-style: normal;
+      color: var(--amber);
+      -webkit-text-stroke: 0px;
+    }
+    .hero-title .outline {
+      -webkit-text-stroke: 1.5px var(--amber-pale);
+      color: transparent;
+    }
+
+    .hero-sub {
+      font-size: 16px;
+      font-weight: 300;
+      color: var(--muted);
+      line-height: 1.8;
+      max-width: 420px;
+      margin-bottom: 48px;
+    }
+
+    .hero-cta {
+      display: flex; align-items: center; gap: 20px;
+      flex-wrap: wrap;
+    }
+    .btn-primary {
+      display: inline-flex; align-items: center; gap: 10px;
+      font-family: var(--font-body);
+      font-size: 14px;
+      font-weight: 500;
+      letter-spacing: 1.5px;
+      text-transform: uppercase;
+      padding: 16px 36px;
+      background: var(--amber);
+      color: var(--charcoal);
+      text-decoration: none;
+      border-radius: 2px;
+      transition: all 0.25s;
+      border: none; cursor: pointer;
+    }
+    .btn-primary:hover {
+      background: var(--amber-lt);
+      transform: translateY(-2px);
+    }
+    .btn-ghost {
+      display: inline-flex; align-items: center; gap: 8px;
+      font-family: var(--font-body);
+      font-size: 14px;
+      font-weight: 500;
+      letter-spacing: 1px;
+      text-transform: uppercase;
+      color: var(--cream2);
+      text-decoration: none;
+      transition: color 0.2s;
+    }
+    .btn-ghost:hover { color: var(--amber-lt); }
+    .btn-ghost svg { transition: transform 0.2s; }
+    .btn-ghost:hover svg { transform: translateX(4px); }
+
+    .hero-stats {
+      display: flex; gap: 40px;
+      margin-top: 60px;
+      padding-top: 40px;
+      border-top: 1px solid var(--border);
+    }
+    .stat-num {
+      font-family: var(--font-display);
+      font-size: 36px;
+      color: var(--amber);
+      line-height: 1;
+    }
+    .stat-label {
+      font-size: 12px;
+      letter-spacing: 1px;
+      color: var(--muted);
+      text-transform: uppercase;
+      margin-top: 4px;
+    }
+
+    /* Hero right - visual panel */
+    .hero-right {
+      position: relative;
+      overflow: hidden;
+    }
+    .hero-wood-grid {
+      position: absolute; inset: 0;
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      grid-template-rows: 1fr 1fr;
+      gap: 3px;
+    }
+    .wood-panel {
+      background: var(--charcoal3);
+      position: relative;
+      overflow: hidden;
+    }
+    .wood-panel::after {
+      content: '';
+      position: absolute; inset: 0;
+      background: repeating-linear-gradient(
+        88deg,
+        transparent,
+        transparent 18px,
+        rgba(200,129,26,0.04) 18px,
+        rgba(200,129,26,0.04) 19px
+      );
+    }
+    .wood-panel:nth-child(1) { background: #1a1810; }
+    .wood-panel:nth-child(2) { background: #231f14; }
+    .wood-panel:nth-child(3) { background: #1f1c12; }
+    .wood-panel:nth-child(4) { background: #1c1910; }
+
+    .hero-right-overlay {
+      position: absolute; inset: 0;
+      display: flex; flex-direction: column;
+      justify-content: center; align-items: center;
+      z-index: 2;
+    }
+    .hero-graphic {
+      width: 280px; height: 280px;
+      position: relative;
+    }
+    .hex-ring {
+      position: absolute; inset: 0;
+      border: 1.5px solid rgba(200,129,26,0.25);
+      border-radius: 50%;
+      animation: spin 18s linear infinite;
+    }
+    .hex-ring:nth-child(2) {
+      inset: 20px;
+      border-color: rgba(200,129,26,0.15);
+      animation-direction: reverse;
+      animation-duration: 26s;
+    }
+    @keyframes spin { to { transform: rotate(360deg); } }
+
+    .hero-center-box {
+      position: absolute;
+      inset: 60px;
+      background: var(--charcoal2);
+      border: 1px solid var(--border);
+      display: flex; flex-direction: column;
+      align-items: center; justify-content: center;
+      border-radius: 4px;
+    }
+    .hero-center-icon {
+      font-size: 48px;
+      line-height: 1;
+    }
+    .hero-center-label {
+      font-family: var(--font-display);
+      font-size: 20px;
+      letter-spacing: 3px;
+      color: var(--amber);
+      margin-top: 8px;
+    }
+    .hero-right-tag {
+      margin-top: 32px;
+      font-family: var(--font-mono);
+      font-size: 11px;
+      letter-spacing: 2px;
+      color: var(--muted);
+      text-align: center;
+    }
+
+    /* ── MARQUEE STRIP ── */
+    .marquee-strip {
+      background: var(--amber);
+      padding: 12px 0;
+      overflow: hidden;
+      white-space: nowrap;
+    }
+    .marquee-track {
+      display: inline-flex;
+      animation: marquee 24s linear infinite;
+    }
+    .marquee-item {
+      font-family: var(--font-display);
+      font-size: 14px;
+      letter-spacing: 3px;
+      color: var(--charcoal);
+      padding: 0 32px;
+    }
+    .marquee-dot {
+      color: rgba(20,20,16,0.4);
+    }
+    @keyframes marquee { from { transform: translateX(0); } to { transform: translateX(-50%); } }
+
+    /* ── SECTION COMMON ── */
+    section { padding: 100px 72px; }
+    .section-eyebrow {
+      font-family: var(--font-mono);
+      font-size: 11px;
+      letter-spacing: 3px;
+      color: var(--amber);
+      text-transform: uppercase;
+      margin-bottom: 16px;
+      display: flex; align-items: center; gap: 12px;
+    }
+    .section-eyebrow::after {
+      content: '';
+      flex: 1; max-width: 60px;
+      height: 1px; background: var(--amber);
+      opacity: 0.4;
+    }
+    .section-title {
+      font-family: var(--font-display);
+      font-size: clamp(40px, 5vw, 64px);
+      color: var(--white);
+      line-height: 1;
+      letter-spacing: 1px;
+      margin-bottom: 16px;
+    }
+    .section-sub {
+      font-size: 15px;
+      color: var(--muted);
+      max-width: 520px;
+      line-height: 1.8;
+    }
+
+    /* ── PRODUCTS ── */
+    .products-section {
+      background: var(--charcoal2);
+    }
+    .products-header {
+      display: flex; justify-content: space-between; align-items: flex-end;
+      margin-bottom: 56px;
+      flex-wrap: wrap; gap: 20px;
+    }
+    .products-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(260px, 1fr));
+      gap: 2px;
+    }
+    .product-card {
+      background: var(--charcoal);
+      padding: 32px 28px;
+      position: relative;
+      cursor: pointer;
+      transition: background 0.3s;
+      border: 1px solid transparent;
+      text-decoration: none;
+      display: block;
+      overflow: hidden;
+    }
+    .product-card::before {
+      content: '';
+      position: absolute; bottom: 0; left: 0;
+      width: 100%; height: 2px;
+      background: var(--amber);
+      transform: scaleX(0);
+      transform-origin: left;
+      transition: transform 0.3s;
+    }
+    .product-card:hover { background: var(--charcoal3); border-color: var(--border); }
+    .product-card:hover::before { transform: scaleX(1); }
+
+    .product-num {
+      font-family: var(--font-mono);
+      font-size: 11px;
+      letter-spacing: 2px;
+      color: var(--amber);
+      opacity: 0.6;
+      margin-bottom: 20px;
+    }
+    .product-icon {
+      font-size: 32px;
+      margin-bottom: 16px;
+      line-height: 1;
+    }
+    .product-name {
+      font-family: var(--font-display);
+      font-size: 22px;
+      letter-spacing: 1px;
+      color: var(--white);
+      margin-bottom: 8px;
+    }
+    .product-desc {
+      font-size: 13px;
+      color: var(--muted);
+      line-height: 1.7;
+      margin-bottom: 20px;
+    }
+    .product-tag {
+      display: inline-block;
+      font-family: var(--font-mono);
+      font-size: 10px;
+      letter-spacing: 1.5px;
+      text-transform: uppercase;
+      padding: 4px 10px;
+      border: 1px solid var(--border);
+      color: var(--amber);
+      border-radius: 1px;
+    }
+
+    /* ── QR REWARDS ── */
+    .rewards-section {
+      background: var(--charcoal);
+      position: relative;
+      overflow: hidden;
+    }
+    .rewards-section::before {
+      content: '';
+      position: absolute;
+      top: -200px; right: -200px;
+      width: 600px; height: 600px;
+      border-radius: 50%;
+      background: radial-gradient(circle, rgba(200,129,26,0.06) 0%, transparent 70%);
+      pointer-events: none;
+    }
+    .rewards-inner {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 80px;
+      align-items: center;
+    }
+    .rewards-steps {
+      display: flex;
+      flex-direction: column;
+      gap: 0;
+    }
+    .reward-step {
+      display: flex; gap: 24px;
+      padding: 28px 0;
+      border-bottom: 1px solid var(--border);
+      position: relative;
+    }
+    .reward-step:last-child { border-bottom: none; }
+    .step-num {
+      font-family: var(--font-display);
+      font-size: 48px;
+      color: var(--amber);
+      opacity: 0.2;
+      line-height: 1;
+      flex-shrink: 0;
+      width: 52px;
+      transition: opacity 0.3s;
+    }
+    .reward-step:hover .step-num { opacity: 0.7; }
+    .step-content h4 {
+      font-family: var(--font-body);
+      font-size: 16px;
+      font-weight: 500;
+      color: var(--white);
+      margin-bottom: 6px;
+    }
+    .step-content p {
+      font-size: 14px;
+      color: var(--muted);
+      line-height: 1.7;
+    }
+
+    /* QR mockup */
+    .qr-mockup {
+      display: flex; flex-direction: column; align-items: center; gap: 24px;
+    }
+    .qr-card {
+      background: var(--charcoal2);
+      border: 1px solid var(--border);
+      border-radius: 4px;
+      padding: 32px;
+      width: 100%; max-width: 300px;
+      display: flex; flex-direction: column; align-items: center; gap: 16px;
+    }
+    .qr-code-visual {
+      width: 120px; height: 120px;
+      background: var(--white);
+      border-radius: 4px;
+      display: flex; align-items: center; justify-content: center;
+      padding: 10px;
+      position: relative;
+    }
+    .qr-grid {
+      width: 100%; height: 100%;
+      display: grid;
+      grid-template-columns: repeat(7, 1fr);
+      grid-template-rows: repeat(7, 1fr);
+      gap: 1px;
+    }
+    .qr-cell { background: var(--charcoal); border-radius: 1px; }
+    .qr-cell.on { background: var(--charcoal); }
+    .qr-cell.off { background: var(--white); }
+    .qr-label {
+      font-family: var(--font-mono);
+      font-size: 11px;
+      letter-spacing: 2px;
+      color: var(--amber);
+      text-align: center;
+    }
+    .qr-product-name {
+      font-family: var(--font-display);
+      font-size: 20px;
+      letter-spacing: 1px;
+      color: var(--white);
+    }
+    .points-badge {
+      background: var(--amber);
+      color: var(--charcoal);
+      font-family: var(--font-display);
+      font-size: 15px;
+      letter-spacing: 1px;
+      padding: 6px 18px;
+      border-radius: 2px;
+    }
+
+    /* ── WHY US ── */
+    .why-section {
+      background: var(--charcoal2);
+    }
+    .why-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(220px, 1fr));
+      gap: 2px;
+      margin-top: 60px;
+    }
+    .why-card {
+      background: var(--charcoal);
+      padding: 40px 28px;
+      position: relative;
+    }
+    .why-icon {
+      font-size: 28px;
+      margin-bottom: 20px;
+      line-height: 1;
+    }
+    .why-title {
+      font-family: var(--font-body);
+      font-size: 16px;
+      font-weight: 500;
+      color: var(--white);
+      margin-bottom: 10px;
+    }
+    .why-text {
+      font-size: 13px;
+      color: var(--muted);
+      line-height: 1.8;
+    }
+    .why-card::after {
+      content: '';
+      position: absolute;
+      top: 0; left: 0;
+      width: 2px; height: 100%;
+      background: var(--amber);
+      opacity: 0;
+      transition: opacity 0.3s;
+    }
+    .why-card:hover::after { opacity: 1; }
+
+    /* ── ENQUIRY / CONTACT ── */
+    .contact-section {
+      background: var(--charcoal);
+    }
+    .contact-inner {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 80px;
+      align-items: start;
+    }
+    .contact-info {
+      padding-top: 8px;
+    }
+    .contact-detail {
+      display: flex; gap: 16px;
+      align-items: flex-start;
+      margin-top: 40px;
+      padding-top: 32px;
+      border-top: 1px solid var(--border);
+    }
+    .contact-detail:first-of-type { margin-top: 48px; }
+    .contact-icon {
+      font-size: 20px; flex-shrink: 0;
+    }
+    .contact-detail-label {
+      font-family: var(--font-mono);
+      font-size: 10px;
+      letter-spacing: 2px;
+      color: var(--amber);
+      text-transform: uppercase;
+      margin-bottom: 4px;
+    }
+    .contact-detail-value {
+      font-size: 14px;
+      color: var(--cream2);
+    }
+
+    /* Form */
+    .enquiry-form {
+      display: flex; flex-direction: column; gap: 16px;
+    }
+    .form-row {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 16px;
+    }
+    .form-group {
+      display: flex; flex-direction: column; gap: 8px;
+    }
+    .form-label {
+      font-family: var(--font-mono);
+      font-size: 10px;
+      letter-spacing: 2px;
+      color: var(--amber);
+      text-transform: uppercase;
+    }
+    .form-input, .form-textarea, .form-select {
+      background: var(--charcoal2);
+      border: 1px solid var(--border);
+      color: var(--cream);
+      font-family: var(--font-body);
+      font-size: 14px;
+      padding: 14px 16px;
+      border-radius: 2px;
+      outline: none;
+      transition: border-color 0.2s;
+      width: 100%;
+    }
+    .form-input:focus, .form-textarea:focus, .form-select:focus {
+      border-color: var(--amber);
+    }
+    .form-textarea {
+      resize: vertical;
+      min-height: 120px;
+    }
+    .form-select option {
+      background: var(--charcoal2);
+    }
+    .form-submit {
+      font-family: var(--font-body);
+      font-size: 14px;
+      font-weight: 500;
+      letter-spacing: 1.5px;
+      text-transform: uppercase;
+      padding: 16px 36px;
+      background: var(--amber);
+      color: var(--charcoal);
+      border: none;
+      border-radius: 2px;
+      cursor: pointer;
+      transition: all 0.25s;
+      align-self: flex-start;
+    }
+    .form-submit:hover {
+      background: var(--amber-lt);
+      transform: translateY(-2px);
+    }
+
+    /* ── FOOTER ── */
+    footer {
+      background: var(--charcoal2);
+      border-top: 1px solid var(--border);
+      padding: 60px 72px 40px;
+    }
+    .footer-top {
+      display: grid;
+      grid-template-columns: 2fr 1fr 1fr 1fr;
+      gap: 60px;
+      margin-bottom: 60px;
+    }
+    .footer-brand .nav-logo {
+      font-size: 22px;
+      margin-bottom: 16px;
+      display: inline-flex;
+    }
+    .footer-tagline {
+      font-size: 13px;
+      color: var(--muted);
+      line-height: 1.8;
+      max-width: 260px;
+    }
+    .footer-col h5 {
+      font-family: var(--font-mono);
+      font-size: 10px;
+      letter-spacing: 2px;
+      color: var(--amber);
+      text-transform: uppercase;
+      margin-bottom: 20px;
+    }
+    .footer-col ul { list-style: none; display: flex; flex-direction: column; gap: 12px; }
+    .footer-col ul a {
+      font-size: 13px;
+      color: var(--muted);
+      text-decoration: none;
+      transition: color 0.2s;
+    }
+    .footer-col ul a:hover { color: var(--cream); }
+    .footer-bottom {
+      display: flex; justify-content: space-between; align-items: center;
+      padding-top: 32px;
+      border-top: 1px solid var(--border);
+      flex-wrap: wrap; gap: 12px;
+    }
+    .footer-copy {
+      font-size: 12px;
+      color: var(--muted);
+      font-family: var(--font-mono);
+      letter-spacing: 1px;
+    }
+    .footer-rewards-badge {
+      display: flex; align-items: center; gap: 8px;
+      font-family: var(--font-mono);
+      font-size: 11px;
+      color: var(--amber);
+      letter-spacing: 1px;
+    }
+    .rewards-dot {
+      width: 6px; height: 6px;
+      background: var(--amber);
+      border-radius: 50%;
+      animation: pulse 2s infinite;
+    }
+    @keyframes pulse {
+      0%, 100% { opacity: 1; transform: scale(1); }
+      50% { opacity: 0.5; transform: scale(0.8); }
+    }
+
+    /* ── MOBILE NAV MENU ── */
+    .mobile-menu {
+      display: none;
+      position: fixed; inset: 0; top: 68px;
+      background: rgba(20,20,16,0.98);
+      z-index: 999;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      gap: 36px;
+    }
+    .mobile-menu.open { display: flex; }
+    .mobile-menu a {
+      font-family: var(--font-display);
+      font-size: 36px;
+      letter-spacing: 3px;
+      color: var(--cream);
+      text-decoration: none;
+      transition: color 0.2s;
+    }
+    .mobile-menu a:hover { color: var(--amber); }
+
+    /* ── ANIMATE ON SCROLL ── */
+    .fade-up {
+      opacity: 0;
+      transform: translateY(30px);
+      transition: opacity 0.7s ease, transform 0.7s ease;
+    }
+    .fade-up.visible {
+      opacity: 1;
+      transform: translateY(0);
+    }
+
+    /* ── RESPONSIVE ── */
+    @media (max-width: 1024px) {
+      section { padding: 80px 40px; }
+      footer { padding: 60px 40px 32px; }
+      nav { padding: 0 32px; }
+      .hero { grid-template-columns: 1fr; }
+      .hero-left { padding: 60px 40px; }
+      .hero-right { display: none; }
+      .rewards-inner { grid-template-columns: 1fr; gap: 48px; }
+      .contact-inner { grid-template-columns: 1fr; gap: 48px; }
+      .footer-top { grid-template-columns: 1fr 1fr; gap: 40px; }
+    }
+
+    @media (max-width: 768px) {
+      section { padding: 60px 24px; }
+      footer { padding: 48px 24px 28px; }
+      nav { padding: 0 24px; }
+      .nav-links, .nav-actions { display: none; }
+      .hamburger { display: flex; }
+      .hero-left { padding: 48px 24px; }
+      .hero-stats { gap: 24px; flex-wrap: wrap; }
+      .form-row { grid-template-columns: 1fr; }
+      .footer-top { grid-template-columns: 1fr; }
+      .footer-bottom { flex-direction: column; text-align: center; }
+      .products-header { flex-direction: column; align-items: flex-start; }
+    }
+  </style>
+</head>
+<body>
+
+<!-- NAV -->
+<nav id="navbar">
+  <a href="index.html" class="nav-logo">XTRAA<span>PLYWOOD</span></a>
+  <ul class="nav-links">
+    <li><a href="products.html">Products</a></li>
+    <li><a href="rewards.html">Rewards</a></li>
+    <li><a href="contact.html">Enquire</a></li>
+    <li><a href="#about">About</a></li>
+  </ul>
+  <div class="nav-actions">
+    <a href="login.html#login" class="btn-nav btn-outline">Login</a>
+    <a href="login.html#signup" class="btn-nav btn-amber">Sign Up</a>
+  </div>
+  <button class="hamburger" id="hamburger" aria-label="Menu">
+    <span></span><span></span><span></span>
+  </button>
+</nav>
+
+<!-- MOBILE MENU -->
+<div class="mobile-menu" id="mobileMenu">
+  <a href="products.html" onclick="closeMobile()">Products</a>
+  <a href="rewards.html" onclick="closeMobile()">Rewards</a>
+  <a href="contact.html" onclick="closeMobile()">Enquire</a>
+  <a href="login.html#login" onclick="closeMobile()">Login</a>
+  <a href="login.html#signup" onclick="closeMobile()">Sign Up</a>
+</div>
+
+<!-- HERO -->
+<section class="hero" id="home">
+  <div class="hero-left">
+    <div class="hero-badge">Est. Premium Timber &amp; Hardware</div>
+    <h1 class="hero-title">
+      BUILT<br>
+      <em>STRONG.</em><br>
+      <span class="outline">BUILT RIGHT.</span>
+    </h1>
+    <p class="hero-sub">
+      Bihar's trusted source for premium plywood, laminates, and hardware.
+      Every sheet, every board — precision-cut and quality-certified.
+    </p>
+    <div class="hero-cta">
+      <a href="#products" class="btn-primary">
+        Browse Products
+        <svg width="16" height="16" viewBox="0 0 16 16" fill="none">
+          <path d="M3 8h10M9 4l4 4-4 4" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
+        </svg>
+      </a>
+      <a href="#rewards" class="btn-ghost">
+        Scan &amp; Earn Points
+        <svg width="16" height="16" viewBox="0 0 16 16" fill="none">
+          <path d="M3 8h10M9 4l4 4-4 4" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
+        </svg>
+      </a>
+    </div>
+    <div class="hero-stats">
+      <div>
+        <div class="stat-num">500+</div>
+        <div class="stat-label">Products</div>
+      </div>
+      <div>
+        <div class="stat-num">15+</div>
+        <div class="stat-label">Years Trust</div>
+      </div>
+      <div>
+        <div class="stat-num">10K+</div>
+        <div class="stat-label">Happy Clients</div>
+      </div>
+    </div>
+  </div>
+  <div class="hero-right">
+    <div class="hero-wood-grid">
+      <div class="wood-panel"></div>
+      <div class="wood-panel"></div>
+      <div class="wood-panel"></div>
+      <div class="wood-panel"></div>
+    </div>
+    <div class="hero-right-overlay">
+      <div class="hero-graphic">
+        <div class="hex-ring"></div>
+        <div class="hex-ring"></div>
+        <div class="hero-center-box">
+          <div class="hero-center-icon">🪵</div>
+          <div class="hero-center-label">XTRAA</div>
+        </div>
+      </div>
+      <div class="hero-right-tag">SCAN · EARN · REDEEM</div>
+    </div>
+  </div>
+</section>
+
+<!-- MARQUEE -->
+<div class="marquee-strip">
+  <div class="marquee-track">
+    <span class="marquee-item">PREMIUM PLYWOOD <span class="marquee-dot">✦</span></span>
+    <span class="marquee-item">COMMERCIAL GRADE <span class="marquee-dot">✦</span></span>
+    <span class="marquee-item">LAMINATES <span class="marquee-dot">✦</span></span>
+    <span class="marquee-item">FLUSH DOORS <span class="marquee-dot">✦</span></span>
+    <span class="marquee-item">HARDWARE <span class="marquee-dot">✦</span></span>
+    <span class="marquee-item">LOYALTY REWARDS <span class="marquee-dot">✦</span></span>
+    <span class="marquee-item">PREMIUM PLYWOOD <span class="marquee-dot">✦</span></span>
+    <span class="marquee-item">COMMERCIAL GRADE <span class="marquee-dot">✦</span></span>
+    <span class="marquee-item">LAMINATES <span class="marquee-dot">✦</span></span>
+    <span class="marquee-item">FLUSH DOORS <span class="marquee-dot">✦</span></span>
+    <span class="marquee-item">HARDWARE <span class="marquee-dot">✦</span></span>
+    <span class="marquee-item">LOYALTY REWARDS <span class="marquee-dot">✦</span></span>
+  </div>
+</div>
+
+<!-- PRODUCTS -->
+<section class="products-section" id="products">
+  <div class="products-header fade-up">
+    <div>
+      <div class="section-eyebrow">Our Catalogue</div>
+      <h2 class="section-title">WHAT WE STOCK</h2>
+      <p class="section-sub">From structural-grade marine ply to decorative laminates — sourced from India's top manufacturers.</p>
+    </div>
+    <a href="products.html" class="btn-nav btn-outline" style="flex-shrink:0;">View All →</a>
+  </div>
+  <div class="products-grid">
+    <a href="products.html" class="product-card fade-up">
+      <div class="product-num">01</div>
+      <div class="product-icon">🪵</div>
+      <div class="product-name">Plywood Sheets</div>
+      <div class="product-desc">BWR, BWP, Marine & Commercial grade. Available in 6mm to 25mm thickness.</div>
+      <span class="product-tag">In Stock</span>
+    </a>
+    <a href="products.html" class="product-card fade-up">
+      <div class="product-num">02</div>
+      <div class="product-icon">🏗️</div>
+      <div class="product-name">Block Board</div>
+      <div class="product-desc">High-strength core boards for doors, furniture, and panelling applications.</div>
+      <span class="product-tag">In Stock</span>
+    </a>
+    <!-- <a href="products.html" class="product-card fade-up">
+      <div class="product-num">03</div>
+      <div class="product-icon">✨</div>
+      <div class="product-name">Laminates</div>
+      <div class="product-desc">800+ designs. Matte, gloss, textured & woodgrain finishes by top brands.</div>
+      <span class="product-tag">500+ Designs</span>
+    </a> -->
+    <a href="products.html" class="product-card fade-up">
+      <div class="product-num">04</div>
+      <div class="product-icon">🚪</div>
+      <div class="product-name">Flush Doors</div>
+      <div class="product-desc">Pre-hung solid and hollow core flush doors. ISI marked, factory-finished.</div>
+      <span class="product-tag">ISI Certified</span>
+    </a>
+    <!-- <a href="products.html" class="product-card fade-up">
+      <div class="product-num">05</div>
+      <div class="product-icon">🔩</div>
+      <div class="product-name">Hardware</div>
+      <div class="product-desc">Hinges, handles, drawer channels, locks, and structural fixings — all grades.</div>
+      <span class="product-tag">All Grades</span>
+    </a> -->
+    <!-- <a href="products.html" class="product-card fade-up">
+      <div class="product-num">06</div>
+      <div class="product-icon">🏠</div>
+      <div class="product-name">MDF & HDF</div>
+      <div class="product-desc">Medium and high-density fibreboards for cabinetry, modular kitchens & more.</div>
+      <span class="product-tag">In Stock</span>
+    </a> -->
+  </div>
+</section>
+
+<!-- QR REWARDS -->
+<section class="rewards-section" id="rewards">
+  <div class="rewards-inner">
+    <div class="fade-up">
+      <div class="section-eyebrow">Loyalty Program</div>
+      <h2 class="section-title">SCAN, EARN &amp; WIN</h2>
+      <p class="section-sub" style="margin-bottom:48px;">Every product you buy has a QR code. Scan it, earn points, and unlock exclusive rewards and discounts.</p>
+      <div class="rewards-steps">
+        <div class="reward-step">
+          <div class="step-num">01</div>
+          <div class="step-content">
+            <h4>Scan the QR code on your product</h4>
+            <p>Every Xtraaplywood product comes with a unique QR label. Scan it with your phone.</p>
+          </div>
+        </div>
+        <div class="reward-step">
+          <div class="step-num">02</div>
+          <div class="step-content">
+            <h4>Points land in your wallet</h4>
+            <p>Points are credited instantly to your account. Each code can only be redeemed once.</p>
+          </div>
+        </div>
+        <div class="reward-step">
+          <div class="step-num">03</div>
+          <div class="step-content">
+            <h4>Unlock rewards &amp; big discounts</h4>
+            <p>Hit your point threshold and redeem for cash discounts, free products, or exclusive deals.</p>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="qr-mockup fade-up">
+      <div class="qr-card">
+        <div class="qr-label">SCAN TO EARN</div>
+        <div class="qr-code-visual">
+          <!-- Decorative QR pattern -->
+          <svg width="100" height="100" viewBox="0 0 100 100">
+            <rect x="5" y="5" width="30" height="30" rx="3" fill="#141410"/>
+            <rect x="10" y="10" width="20" height="20" rx="2" fill="white"/>
+            <rect x="14" y="14" width="12" height="12" rx="1" fill="#c8811a"/>
+            <rect x="65" y="5" width="30" height="30" rx="3" fill="#141410"/>
+            <rect x="70" y="10" width="20" height="20" rx="2" fill="white"/>
+            <rect x="74" y="14" width="12" height="12" rx="1" fill="#c8811a"/>
+            <rect x="5" y="65" width="30" height="30" rx="3" fill="#141410"/>
+            <rect x="10" y="70" width="20" height="20" rx="2" fill="white"/>
+            <rect x="14" y="74" width="12" height="12" rx="1" fill="#c8811a"/>
+            <rect x="42" y="5" width="6" height="6" rx="1" fill="#141410"/>
+            <rect x="50" y="5" width="6" height="6" rx="1" fill="#141410"/>
+            <rect x="42" y="13" width="6" height="6" rx="1" fill="#141410"/>
+            <rect x="58" y="13" width="6" height="6" rx="1" fill="#141410"/>
+            <rect x="42" y="42" width="6" height="6" rx="1" fill="#141410"/>
+            <rect x="50" y="42" width="6" height="6" rx="1" fill="#141410"/>
+            <rect x="58" y="42" width="6" height="6" rx="1" fill="#141410"/>
+            <rect x="42" y="50" width="6" height="6" rx="1" fill="#141410"/>
+            <rect x="58" y="58" width="6" height="6" rx="1" fill="#c8811a"/>
+            <rect x="65" y="42" width="6" height="6" rx="1" fill="#141410"/>
+            <rect x="73" y="50" width="6" height="6" rx="1" fill="#141410"/>
+            <rect x="65" y="58" width="6" height="6" rx="1" fill="#141410"/>
+            <rect x="81" y="42" width="6" height="6" rx="1" fill="#141410"/>
+            <rect x="42" y="65" width="6" height="6" rx="1" fill="#141410"/>
+            <rect x="50" y="73" width="6" height="6" rx="1" fill="#141410"/>
+            <rect x="58" y="65" width="6" height="6" rx="1" fill="#141410"/>
+            <rect x="42" y="81" width="6" height="6" rx="1" fill="#141410"/>
+          </svg>
+        </div>
+        <div class="qr-product-name">BWR Plywood 18mm</div>
+        <div class="points-badge">+50 POINTS</div>
+        <div class="qr-label" style="opacity:0.5;font-size:10px;">One-time redemption per product</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- WHY US -->
+<section class="why-section" id="about">
+  <div class="fade-up">
+    <div class="section-eyebrow">Why Choose Us</div>
+    <h2 class="section-title">QUALITY YOU CAN TRUST</h2>
+  </div>
+  <div class="why-grid">
+    <div class="why-card fade-up">
+      <div class="why-icon">🏆</div>
+      <div class="why-title">ISI & BIS Certified</div>
+      <p class="why-text">All our plywood and boards are sourced from BIS-licensed manufacturers meeting IS:710 and IS:303 standards.</p>
+    </div>
+    <div class="why-card fade-up">
+      <div class="why-icon">🚚</div>
+      <div class="why-title">Fast Delivery</div>
+      <p class="why-text">Same-day delivery available across Patna. Bulk orders dispatched within 48 hours.</p>
+    </div>
+    <div class="why-card fade-up">
+      <div class="why-icon">💰</div>
+      <div class="why-title">Competitive Pricing</div>
+      <p class="why-text">Direct tie-ups with leading mills. No middlemen. Better prices with no compromise on quality.</p>
+    </div>
+    <div class="why-card fade-up">
+      <div class="why-icon">🎁</div>
+      <div class="why-title">Loyalty Rewards</div>
+      <p class="why-text">Scan product QR codes, earn points, and redeem them for real discounts and exclusive offers.</p>
+    </div>
+  </div>
+</section>
+
+<!-- CONTACT -->
+<section class="contact-section" id="contact">
+  <div class="contact-inner">
+    <div class="contact-info fade-up">
+      <div class="section-eyebrow">Get In Touch</div>
+      <h2 class="section-title">ENQUIRE NOW</h2>
+      <p class="section-sub">Have a bulk requirement? Need a custom cut? Drop us a message and we'll get back within the day.</p>
+      <div class="contact-detail">
+        <div class="contact-icon">📍</div>
+        <div>
+          <div class="contact-detail-label">Location</div>
+          <div class="contact-detail-value">Patna, Bihar - 800001, India</div>
+        </div>
+      </div>
+      <div class="contact-detail">
+        <div class="contact-icon">📞</div>
+        <div>
+          <div class="contact-detail-label">Phone</div>
+          <div class="contact-detail-value">Contact via enquiry form</div>
+        </div>
+      </div>
+      <div class="contact-detail">
+        <div class="contact-icon">✉️</div>
+        <div>
+          <div class="contact-detail-label">Email</div>
+          <div class="contact-detail-value">Response shared after enquiry</div>
+        </div>
+      </div>
+    </div>
+    <div class="fade-up">
+      <form class="enquiry-form" onsubmit="handleSubmit(event)">
+        <div class="form-row">
+          <div class="form-group">
+            <label class="form-label">Full Name</label>
+            <input class="form-input" type="text" placeholder="Your name" required />
+          </div>
+          <div class="form-group">
+            <label class="form-label">Phone</label>
+            <input class="form-input" type="tel" placeholder="+91 XXXXX XXXXX" required />
+          </div>
+        </div>
+        <div class="form-group">
+          <label class="form-label">Email</label>
+          <input class="form-input" type="email" placeholder="you@email.com" />
+        </div>
+        <div class="form-group">
+          <label class="form-label">Product Interest</label>
+          <select class="form-select">
+            <option value="">Select a product category…</option>
+            <option>Plywood Sheets</option>
+            <option>Block Board</option>
+            <option>Flush Doors</option>
+            <option>Other</option>
+          </select>
+        </div>
+        <div class="form-group">
+          <label class="form-label">Message</label>
+          <textarea class="form-textarea" placeholder="Tell us about your requirement — quantity, size, grade…"></textarea>
+        </div>
+        <button type="submit" class="form-submit">Send Enquiry →</button>
+      </form>
+    </div>
+  </div>
+</section>
+
+<!-- FOOTER -->
+<footer>
+  <div class="footer-top">
+    <div class="footer-brand">
+      <div class="nav-logo" style="margin-bottom:16px;font-size:22px;">XTRAA<span style="color:var(--amber)">PLYWOOD</span></div>
+      <p class="footer-tagline">Patna's premium destination for plywood, laminates, and hardware. Quality certified, competitively priced.</p>
+    </div>
+    <div class="footer-col">
+      <h5>Products</h5>
+      <ul>
+        <li><a href="products.html">Plywood Sheets</a></li>
+        <li><a href="products.html">Block Board</a></li>
+        <li><a href="products.html">Laminates</a></li>
+        <li><a href="products.html">Flush Doors</a></li>
+        <li><a href="products.html">Hardware</a></li>
+      </ul>
+    </div>
+    <div class="footer-col">
+      <h5>Company</h5>
+      <ul>
+        <li><a href="#about">About Us</a></li>
+        <li><a href="products.html">Our Brands</a></li>
+        <li><a href="contact.html">Visit Showroom</a></li>
+        <li><a href="contact.html">Contact</a></li>
+      </ul>
+    </div>
+    <div class="footer-col">
+      <h5>Account</h5>
+      <ul>
+        <li><a href="login.html#login">Login</a></li>
+        <li><a href="login.html#signup">Sign Up</a></li>
+        <li><a href="rewards.html">My Points</a></li>
+        <li><a href="rewards.html">Scan QR</a></li>
+        <li><a href="rewards.html">Rewards</a></li>
+      </ul>
+    </div>
+  </div>
+  <div class="footer-bottom">
+    <div class="footer-copy">(c) 2026 Xtraaplywood. All rights reserved.</div>
+    <div class="footer-rewards-badge">
+      <span class="rewards-dot"></span>
+      Loyalty rewards active — scan your next product!
+    </div>
+  </div>
+</footer>
+
+<script type="module" src="./supabase/nav-auth.js"></script>
+<script type="module">
+  import { getSupabaseClient, isSupabaseConfigured } from "./supabase/client.js";
+
+  const supabase = isSupabaseConfigured() ? getSupabaseClient() : null;
+
+  // Hamburger menu
+  const hamburger = document.getElementById('hamburger');
+  const mobileMenu = document.getElementById('mobileMenu');
+  hamburger.addEventListener('click', () => {
+    mobileMenu.classList.toggle('open');
+  });
+  function closeMobile() {
+    mobileMenu.classList.remove('open');
+  }
+  window.closeMobile = closeMobile;
+
+  // Scroll fade-up animation
+  const observer = new IntersectionObserver((entries) => {
+    entries.forEach(e => {
+      if (e.isIntersecting) {
+        e.target.classList.add('visible');
+      }
+    });
+  }, { threshold: 0.1 });
+  document.querySelectorAll('.fade-up').forEach(el => observer.observe(el));
+
+  // Stagger product cards
+  document.querySelectorAll('.product-card').forEach((card, i) => {
+    card.style.transitionDelay = (i * 80) + 'ms';
+  });
+
+  // Form submit
+  async function handleSubmit(e) {
+    e.preventDefault();
+    const form = e.target;
+    const btn = form.querySelector('.form-submit');
+    const [nameInput, phoneInput, emailInput] = form.querySelectorAll('.form-input');
+    const categoryInput = form.querySelector('.form-select');
+    const messageInput = form.querySelector('.form-textarea');
+
+    btn.textContent = 'Sending...';
+    btn.disabled = true;
+
+    try {
+      if (!supabase) {
+        const params = new URLSearchParams();
+        if (categoryInput.value) params.set('product', categoryInput.value);
+        if (messageInput.value.trim()) params.set('message', messageInput.value.trim());
+        window.location.href = `contact.html${params.toString() ? `?${params.toString()}` : ''}`;
+        return;
+      }
+
+      const { data: sessionData } = await supabase.auth.getSession();
+      const payload = {
+        user_id: sessionData.session?.user?.id || null,
+        full_name: nameInput.value.trim(),
+        phone: phoneInput.value.trim(),
+        email: emailInput.value.trim() || null,
+        product_id: null,
+        order_type: categoryInput.value || null,
+        quantity_requirement: null,
+        message: messageInput.value.trim() || `Homepage enquiry${categoryInput.value ? ` for ${categoryInput.value}` : ''}`
+      };
+
+      const { error } = await supabase.from('enquiries').insert(payload);
+      if (error) throw error;
+
+      btn.textContent = 'Enquiry Sent';
+      btn.style.background = '#3a7a40';
+      setTimeout(() => {
+        btn.textContent = 'Send Enquiry ->';
+        btn.style.background = '';
+        btn.disabled = false;
+        form.reset();
+      }, 2500);
+    } catch (error) {
+      console.error(error);
+      btn.textContent = 'Try Again';
+      btn.disabled = false;
+      window.alert(error?.message || 'We could not submit your enquiry right now.');
+    }
+  }
+  window.handleSubmit = handleSubmit;
+
+  // Nav scroll effect
+  window.addEventListener('scroll', () => {
+    const nav = document.getElementById('navbar');
+    nav.style.background = window.scrollY > 60
+      ? 'rgba(20,20,16,0.98)'
+      : 'rgba(20,20,16,0.88)';
+  });
+</script>
+</body>
+</html>
+
+
+
+
+
