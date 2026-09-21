@@ -6,6 +6,19 @@
   <title>Products – Xtraaplywood</title>
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=Barlow:ital,wght@0,300;0,400;0,500;0,600;1,300&family=DM+Mono:wght@400;500&display=swap" rel="stylesheet">
+<script>
+  (function(){
+    try {
+      var theme = localStorage.getItem('xtraaplywood-theme');
+      if (theme !== 'light' && theme !== 'dark') {
+        theme = window.matchMedia('(prefers-color-scheme: light)').matches ? 'light' : 'dark';
+      }
+      document.documentElement.dataset.theme = theme;
+    } catch (error) {
+      document.documentElement.dataset.theme = 'dark';
+    }
+  })();
+  </script>
   <style>
 *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
 
@@ -635,17 +648,18 @@
       .modal { padding: 28px 20px; }
     }
   </style>
+  <link rel="stylesheet" href="./theme.css?v=2">
 </head>
 <body>
 
 <!-- NAV -->
 <nav>
-  <a href="index.html" class="nav-logo">XTRAA<span>PLYWOOD</span></a>
+  <a href="index.html" class="nav-logo">XTRAAPLY</a>
   <ul class="nav-links">
     <li><a href="index.html">Home</a></li>
     <li><a href="products.html" class="active">Products</a></li>
     <li><a href="rewards.html">Rewards</a></li>
-    <li><a href="index.html#contact">Enquire</a></li>
+    <li><a href="contact.html">Contact</a></li>
   </ul>
   <div class="nav-actions">
     <a href="login.html#login" class="btn-nav btn-outline">Login</a>
@@ -1275,6 +1289,7 @@ window.toggleThickness = toggleThickness;
 
 init();
 </script>
+<script src="./theme.js?v=2" defer></script>
 </body>
 </html>
 

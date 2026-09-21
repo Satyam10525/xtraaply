@@ -6,6 +6,19 @@
   <title>Contact & Enquiry – Xtraaplywood</title>
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=Barlow:ital,wght@0,300;0,400;0,500;0,600;1,300&family=DM+Mono:wght@400;500&display=swap" rel="stylesheet">
+<script>
+  (function(){
+    try {
+      var theme = localStorage.getItem('xtraaplywood-theme');
+      if (theme !== 'light' && theme !== 'dark') {
+        theme = window.matchMedia('(prefers-color-scheme: light)').matches ? 'light' : 'dark';
+      }
+      document.documentElement.dataset.theme = theme;
+    } catch (error) {
+      document.documentElement.dataset.theme = 'dark';
+    }
+  })();
+  </script>
   <style>
 *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
     :root {
@@ -355,12 +368,13 @@
       .contact-prefs { flex-direction: column; gap: 12px; }
     }
   </style>
+  <link rel="stylesheet" href="./theme.css?v=2">
 </head>
 <body>
 
 <!-- NAV -->
 <nav>
-  <a href="index.html" class="nav-logo">XTRAA<span>PLYWOOD</span></a>
+  <a href="index.html" class="nav-logo">XTRAAPLY</a>
   <ul class="nav-links">
     <li><a href="index.html">Home</a></li>
     <li><a href="products.html">Products</a></li>
@@ -880,6 +894,7 @@
     }
   }
 </script>
+<script src="./theme.js?v=2" defer></script>
 </body>
 </html>
 

@@ -6,6 +6,19 @@
   <title>Xtraaplywood – Premium Plywood & Hardware</title>
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=Barlow:ital,wght@0,300;0,400;0,500;0,600;1,300&family=DM+Mono:wght@400;500&display=swap" rel="stylesheet">
+<script>
+  (function(){
+    try {
+      var theme = localStorage.getItem('xtraaplywood-theme');
+      if (theme !== 'light' && theme !== 'dark') {
+        theme = window.matchMedia('(prefers-color-scheme: light)').matches ? 'light' : 'dark';
+      }
+      document.documentElement.dataset.theme = theme;
+    } catch (error) {
+      document.documentElement.dataset.theme = 'dark';
+    }
+  })();
+  </script>
   <style>
 *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
 
@@ -856,16 +869,17 @@
       .products-header { flex-direction: column; align-items: flex-start; }
     }
   </style>
+  <link rel="stylesheet" href="./theme.css?v=2">
 </head>
 <body>
 
 <!-- NAV -->
 <nav id="navbar">
-  <a href="index.html" class="nav-logo">XTRAA<span>PLYWOOD</span></a>
+  <a href="index.html" class="nav-logo">XTRAAPLY</a>
   <ul class="nav-links">
     <li><a href="products.html">Products</a></li>
     <li><a href="rewards.html">Rewards</a></li>
-    <li><a href="contact.html">Enquire</a></li>
+    <li><a href="contact.html">Contact</a></li>
     <li><a href="#about">About</a></li>
   </ul>
   <div class="nav-actions">
@@ -881,7 +895,7 @@
 <div class="mobile-menu" id="mobileMenu">
   <a href="products.html" onclick="closeMobile()">Products</a>
   <a href="rewards.html" onclick="closeMobile()">Rewards</a>
-  <a href="contact.html" onclick="closeMobile()">Enquire</a>
+  <a href="contact.html" onclick="closeMobile()">Contact</a>
   <a href="login.html#login" onclick="closeMobile()">Login</a>
   <a href="login.html#signup" onclick="closeMobile()">Sign Up</a>
 </div>
@@ -889,14 +903,14 @@
 <!-- HERO -->
 <section class="hero" id="home">
   <div class="hero-left">
-    <div class="hero-badge">Est. Premium Timber &amp; Hardware</div>
+    <div class="hero-badge">1992 Est. Premium Timber &amp; Hardware</div>
     <h1 class="hero-title">
       BUILT<br>
       <em>STRONG.</em><br>
       <span class="outline">BUILT RIGHT.</span>
     </h1>
     <p class="hero-sub">
-      Bihar's trusted source for premium plywood, laminates, and hardware.
+      Bihar's trusted source for premium plywood and block board.
       Every sheet, every board — precision-cut and quality-certified.
     </p>
     <div class="hero-cta">
@@ -919,7 +933,7 @@
         <div class="stat-label">Products</div>
       </div>
       <div>
-        <div class="stat-num">15+</div>
+        <div class="stat-num">30+</div>
         <div class="stat-label">Years Trust</div>
       </div>
       <div>
@@ -954,15 +968,11 @@
   <div class="marquee-track">
     <span class="marquee-item">PREMIUM PLYWOOD <span class="marquee-dot">✦</span></span>
     <span class="marquee-item">COMMERCIAL GRADE <span class="marquee-dot">✦</span></span>
-    <span class="marquee-item">LAMINATES <span class="marquee-dot">✦</span></span>
     <span class="marquee-item">FLUSH DOORS <span class="marquee-dot">✦</span></span>
-    <span class="marquee-item">HARDWARE <span class="marquee-dot">✦</span></span>
     <span class="marquee-item">LOYALTY REWARDS <span class="marquee-dot">✦</span></span>
     <span class="marquee-item">PREMIUM PLYWOOD <span class="marquee-dot">✦</span></span>
     <span class="marquee-item">COMMERCIAL GRADE <span class="marquee-dot">✦</span></span>
-    <span class="marquee-item">LAMINATES <span class="marquee-dot">✦</span></span>
     <span class="marquee-item">FLUSH DOORS <span class="marquee-dot">✦</span></span>
-    <span class="marquee-item">HARDWARE <span class="marquee-dot">✦</span></span>
     <span class="marquee-item">LOYALTY REWARDS <span class="marquee-dot">✦</span></span>
   </div>
 </div>
@@ -1196,16 +1206,14 @@
   <div class="footer-top">
     <div class="footer-brand">
       <div class="nav-logo" style="margin-bottom:16px;font-size:22px;">XTRAA<span style="color:var(--amber)">PLYWOOD</span></div>
-      <p class="footer-tagline">Patna's premium destination for plywood, laminates, and hardware. Quality certified, competitively priced.</p>
+      <p class="footer-tagline">Patna's premium destination for plywood and block board. Quality certified, competitively priced.</p>
     </div>
     <div class="footer-col">
       <h5>Products</h5>
       <ul>
         <li><a href="products.html">Plywood Sheets</a></li>
         <li><a href="products.html">Block Board</a></li>
-        <li><a href="products.html">Laminates</a></li>
         <li><a href="products.html">Flush Doors</a></li>
-        <li><a href="products.html">Hardware</a></li>
       </ul>
     </div>
     <div class="footer-col">
@@ -1325,11 +1333,13 @@
   // Nav scroll effect
   window.addEventListener('scroll', () => {
     const nav = document.getElementById('navbar');
+    const isLight = document.documentElement.dataset.theme === 'light';
     nav.style.background = window.scrollY > 60
-      ? 'rgba(20,20,16,0.98)'
-      : 'rgba(20,20,16,0.88)';
+      ? (isLight ? 'rgba(248,245,236,0.98)' : 'rgba(20,20,16,0.98)')
+      : (isLight ? 'rgba(248,245,236,0.94)' : 'rgba(20,20,16,0.88)');
   });
 </script>
+<script src="./theme.js?v=2" defer></script>
 </body>
 </html>
 
